@@ -182,6 +182,11 @@
   .loi-links a { color: var(--green); font-weight: 600; font-size: 13.5px; }
   .loi-links a:hover { color: var(--green-dark); }
   .toast { position: fixed; left: 50%; bottom: 92px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 14px; font-size: 14.5px; font-weight: 600; box-shadow: 0 10px 30px rgba(20,51,43,.32); z-index: 200; max-width: 90%; text-align: center; animation: waPop .3s ease; }
+  .sig-wrap { position: relative; border: 1.5px solid var(--line); border-radius: 12px; background: var(--bg); overflow: hidden; }
+  .sig-wrap canvas { width: 100%; height: 120px; display: block; touch-action: none; cursor: crosshair; }
+  .sig-clear { position: absolute; top: 6px; right: 8px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-family: inherit; font-size: 12px; font-weight: 600; padding: 3px 9px; cursor: pointer; }
+  .sig-clear:hover { color: var(--green-dark); border-color: var(--green); }
+  .sig-hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
 
   /* Hero two-column + phone */
   .hero .wrap { display: flex; align-items: center; gap: 48px; text-align: left; }
@@ -389,9 +394,15 @@
         <div class="field"><label for="loi-gname" data-i18n="loi.gname">Name der Gruppe / Community *</label><input id="loi-gname" required data-i18n-ph="loi.gnamePh" placeholder="z.B. München Yoga Crew" /></div>
         <div class="field"><label for="loi-contact" data-i18n="loi.contact">Ansprechpartner:in *</label><input id="loi-contact" required data-i18n-ph="loi.contactPh" placeholder="Vor- und Nachname" /></div>
         <div class="field"><label for="loi-role" data-i18n="loi.role">Rolle</label><input id="loi-role" data-i18n-ph="loi.rolePh" placeholder="z.B. Founder / Host" /></div>
-        <div class="field"><label for="loi-mail" data-i18n="loi.mail">E-Mail / Telefon *</label><input id="loi-mail" required data-i18n-ph="loi.mailPh" placeholder="name@mail.de oder +49 …" /></div>
+        <div class="field"><label for="loi-mail" data-i18n="loi.mail">E-Mail *</label><input id="loi-mail" type="email" required data-i18n-ph="loi.mailPh" placeholder="name@mail.de" /></div>
+        <div class="field"><label for="loi-phone" data-i18n="loi.phone">Telefon</label><input id="loi-phone" type="tel" data-i18n-ph="loi.phonePh" placeholder="+49 …" /></div>
         <div class="field"><label for="loi-members" data-i18n="loi.members">Ungefähre Mitgliederzahl</label><input id="loi-members" inputmode="numeric" data-i18n-ph="loi.membersPh" placeholder="z.B. 80" /></div>
         <div class="field"><label for="loi-place" data-i18n="loi.place">Ort</label><input id="loi-place" data-i18n-ph="loi.placePh" placeholder="München" /></div>
+        <div class="field">
+          <label data-i18n="loi.sig">Deine Unterschrift *</label>
+          <div class="sig-wrap"><canvas id="loi-sig" width="440" height="120"></canvas><button type="button" class="sig-clear" id="sigClear" data-i18n="loi.sigClear">Löschen</button></div>
+          <p class="sig-hint" data-i18n="loi.sigHint">Mit Maus oder Finger unterschreiben.</p>
+        </div>
         <button type="button" class="btn" id="loiSend" data-i18n="loi.send">LOI ausgefüllt an Clero senden</button>
         <button type="button" class="btn btn-ghost" id="loiDownloadFilled" data-i18n="loi.downloadFilled">Ausgefülltes PDF herunterladen</button>
       </form>
@@ -503,12 +514,15 @@ const I18N = {
     "loi.gname":"Name der Gruppe / Community *","loi.gnamePh":"z.B. München Yoga Crew",
     "loi.contact":"Ansprechpartner:in *","loi.contactPh":"Vor- und Nachname",
     "loi.role":"Rolle","loi.rolePh":"z.B. Founder / Host",
-    "loi.mail":"E-Mail / Telefon *","loi.mailPh":"name@mail.de oder +49 …",
+    "loi.mail":"E-Mail *","loi.mailPh":"name@mail.de",
+    "loi.phone":"Telefon","loi.phonePh":"+49 …",
     "loi.members":"Ungefähre Mitgliederzahl","loi.membersPh":"z.B. 80",
     "loi.place":"Ort","loi.placePh":"München",
+    "loi.sig":"Deine Unterschrift *","loi.sigHint":"Mit Maus oder Finger unterschreiben.","loi.sigClear":"Löschen",
     "loi.send":"LOI ausgefüllt an Clero senden","loi.downloadFilled":"Ausgefülltes PDF herunterladen",
     "loi.blank":"Oder leeres PDF herunterladen","loi.sending":"Wird vorbereitet …",
-    "loi.required":"Bitte fülle Name der Gruppe, Ansprechpartner:in und E-Mail / Telefon aus.",
+    "loi.required":"Bitte fülle Name der Gruppe, Ansprechpartner:in und E-Mail aus.",
+    "loi.sigRequired":"Bitte unterschreibe im Unterschrift-Feld.",
     "loi.sentToast":"Danke! Dein LOI ist bei Nicole eingegangen. 💚",
     "modal.basicInfo":"Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.",
     "modal.fName":"Name der Community *","modal.fNamePh":"z.B. München Yoga Crew",
@@ -550,12 +564,15 @@ const I18N = {
     "loi.gname":"Group / community name *","loi.gnamePh":"e.g. Munich Yoga Crew",
     "loi.contact":"Contact person *","loi.contactPh":"First and last name",
     "loi.role":"Role","loi.rolePh":"e.g. Founder / Host",
-    "loi.mail":"Email / phone *","loi.mailPh":"name@mail.com or +49 …",
+    "loi.mail":"Email *","loi.mailPh":"name@mail.com",
+    "loi.phone":"Phone","loi.phonePh":"+49 …",
     "loi.members":"Approx. number of members","loi.membersPh":"e.g. 80",
     "loi.place":"Place","loi.placePh":"Munich",
+    "loi.sig":"Your signature *","loi.sigHint":"Sign with your mouse or finger.","loi.sigClear":"Clear",
     "loi.send":"Send completed LOI to Clero","loi.downloadFilled":"Download completed PDF",
     "loi.blank":"Or download a blank PDF","loi.sending":"Preparing …",
-    "loi.required":"Please fill in group name, contact person and email / phone.",
+    "loi.required":"Please fill in group name, contact person and email.",
+    "loi.sigRequired":"Please sign in the signature field.",
     "loi.sentToast":"Thank you! Your LOI has reached Nicole. 💚",
     "modal.basicInfo":"Without an LOI and without Founding 20 benefits. We are happy to add your community to the directory anyway.",
     "modal.fName":"Community name *","modal.fNamePh":"e.g. Munich Yoga Crew",
@@ -757,20 +774,35 @@ const LOI_FIELDS = {
   de: { url: 'clero-loi.pdf',
     gname: {p:0,x:46,y:666}, contactP0: {p:0,x:341,y:666}, members: {p:0,x:327,y:252},
     hName: {p:1,x:94,y:415}, hRole: {p:1,x:89,y:391}, hMail: {p:1,x:209,y:367}, hOrt: {p:1,x:128,y:315},
-    tjard: {p:1,x:191,y:173} },
+    hSign: {p:1,x:135,y:288,w:120,h:34}, tjard: {p:1,x:191,y:173} },
   en: { url: 'clero-loi-en.pdf',
     gname: {p:0,x:46,y:641}, contactP0: null, members: {p:0,x:363,y:249},
     hName: {p:1,x:94,y:411}, hRole: {p:1,x:85,y:387}, hMail: {p:1,x:145,y:363}, hOrt: {p:1,x:128,y:311},
-    tjard: {p:1,x:180,y:170} }
+    hSign: {p:1,x:121,y:286,w:120,h:34}, tjard: {p:1,x:180,y:170} }
 };
 const lv = id => (document.getElementById(id).value || '').trim();
 const safeName = () => (lv('loi-gname') || 'Community').replace(/[^\w\-]+/g, '_');
+
+// Unterschrift-Pad (zeichnen mit Maus/Finger)
+const sigCanvas = document.getElementById('loi-sig');
+const sctx = sigCanvas.getContext('2d');
+sctx.strokeStyle = '#14332B'; sctx.lineWidth = 2.2; sctx.lineCap = 'round'; sctx.lineJoin = 'round';
+let sigDrawing = false, sigHas = false;
+function sigPos(e) { const r = sigCanvas.getBoundingClientRect(); const tp = e.touches ? e.touches[0] : e; return { x: (tp.clientX - r.left) * (sigCanvas.width / r.width), y: (tp.clientY - r.top) * (sigCanvas.height / r.height) }; }
+function sigStart(e) { sigDrawing = true; const p = sigPos(e); sctx.beginPath(); sctx.moveTo(p.x, p.y); e.preventDefault(); }
+function sigMove(e) { if (!sigDrawing) return; const p = sigPos(e); sctx.lineTo(p.x, p.y); sctx.stroke(); sigHas = true; e.preventDefault(); }
+function sigEnd() { sigDrawing = false; }
+['mousedown','touchstart'].forEach(ev => sigCanvas.addEventListener(ev, sigStart, { passive: false }));
+['mousemove','touchmove'].forEach(ev => sigCanvas.addEventListener(ev, sigMove, { passive: false }));
+['mouseup','mouseleave','touchend','touchcancel'].forEach(ev => sigCanvas.addEventListener(ev, sigEnd));
+document.getElementById('sigClear').addEventListener('click', () => { sctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height); sigHas = false; });
 
 function loiValid() {
   for (const id of ['loi-gname','loi-contact','loi-mail']) {
     const el = document.getElementById(id);
     if (!el.value.trim()) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); showToast(t('loi.required')); return false; }
   }
+  if (!sigHas) { showToast(t('loi.sigRequired')); sigCanvas.parentElement.style.borderColor = '#e23b3b'; setTimeout(() => { sigCanvas.parentElement.style.borderColor = ''; }, 2500); return false; }
   return true;
 }
 
@@ -789,9 +821,14 @@ async function buildFilledLoi() {
   put(cfg.members, lv('loi-members'));
   put(cfg.hName, lv('loi-contact'));
   put(cfg.hRole, lv('loi-role'));
-  put(cfg.hMail, lv('loi-mail'));
+  put(cfg.hMail, lv('loi-mail') + (lv('loi-phone') ? '  ·  ' + lv('loi-phone') : ''));
   put(cfg.hOrt, place + ', ' + today);
   put(cfg.tjard, today);
+  if (sigHas && cfg.hSign) {
+    const png = await doc.embedPng(sigCanvas.toDataURL('image/png'));
+    const s = cfg.hSign;
+    pages[s.p].drawImage(png, { x: s.x, y: s.y, width: s.w, height: s.h });
+  }
   return await doc.save();
 }
 
@@ -825,7 +862,8 @@ async function sendLoi() {
   add(lang === 'en' ? 'Group' : 'Gruppe', lv('loi-gname'));
   add(lang === 'en' ? 'Contact' : 'Ansprechpartner', lv('loi-contact'));
   add(lang === 'en' ? 'Role' : 'Rolle', lv('loi-role'));
-  add(lang === 'en' ? 'Email/Phone' : 'E-Mail/Telefon', lv('loi-mail'));
+  add(lang === 'en' ? 'Email' : 'E-Mail', lv('loi-mail'));
+  add(lang === 'en' ? 'Phone' : 'Telefon', lv('loi-phone'));
   add(lang === 'en' ? 'Members' : 'Mitglieder', lv('loi-members'));
   add(lang === 'en' ? 'Place' : 'Ort', place);
   add(lang === 'en' ? 'Date' : 'Datum', todayStr());
