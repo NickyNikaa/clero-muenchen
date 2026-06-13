@@ -67,7 +67,7 @@
   .hero { padding: 72px 0 48px; text-align: center; position: relative; overflow: hidden; }
   .hero::before {
     content: ""; position: absolute; inset: 0; z-index: -1;
-    background: radial-gradient(680px 320px at 50% -10%, var(--green-light), transparent 70%);
+    background: radial-gradient(520px 220px at 50% -25%, var(--neon-soft), transparent 72%);
   }
   .pill {
     display: inline-flex; align-items: center; gap: 7px;
@@ -191,7 +191,7 @@
 
 <section class="hero">
   <div class="wrap">
-    <span class="pill">💚 Jetzt in München · Launch Sommer 2026</span>
+    <span class="pill">💚 Jetzt in München · Launch August 2026</span>
     <h1>Finde die <span class="hl">Communities</span>, die zu dir passen.</h1>
     <p class="sub">Wir möchten Städte wieder zu Orten machen, an denen Communities sichtbar werden. Entdecke lokale Gruppen in München, von Yoga über Surfen bis zu Sprache und Kultur.</p>
     <div class="hero-cta">
@@ -280,26 +280,35 @@
 
 <script>
 const communities = [
-  { name: "Sober Society MUC", cat: "Achtsamkeit & Wellness", district: "München-weit", emoji: "🌿", desc: "Sober-curious Community für alkoholfreie Treffen, Events und ehrlichen Austausch in München.", link: "https://instagram.com/sobercommunity.muc" },
-  { name: "POP UP YOGA München", cat: "Yoga & Bewegung", district: "Wechselnde Orte", emoji: "🧘", desc: "Yoga an besonderen Pop-up-Locations in der ganzen Stadt, draußen wie drinnen.", link: "https://instagram.com/popupyoga.muenchen" },
-  { name: "At Peace", cat: "Achtsamkeit & Wellness", district: "München-weit", emoji: "🕯️", desc: "Breathwork, Meditation und Wellness-Sessions abseits des klassischen Yogastudios.", link: "" },
-  { name: "BeCommunity Pilates", cat: "Yoga & Bewegung", district: "München-weit", emoji: "🤸", desc: "Pilates-Community mit Fokus auf Kraft, Mobilität und ein starkes Miteinander.", link: "" },
-  { name: "KEFAI · Italian Pulses", cat: "Sprache & Kultur", district: "München-weit", emoji: "🇮🇹", desc: "Italienisches Collective für alle, die Sprache, Aperitivo und La Dolce Vita lieben.", link: "https://instagram.com/kefai.munich" },
-  { name: "Münchner Strickeria", cat: "Handarbeit & Kreativ", district: "München-weit", emoji: "🧶", desc: "Münchens erste Strickgruppe zum gemeinsamen Stricken, Plaudern und Maschen zählen.", link: "mailto:muenchner-strickeria@gmx.de" },
-  { name: "IGSM Surf-Community", cat: "Sport & Outdoor", district: "München-weit", emoji: "🏄", desc: "Münchens Surf-Community von Eisbach bis Roadtrip an die Welle.", link: "mailto:kontakt@igsm.info" },
-  { name: "Türkenstraße", cat: "Nachbarschaft & Ausgehen", district: "Maxvorstadt", emoji: "🌹", desc: "Vom Sakura Picnic über Baklava bis Çay on Ferry, die Crew rund um die Türkenstraße.", link: "https://instagram.com/tuerkenstrasse" },
-  { name: "Munich Girls & Gatherings", cat: "Frauen & Netzwerk", district: "München-weit", emoji: "💃", desc: "Treffen, Netzwerken und neue Freundinnen finden für Frauen in München.", link: "https://instagram.com/muc_girlsandgatherings" },
-  { name: "MILA · Munich Int. Ladies", cat: "Frauen & Netzwerk", district: "München-weit", emoji: "🌸", desc: "Munich International Ladies Association für internationale Frauen in der Stadt.", link: "" },
-  { name: "München Moms", cat: "Familie & Eltern", district: "München-weit", emoji: "👶", desc: "Community für Mütter in München, von Spielgruppen bis Mama-Abenden.", link: "" },
-  { name: "Munich Mountain Girls", cat: "Sport & Outdoor", district: "Voralpenland", emoji: "🏔️", desc: "Frauen, die zusammen wandern, klettern und die Berge rund um München erobern.", link: "" },
-  { name: "Rapha München", cat: "Sport & Outdoor", district: "München-weit", emoji: "🚴", desc: "Rennrad-Community für gemeinsame Ausfahrten und Kaffee danach.", link: "" },
-  { name: "Beauty Club Munich", cat: "Lifestyle", district: "München-weit", emoji: "💄", desc: "Community rund um Beauty, Self-Care und Events in München.", link: "" },
-  { name: "Münchner Kammerspiele", cat: "Kunst & Kultur", district: "Altstadt", emoji: "🎭", desc: "Theater-Community für alle, die Bühne, Kunst und Kultur leben.", link: "" },
-  { name: "Improart", cat: "Tanz & Performance", district: "München-weit", emoji: "🕺", desc: "Improtheater und Tanz-Events zum Mitmachen und Zuschauen.", link: "mailto:info@improart.de" },
-  { name: "The Munich Caledonians", cat: "Sprache & Kultur", district: "München-weit", emoji: "🏴", desc: "Schottischer Verein in München, Deutscher Meistertitel 2026 inklusive.", link: "mailto:info@the-munich-caledonians.org" },
-  { name: "Münchner Frauenchor", cat: "Musik & Chor", district: "München-weit", emoji: "🎶", desc: "Gemeinsam singen im Frauenchor, von Klassik bis Moderne.", link: "mailto:look@muenchner-frauenchor.de" },
-  { name: "Herrenbesuch", cat: "Musik & Chor", district: "München-weit", emoji: "🎤", desc: "Männerchor mit Charakter, der Singen und Geselligkeit verbindet.", link: "mailto:kontakt@herrenbesuch.net" },
-  { name: "Drops · Spontan treffen", cat: "Nachbarschaft & Ausgehen", district: "München-weit", emoji: "☕", desc: "Spontane Treffen und lockere Hangouts für alle, die offen für Neues sind.", link: "" }
+  { name: "Sober Society MUC", cat: "Nachbarschaft & Ausgehen", district: "München-weit", emoji: "🌿", desc: "Alkoholfreie High-Vibe-Events, von Rooftop-Day-Partys mit Live-DJs bis zu Coffee-Meetups für alle, die ohne Kater feiern wollen.", link: "https://instagram.com/sobersociety.muc" },
+  { name: "POP UP YOGA München", cat: "Yoga & Bewegung", district: "München-weit", emoji: "🧘", desc: "Yoga an wechselnden, besonderen Orten wie Villa Stuck, Haus der Kunst oder BMW Welt, geleitet von Gina und Terry.", link: "https://instagram.com/popupyogamuc" },
+  { name: "KEFAI Italian Pulses", cat: "Nachbarschaft & Ausgehen", district: "München-weit", emoji: "🇮🇹", desc: "Italienische Lebensfreude in München mit Disco-Music und Afterwork-Events für alle Italien-Fans.", link: "https://instagram.com/kefai.munich" },
+  { name: "Münchner Strickeria", cat: "Handarbeit & Kreativ", district: "Schwabing", emoji: "🧶", desc: "Strickgruppe, die sich mittwochabends in der Königinstraße trifft, gemeinsam strickt, snackt und ratscht.", link: "https://www.facebook.com/StrickeriaMuenchen/" },
+  { name: "IGSM Surf-Community", cat: "Sport & Outdoor", district: "München-weit", emoji: "🏄", desc: "Interessengemeinschaft Surfen in München, kämpft für Flusswellen wie die Eisbachwelle und vernetzt die Surfer der Stadt.", link: "https://instagram.com/igsm.surfen.muenchen" },
+  { name: "Türkenstraße", cat: "Nachbarschaft & Ausgehen", district: "Maxvorstadt", emoji: "🌹", desc: "Connected München durch Community und Events, baut seit 2022 echte Freundschaften über soziale Abenteuer.", link: "https://instagram.com/tuerkenstrasse" },
+  { name: "Munich Girls & Gatherings", cat: "Frauen & Netzwerk", district: "München-weit", emoji: "💃", desc: "Community für Frauen in München, die sich bei gemeinsamen Treffen und Events kennenlernen und vernetzen.", link: "https://instagram.com/muc_girlsandgatherings" },
+  { name: "MILA Munich Int. Ladies", cat: "Frauen & Netzwerk", district: "München-weit", emoji: "🌸", desc: "Non-Profit-Netzwerk, das über 5.000 internationale Frauen, Expats und Locals in München verbindet und unterstützt.", link: "https://instagram.com/munichinternationalladies" },
+  { name: "München Moms", cat: "Familie & Eltern", district: "München-weit", emoji: "👶", desc: "Die Community für Mamas in München mit Treffen, Impulsen und Austausch, bei der es um dich als Frau geht.", link: "https://instagram.com/muenchen.moms" },
+  { name: "Munich Mountain Girls", cat: "Sport & Outdoor", district: "München-weit", emoji: "🏔️", desc: "Community zum Finden neuer bergverliebter Freundinnen, mit Stammtischen, Kursen und eigenem Podcast.", link: "https://instagram.com/munichmountaingirls" },
+  { name: "Rapha München", cat: "Sport & Outdoor", district: "Altstadt-Lehel", emoji: "🚴", desc: "Clubhouse am Viktualienmarkt mit Talks, Workshops und gemeinsamen Clubhouse-Rides für die Rennrad-Community.", link: "https://instagram.com/rapha_munich" },
+  { name: "Münchner Kammerspiele", cat: "Kunst & Kultur", district: "Altstadt-Lehel", emoji: "🎭", desc: "Eines der bedeutendsten Sprechtheater Deutschlands, das Theater der Stadt mit Bühne, Musik und Mitmach-Formaten.", link: "https://instagram.com/muenchner_kammerspiele" },
+  { name: "Improart München", cat: "Tanz & Performance", district: "Ludwigsvorstadt", emoji: "🕺", desc: "Schule für Tanz, Improtheater und Contact Improvisation mit Kursen und Workshops rund um körperbasierte Improvisation.", link: "https://improart.de/" },
+  { name: "The Munich Caledonians", cat: "Sprache & Kultur", district: "München-weit", emoji: "🏴", desc: "Sozialer Klub für Schotten und Schottland-Fans in München mit Ceilidhs, Burns Night und Scottish Sports Day.", link: "https://www.the-munich-caledonians.org/" },
+  { name: "Münchner Frauenchor", cat: "Musik & Chor", district: "München-weit", emoji: "🎶", desc: "Führender Frauenchor, der seit 1989 originale Frauenchor-Literatur von der Romantik bis heute singt.", link: "https://instagram.com/muenchnerfrauenchor" },
+  { name: "Herrenbesuch", cat: "Musik & Chor", district: "Schwanthalerhöhe", emoji: "🎤", desc: "Barbershop-Männerchor aus München, über 55 Sänger, Deutscher Meister 2026, Proben montags am Heimeranplatz.", link: "https://instagram.com/herrenbesuchchor" },
+  { name: "bold. running club", cat: "Sport & Outdoor", district: "Haidhausen", emoji: "👟", desc: "Social Running Club, läuft montags 7 Uhr vom Wiener Platz acht Kilometer durch die Stadt und an der Isar.", link: "https://instagram.com/bold.runningclub" },
+  { name: "Run and Chill Club", cat: "Sport & Outdoor", district: "München-weit", emoji: "🏃", desc: "Social Running Club in München, bei dem Laufen und entspanntes Beisammensein zusammengehören.", link: "https://instagram.com/runandchill.munich" },
+  { name: "Munich Run Collective", cat: "Sport & Outdoor", district: "München-weit", emoji: "🏃‍♀️", desc: "Lauf-Community, die Münchner Runner zu gemeinsamen Läufen und Events zusammenbringt.", link: "https://instagram.com/munichruncollective" },
+  { name: "ISAR RUN", cat: "Sport & Outdoor", district: "München-weit", emoji: "🌊", desc: "Lauf-Crew, die ihre Runden entlang der Isar dreht und die Münchner Running-Szene zusammenbringt.", link: "https://instagram.com/isarrun_munich" },
+  { name: "Boulderwelt München Ost", cat: "Sport & Outdoor", district: "Berg am Laim", emoji: "🧗", desc: "Größte Boulderhalle Münchens mit Rooftop-Boulderbereich und Levels für alle, ein Treffpunkt der Kletter-Community.", link: "https://instagram.com/boulderweltmuenchenost" },
+  { name: "DAV Boulderhalle Freimann", cat: "Sport & Outdoor", district: "Freimann", emoji: "🪨", desc: "Kletter- und Boulderhalle des Alpenvereins im Norden Münchens, Anlaufstelle für Kletterbegeisterte.", link: "https://instagram.com/kbfreimann" },
+  { name: "Alpines Eisbaden", cat: "Achtsamkeit & Wellness", district: "Isarvorstadt", emoji: "🧊", desc: "Eisbade-Community, die sich wöchentlich an der Reichenbachbrücke trifft, um gemeinsam ins kalte Wasser zu gehen.", link: "https://instagram.com/alpineseisbaden" },
+  { name: "Women Entrepreneurs of Munich", cat: "Frauen & Netzwerk", district: "München-weit", emoji: "💼", desc: "Community englischsprachiger Unternehmerinnen in München mit Workshops, Networking und Events.", link: "https://instagram.com/womenentrepreneursofmunich" },
+  { name: "Urban Sketchers Munich", cat: "Handarbeit & Kreativ", district: "München-weit", emoji: "✏️", desc: "Zeichen-Community, die sich am ersten Sonntag im Monat trifft, um die Stadt direkt vor Ort zu skizzieren.", link: "https://instagram.com/uskmunich" },
+  { name: "Kreativ München", cat: "Handarbeit & Kreativ", district: "München-weit", emoji: "🎨", desc: "Plattform und Community für Kreative in München mit Tipps, Networking und kreativem Raum.", link: "https://instagram.com/kreativmuenchen" },
+  { name: "Board Games Munich", cat: "Nachbarschaft & Ausgehen", district: "München-weit", emoji: "🎲", desc: "Brettspiel-Treff mit großer Spieleauswahl, der Erfahrene und Neulinge in lockerer Runde zusammenbringt.", link: "https://bgmuc.de/" },
+  { name: "JDAV Bezirk München", cat: "Sport & Outdoor", district: "München-weit", emoji: "⛰️", desc: "Jugend des Deutschen Alpenvereins im Bezirk München, organisiert Berg- und Outdoor-Aktivitäten für junge Leute.", link: "https://instagram.com/jdavbezirkmuenchen" },
+  { name: "TANDEM München", cat: "Sprache & Kultur", district: "München-weit", emoji: "🗣️", desc: "Internationale Sprachschule seit 1989, bietet Sprach-Tandems und kulturelle Aktivitäten zum echten Eintauchen.", link: "https://instagram.com/tandemmunich" }
 ];
 
 const grid = document.getElementById('grid');
@@ -346,8 +355,9 @@ function render() {
   }
 
   list.forEach(c => {
+    const linkLabel = c.link.includes('instagram.com') ? 'Instagram →' : (c.link.includes('facebook.com') ? 'Facebook →' : 'Website →');
     const linkHtml = c.link
-      ? `<a class="card-link" href="${c.link}" target="_blank" rel="noopener">Ansehen →</a>`
+      ? `<a class="card-link" href="${c.link}" target="_blank" rel="noopener">${linkLabel}</a>`
       : `<span class="loc">Bald auf Clero</span>`;
     const card = document.createElement('article');
     card.className = 'card';
