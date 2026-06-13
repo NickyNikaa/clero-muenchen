@@ -10,18 +10,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --green: #0E8F5E;
-    --green-dark: #0A6F49;
-    --green-light: #E6F5EF;
-    --green-soft: #F2FAF6;
-    --ink: #14201B;
+    --neon: #76EE2E;
+    --neon-hover: #67DC1E;
+    --neon-light: #E9FCD8;
+    --neon-soft: #F4FDEC;
+    --green: #3A8F2C;
+    --green-dark: #2C6E20;
+    --green-light: #E9FCD8;
+    --green-soft: #F4FDEC;
+    --ink: #14332B;
     --muted: #5B6B64;
-    --line: #E2EAE6;
-    --bg: #FBFCFB;
+    --line: #E3EBDF;
+    --bg: #FBFCF9;
     --white: #FFFFFF;
     --radius: 18px;
-    --shadow: 0 4px 24px rgba(14, 143, 94, 0.08);
-    --shadow-hover: 0 10px 34px rgba(14, 143, 94, 0.16);
+    --shadow: 0 4px 24px rgba(20, 51, 43, 0.07);
+    --shadow-hover: 0 10px 34px rgba(20, 51, 43, 0.13);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -43,20 +47,20 @@
     border-bottom: 1px solid var(--line);
   }
   .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-  .logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
-  .logo .dot { width: 26px; height: 26px; border-radius: 50%; background: var(--green); display: grid; place-items: center; color: #fff; font-size: 15px; }
+  .logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--ink); }
+  .logo .mark { display: block; flex-shrink: 0; }
   .nav-links { display: flex; gap: 26px; align-items: center; font-weight: 500; font-size: 15px; }
   .nav-links a { color: var(--muted); transition: color .2s; }
   .nav-links a:hover { color: var(--green); }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
-    background: var(--green); color: #fff; font-weight: 600; font-size: 15px;
+    background: var(--neon); color: var(--ink); font-weight: 700; font-size: 15px;
     padding: 11px 20px; border-radius: 999px; border: none; cursor: pointer;
     transition: transform .15s, box-shadow .2s, background .2s;
   }
-  .btn:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
-  .btn-ghost { background: transparent; color: var(--green); border: 1.5px solid var(--green); }
-  .btn-ghost:hover { background: var(--green-light); color: var(--green-dark); }
+  .btn:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); font-weight: 600; }
+  .btn-ghost:hover { background: var(--neon-light); border-color: var(--green-dark); }
   @media (max-width: 720px) { .nav-links { display: none; } }
 
   /* Hero */
@@ -95,7 +99,7 @@
     border-radius: 999px; cursor: pointer; transition: all .18s; white-space: nowrap;
   }
   .chip:hover { border-color: var(--green); color: var(--green); }
-  .chip.active { background: var(--green); color: #fff; border-color: var(--green); }
+  .chip.active { background: var(--neon); color: var(--ink); border-color: var(--neon); font-weight: 700; }
   .district-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
   .district-row label { font-size: 14px; color: var(--muted); font-weight: 500; }
   select {
@@ -130,12 +134,10 @@
   .empty .big { font-size: 40px; margin-bottom: 10px; }
 
   /* CTA host */
-  .host-cta { background: var(--green); color: #fff; border-radius: 26px; padding: 52px 32px; text-align: center; margin: 30px 0 60px; }
+  .host-cta { background: var(--ink); color: #fff; border-radius: 26px; padding: 52px 32px; text-align: center; margin: 30px 0 60px; }
   .host-cta h2 { font-size: clamp(26px, 3.5vw, 36px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
   .host-cta p { font-size: 17px; opacity: .92; max-width: 520px; margin: 0 auto 26px; }
-  .host-cta .btn { background: #fff; color: var(--green-dark); }
-  .host-cta .btn:hover { background: var(--green-light); }
-  .founding { display: inline-block; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); font-size: 13.5px; font-weight: 600; padding: 7px 16px; border-radius: 999px; margin-bottom: 22px; }
+  .founding { display: inline-block; background: rgba(118,238,46,.16); border: 1px solid rgba(118,238,46,.5); color: var(--neon); font-size: 13.5px; font-weight: 700; padding: 7px 16px; border-radius: 999px; margin-bottom: 22px; }
 
   /* Footer */
   footer { border-top: 1px solid var(--line); padding: 40px 0; }
@@ -144,19 +146,46 @@
   .foot-links { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
   .foot-links a { color: var(--muted); transition: color .2s; }
   .foot-links a:hover { color: var(--green); }
+
+  /* Modal */
+  .overlay { position: fixed; inset: 0; background: rgba(14,32,27,.55); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+  .overlay.open { display: flex; }
+  .modal { background: var(--white); border-radius: 22px; max-width: 480px; width: 100%; padding: 30px 28px; box-shadow: 0 20px 60px rgba(14,32,27,.3); max-height: 90vh; overflow-y: auto; position: relative; }
+  .modal h3 { font-size: 23px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .modal .lead { color: var(--muted); font-size: 15px; margin-bottom: 20px; }
+  .modal-close { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border-radius: 50%; border: none; background: var(--green-soft); color: var(--muted); font-size: 18px; cursor: pointer; transition: background .2s; }
+  .modal-close:hover { background: var(--green-light); color: var(--green-dark); }
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 5px; color: var(--ink); }
+  .field input, .field textarea { width: 100%; font-family: inherit; font-size: 15px; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 12px; outline: none; transition: border .2s, box-shadow .2s; background: var(--bg); }
+  .field input:focus, .field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-light); }
+  .field textarea { resize: vertical; min-height: 76px; }
+  .modal .btn { width: 100%; justify-content: center; margin-top: 6px; }
+  .fallback { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); text-align: center; }
+  .fallback strong { color: var(--ink); }
+  .copy-btn { background: none; border: none; color: var(--green); font-family: inherit; font-weight: 600; font-size: 13.5px; cursor: pointer; padding: 0; margin-left: 4px; }
+  .copy-btn:hover { color: var(--green-dark); }
+  .seg { display: flex; gap: 6px; background: var(--neon-soft); border: 1px solid var(--line); border-radius: 999px; padding: 4px; margin-bottom: 20px; }
+  .seg-btn { flex: 1; border: none; background: transparent; font-family: inherit; font-weight: 600; font-size: 13.5px; color: var(--muted); padding: 9px 8px; border-radius: 999px; cursor: pointer; transition: all .18s; }
+  .seg-btn.active { background: var(--neon); color: var(--ink); font-weight: 700; }
+  .info-box { background: var(--neon-light); border-radius: 13px; padding: 14px 16px; font-size: 14px; color: var(--ink); margin-bottom: 16px; line-height: 1.5; }
+  .steps { margin: 0 0 18px 18px; padding: 0; font-size: 14.5px; color: var(--ink); }
+  .steps li { margin-bottom: 7px; padding-left: 4px; }
+  .tab .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
+  .tab .btn:last-of-type { margin-bottom: 0; }
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="#" class="logo"><span class="dot">💚</span>Clero</a>
+    <a href="#" class="logo"><svg class="mark" viewBox="0 0 34 50" width="24" height="35" aria-hidden="true"><rect x="4" y="4" width="26" height="42" rx="13" fill="none" stroke="var(--neon)" stroke-width="7"/></svg>Clero</a>
     <nav class="nav-links">
       <a href="#finder">Communities</a>
       <a href="#mitmachen">Mitmachen</a>
       <a href="https://instagram.com/clero.app" target="_blank" rel="noopener">Instagram</a>
     </nav>
-    <a href="#mitmachen" class="btn">Community eintragen</a>
+    <button class="btn" data-open-modal>Community eintragen</button>
   </div>
 </header>
 
@@ -193,14 +222,52 @@
     <span class="founding">✨ Founding 20 · Die ersten 20 Hosts in München, dauerhaft kostenlos</span>
     <h2>Du leitest eine Community in München?</h2>
     <p>Trag deine Gruppe ein und sei beim Launch direkt sichtbar. Komplett unverbindlich und aktuell kostenlos. Wir freuen uns, von dir zu hören.</p>
-    <a class="btn" href="mailto:n.emrich@clero.de?subject=Community%20bei%20Clero%20eintragen&body=Hallo%20Nicole%2C%0A%0Aich%20m%C3%B6chte%20meine%20Community%20bei%20Clero%20eintragen.%0A%0AName%20der%20Community%3A%20%0AKategorie%2FThema%3A%20%0AStadtteil%3A%20%0AKurzbeschreibung%3A%20%0AInstagram%2FWebsite%3A%20%0A%0ALiebe%20Gr%C3%BC%C3%9Fe">Community eintragen</a>
+    <button class="btn" data-open-modal>Community eintragen</button>
   </div>
 </section>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" id="modalClose" aria-label="Schließen">×</button>
+    <h3 id="modal-title">Community eintragen 💚</h3>
+    <p class="lead">Such dir aus, wie du loslegen möchtest.</p>
+
+    <div class="seg">
+      <button class="seg-btn active" data-tab="founding" type="button">✨ Founding 20 (mit LOI)</button>
+      <button class="seg-btn" data-tab="basic" type="button">Nur eintragen</button>
+    </div>
+
+    <div class="tab" id="tab-founding">
+      <div class="info-box">Als <strong>Founding-20-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 20 Hosts in München, komplett unverbindlich.</div>
+      <ol class="steps">
+        <li>LOI herunterladen und ausfüllen</li>
+        <li>Unterschreiben (digital oder eingescannt)</li>
+        <li>Ausgefüllten LOI an uns zurücksenden</li>
+      </ol>
+      <a class="btn" href="clero-loi.pdf" download>📄 LOI herunterladen</a>
+      <a class="btn btn-ghost" id="loiMailBtn" href="#">Ausgefüllten LOI per Mail senden</a>
+    </div>
+
+    <div class="tab" id="tab-basic" hidden>
+      <div class="info-box">Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.</div>
+      <form id="hostForm">
+        <div class="field"><label for="f-name">Name der Community *</label><input id="f-name" required placeholder="z.B. München Yoga Crew" /></div>
+        <div class="field"><label for="f-cat">Kategorie / Thema *</label><input id="f-cat" required placeholder="z.B. Yoga, Sport, Sprache …" /></div>
+        <div class="field"><label for="f-district">Stadtteil</label><input id="f-district" placeholder="z.B. Maxvorstadt oder München-weit" /></div>
+        <div class="field"><label for="f-desc">Kurzbeschreibung</label><textarea id="f-desc" placeholder="Was macht eure Community aus?"></textarea></div>
+        <div class="field"><label for="f-link">Instagram / Website</label><input id="f-link" placeholder="@euer_account oder https://…" /></div>
+        <button type="submit" class="btn">Per Mail an uns senden</button>
+      </form>
+    </div>
+
+    <p class="fallback">Mailprogramm öffnet nicht? Schreib direkt an<br><strong>n.emrich@clero.de</strong><button class="copy-btn" id="copyMail">kopieren</button></p>
+  </div>
+</div>
 
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <a href="#" class="logo" style="font-size:19px;"><span class="dot" style="width:22px;height:22px;font-size:13px;">💚</span>Clero</a>
+      <a href="#" class="logo" style="font-size:19px;"><svg class="mark" viewBox="0 0 34 50" width="21" height="31" aria-hidden="true"><rect x="4" y="4" width="26" height="42" rx="13" fill="none" stroke="var(--neon)" stroke-width="7"/></svg>Clero</a>
       <p class="muted" style="margin-top:8px;">Städte wieder zu Orten machen, an denen Communities sichtbar werden.</p>
     </div>
     <div class="foot-links">
@@ -301,6 +368,53 @@ function render() {
 searchEl.addEventListener('input', render);
 districtEl.addEventListener('change', render);
 render();
+
+// Modal
+const overlay = document.getElementById('overlay');
+const openModal = () => { overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); document.getElementById('f-name').focus(); };
+const closeModal = () => { overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); };
+document.querySelectorAll('[data-open-modal]').forEach(b => b.addEventListener('click', openModal));
+document.getElementById('modalClose').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+document.getElementById('hostForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = id => document.getElementById(id).value.trim();
+  const body =
+    'Hallo Nicole,\n\nich möchte meine Community bei Clero eintragen.\n\n' +
+    'Name der Community: ' + v('f-name') + '\n' +
+    'Kategorie/Thema: ' + v('f-cat') + '\n' +
+    'Stadtteil: ' + v('f-district') + '\n' +
+    'Kurzbeschreibung: ' + v('f-desc') + '\n' +
+    'Instagram/Website: ' + v('f-link') + '\n\nLiebe Grüße';
+  const url = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent('Community bei Clero eintragen: ' + v('f-name')) + '&body=' + encodeURIComponent(body);
+  window.location.href = url;
+});
+
+document.getElementById('copyMail').addEventListener('click', function() {
+  const btn = this;
+  navigator.clipboard.writeText('n.emrich@clero.de').then(() => {
+    btn.textContent = 'kopiert ✓';
+    setTimeout(() => { btn.textContent = 'kopieren'; }, 2000);
+  }).catch(() => { btn.textContent = 'n.emrich@clero.de'; });
+});
+
+// Tabs
+document.querySelectorAll('.seg-btn').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.seg-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  const tab = b.dataset.tab;
+  document.getElementById('tab-founding').hidden = (tab !== 'founding');
+  document.getElementById('tab-basic').hidden = (tab !== 'basic');
+}));
+
+// LOI per Mail zurücksenden
+document.getElementById('loiMailBtn').addEventListener('click', e => {
+  e.preventDefault();
+  const body = 'Hallo Nicole,\n\nanbei unser ausgefüllter und unterschriebener Letter of Intent für das Founding-20-Programm.\n\n(Bitte die ausgefüllte LOI-Datei an diese Mail anhängen.)\n\nName der Community: \nAnsprechpartner:in: \n\nLiebe Grüße';
+  window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent('Founding 20 – Ausgefüllter LOI') + '&body=' + encodeURIComponent(body);
+});
 </script>
 </body>
 </html>
