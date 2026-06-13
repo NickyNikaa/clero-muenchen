@@ -178,6 +178,10 @@
   .steps li { margin-bottom: 7px; padding-left: 4px; }
   .tab .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
   .tab .btn:last-of-type { margin-bottom: 0; }
+  .loi-links { text-align: center; margin-top: 14px; }
+  .loi-links a { color: var(--green); font-weight: 600; font-size: 13.5px; }
+  .loi-links a:hover { color: var(--green-dark); }
+  .toast { position: fixed; left: 50%; bottom: 92px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 14px; font-size: 14.5px; font-weight: 600; box-shadow: 0 10px 30px rgba(20,51,43,.32); z-index: 200; max-width: 90%; text-align: center; animation: waPop .3s ease; }
 
   /* Hero two-column + phone */
   .hero .wrap { display: flex; align-items: center; gap: 48px; text-align: left; }
@@ -381,13 +385,17 @@
 
     <div class="tab" id="tab-founding">
       <div class="info-box" data-i18n="modal.foundingInfo">Als <strong>Founding-20-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 20 Hosts in München, komplett unverbindlich.</div>
-      <ol class="steps">
-        <li data-i18n="modal.step1">LOI herunterladen und ausfüllen</li>
-        <li data-i18n="modal.step2">Unterschreiben (digital oder eingescannt)</li>
-        <li data-i18n="modal.step3">Ausgefüllten LOI an uns zurücksenden</li>
-      </ol>
-      <a class="btn" id="loiDownload" href="clero-loi.pdf" download data-i18n="modal.loiDownload">📄 LOI herunterladen</a>
-      <a class="btn btn-ghost" id="loiMailBtn" href="#" data-i18n="modal.loiMail">Ausgefüllten LOI per Mail senden</a>
+      <form id="loiForm" autocomplete="on">
+        <div class="field"><label for="loi-gname" data-i18n="loi.gname">Name der Gruppe / Community *</label><input id="loi-gname" required data-i18n-ph="loi.gnamePh" placeholder="z.B. München Yoga Crew" /></div>
+        <div class="field"><label for="loi-contact" data-i18n="loi.contact">Ansprechpartner:in *</label><input id="loi-contact" required data-i18n-ph="loi.contactPh" placeholder="Vor- und Nachname" /></div>
+        <div class="field"><label for="loi-role" data-i18n="loi.role">Rolle</label><input id="loi-role" data-i18n-ph="loi.rolePh" placeholder="z.B. Founder / Host" /></div>
+        <div class="field"><label for="loi-mail" data-i18n="loi.mail">E-Mail / Telefon *</label><input id="loi-mail" required data-i18n-ph="loi.mailPh" placeholder="name@mail.de oder +49 …" /></div>
+        <div class="field"><label for="loi-members" data-i18n="loi.members">Ungefähre Mitgliederzahl</label><input id="loi-members" inputmode="numeric" data-i18n-ph="loi.membersPh" placeholder="z.B. 80" /></div>
+        <div class="field"><label for="loi-place" data-i18n="loi.place">Ort</label><input id="loi-place" data-i18n-ph="loi.placePh" placeholder="München" /></div>
+        <button type="button" class="btn" id="loiSend" data-i18n="loi.send">LOI ausgefüllt an Clero senden</button>
+        <button type="button" class="btn btn-ghost" id="loiDownloadFilled" data-i18n="loi.downloadFilled">Ausgefülltes PDF herunterladen</button>
+      </form>
+      <p class="loi-links"><a href="clero-loi.pdf" id="loiDownload" download data-i18n="loi.blank">Oder leeres PDF herunterladen</a></p>
     </div>
 
     <div class="tab" id="tab-basic" hidden>
@@ -492,6 +500,16 @@ const I18N = {
     "modal.foundingInfo":"Als <strong>Founding-20-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 20 Hosts in München, komplett unverbindlich.",
     "modal.step1":"LOI herunterladen und ausfüllen","modal.step2":"Unterschreiben (digital oder eingescannt)","modal.step3":"Ausgefüllten LOI an uns zurücksenden",
     "modal.loiDownload":"📄 LOI herunterladen","modal.loiMail":"Ausgefüllten LOI per Mail senden",
+    "loi.gname":"Name der Gruppe / Community *","loi.gnamePh":"z.B. München Yoga Crew",
+    "loi.contact":"Ansprechpartner:in *","loi.contactPh":"Vor- und Nachname",
+    "loi.role":"Rolle","loi.rolePh":"z.B. Founder / Host",
+    "loi.mail":"E-Mail / Telefon *","loi.mailPh":"name@mail.de oder +49 …",
+    "loi.members":"Ungefähre Mitgliederzahl","loi.membersPh":"z.B. 80",
+    "loi.place":"Ort","loi.placePh":"München",
+    "loi.send":"LOI ausgefüllt an Clero senden","loi.downloadFilled":"Ausgefülltes PDF herunterladen",
+    "loi.blank":"Oder leeres PDF herunterladen","loi.sending":"Wird vorbereitet …",
+    "loi.required":"Bitte fülle Name der Gruppe, Ansprechpartner:in und E-Mail / Telefon aus.",
+    "loi.sentToast":"Danke! Dein LOI ist bei Nicole eingegangen. 💚",
     "modal.basicInfo":"Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.",
     "modal.fName":"Name der Community *","modal.fNamePh":"z.B. München Yoga Crew",
     "modal.fCat":"Kategorie / Thema *","modal.fCatPh":"z.B. Yoga, Sport, Sprache …",
@@ -529,6 +547,16 @@ const I18N = {
     "modal.foundingInfo":"As a <strong>Founding 20 host</strong> you use Clero free forever and are visible right at launch. Limited to the first 20 hosts in Munich, completely non-binding.",
     "modal.step1":"Download and fill in the LOI","modal.step2":"Sign it (digitally or scanned)","modal.step3":"Send the completed LOI back to us",
     "modal.loiDownload":"📄 Download LOI","modal.loiMail":"Send completed LOI by email",
+    "loi.gname":"Group / community name *","loi.gnamePh":"e.g. Munich Yoga Crew",
+    "loi.contact":"Contact person *","loi.contactPh":"First and last name",
+    "loi.role":"Role","loi.rolePh":"e.g. Founder / Host",
+    "loi.mail":"Email / phone *","loi.mailPh":"name@mail.com or +49 …",
+    "loi.members":"Approx. number of members","loi.membersPh":"e.g. 80",
+    "loi.place":"Place","loi.placePh":"Munich",
+    "loi.send":"Send completed LOI to Clero","loi.downloadFilled":"Download completed PDF",
+    "loi.blank":"Or download a blank PDF","loi.sending":"Preparing …",
+    "loi.required":"Please fill in group name, contact person and email / phone.",
+    "loi.sentToast":"Thank you! Your LOI has reached Nicole. 💚",
     "modal.basicInfo":"Without an LOI and without Founding 20 benefits. We are happy to add your community to the directory anyway.",
     "modal.fName":"Community name *","modal.fNamePh":"e.g. Munich Yoga Crew",
     "modal.fCat":"Category / topic *","modal.fCatPh":"e.g. yoga, sports, language …",
@@ -717,20 +745,109 @@ document.querySelectorAll('.seg-btn').forEach(b => b.addEventListener('click', (
   document.getElementById('tab-basic').hidden = (tab !== 'basic');
 }));
 
-document.getElementById('loiMailBtn').addEventListener('click', e => {
-  e.preventDefault();
-  let subject, body;
-  if (lang === 'en') {
-    subject = 'Founding 20 – completed LOI';
-    body = 'Hi Nicole,\n\nplease find attached our completed and signed Letter of Intent for the Founding 20 programme.\n\n(Please attach the completed LOI file to this email.)\n\nCommunity name: \nContact person: \n\nBest regards';
-  } else {
-    subject = 'Founding 20 – Ausgefüllter LOI';
-    body = 'Hallo Nicole,\n\nanbei unser ausgefüllter und unterschriebener Letter of Intent für das Founding-20-Programm.\n\n(Bitte die ausgefüllte LOI-Datei an diese Mail anhängen.)\n\nName der Community: \nAnsprechpartner:in: \n\nLiebe Grüße';
+// ---- Online-LOI: ausfüllen, ins echte PDF stempeln, herunterladen oder direkt senden ----
+function showToast(msg) {
+  const el = document.createElement('div');
+  el.className = 'toast'; el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4500);
+}
+
+const LOI_FIELDS = {
+  de: { url: 'clero-loi.pdf',
+    gname: {p:0,x:46,y:662}, contactP0: {p:0,x:341,y:662}, members: {p:0,x:327,y:248},
+    hName: {p:1,x:94,y:415}, hRole: {p:1,x:89,y:391}, hMail: {p:1,x:209,y:367}, hOrt: {p:1,x:128,y:315},
+    tjard: {p:1,x:191,y:169} },
+  en: { url: 'clero-loi-en.pdf',
+    gname: {p:0,x:46,y:637}, contactP0: null, members: {p:0,x:363,y:245},
+    hName: {p:1,x:94,y:411}, hRole: {p:1,x:85,y:387}, hMail: {p:1,x:145,y:363}, hOrt: {p:1,x:128,y:311},
+    tjard: {p:1,x:180,y:166} }
+};
+const lv = id => (document.getElementById(id).value || '').trim();
+const safeName = () => (lv('loi-gname') || 'Community').replace(/[^\w\-]+/g, '_');
+
+function loiValid() {
+  for (const id of ['loi-gname','loi-contact','loi-mail']) {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); showToast(t('loi.required')); return false; }
   }
-  window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-});
+  return true;
+}
+
+async function buildFilledLoi() {
+  const cfg = LOI_FIELDS[lang];
+  const buf = await fetch(cfg.url).then(r => r.arrayBuffer());
+  const doc = await PDFLib.PDFDocument.load(buf);
+  const pages = doc.getPages();
+  const font = await doc.embedFont(PDFLib.StandardFonts.Helvetica);
+  const ink = PDFLib.rgb(0.08, 0.2, 0.17);
+  const put = (spec, txt) => { if (spec && txt) pages[spec.p].drawText(String(txt), { x: spec.x, y: spec.y, size: 10, font, color: ink }); };
+  const today = todayStr();
+  const place = lv('loi-place') || (lang === 'en' ? 'Munich' : 'München');
+  put(cfg.gname, lv('loi-gname'));
+  put(cfg.contactP0, lv('loi-contact'));
+  put(cfg.members, lv('loi-members'));
+  put(cfg.hName, lv('loi-contact'));
+  put(cfg.hRole, lv('loi-role'));
+  put(cfg.hMail, lv('loi-mail'));
+  put(cfg.hOrt, place + ', ' + today);
+  put(cfg.tjard, today);
+  return await doc.save();
+}
+
+async function downloadFilledLoi() {
+  if (!loiValid()) return;
+  if (!window.PDFLib) { window.location.href = LOI_FIELDS[lang].url; return; }
+  try {
+    const bytes = await buildFilledLoi();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+    a.download = 'Clero-LOI-' + safeName() + '.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  } catch (e) { window.location.href = LOI_FIELDS[lang].url; }
+}
+
+async function sendLoi() {
+  if (!loiValid()) return;
+  const btn = document.getElementById('loiSend');
+  btn.textContent = t('loi.sending'); btn.disabled = true;
+  const place = lv('loi-place') || (lang === 'en' ? 'Munich' : 'München');
+  const form = document.createElement('form');
+  form.action = 'https://formsubmit.co/n.emrich@clero.de';
+  form.method = 'POST'; form.enctype = 'multipart/form-data'; form.style.display = 'none';
+  const add = (n, val) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = val || ''; form.appendChild(i); };
+  add('_subject', (lang === 'en' ? 'New Founding 20 LOI: ' : 'Neuer Founding-20 LOI: ') + lv('loi-gname'));
+  add('_captcha', 'false');
+  add('_template', 'table');
+  add('_next', location.origin + location.pathname + '?loi=sent');
+  add(lang === 'en' ? 'Group' : 'Gruppe', lv('loi-gname'));
+  add(lang === 'en' ? 'Contact' : 'Ansprechpartner', lv('loi-contact'));
+  add(lang === 'en' ? 'Role' : 'Rolle', lv('loi-role'));
+  add(lang === 'en' ? 'Email/Phone' : 'E-Mail/Telefon', lv('loi-mail'));
+  add(lang === 'en' ? 'Members' : 'Mitglieder', lv('loi-members'));
+  add(lang === 'en' ? 'Place' : 'Ort', place);
+  add(lang === 'en' ? 'Date' : 'Datum', todayStr());
+  try {
+    if (window.PDFLib) {
+      const bytes = await buildFilledLoi();
+      const file = new File([new Blob([bytes], { type: 'application/pdf' })], 'Clero-LOI-' + safeName() + '.pdf', { type: 'application/pdf' });
+      const fi = document.createElement('input'); fi.type = 'file'; fi.name = 'attachment'; fi.style.display = 'none'; form.appendChild(fi);
+      const dt = new DataTransfer(); dt.items.add(file); fi.files = dt.files;
+    }
+  } catch (e) {}
+  document.body.appendChild(form);
+  form.submit();
+}
+document.getElementById('loiSend').addEventListener('click', sendLoi);
+document.getElementById('loiDownloadFilled').addEventListener('click', downloadFilledLoi);
 
 applyLang();
+
+if (new URLSearchParams(location.search).get('loi') === 'sent') {
+  showToast(t('loi.sentToast'));
+  history.replaceState({}, '', location.pathname);
+}
 </script>
 </body>
 </html>
