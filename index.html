@@ -46,12 +46,16 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 14px; }
   .logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: var(--ink); }
   .logo .mark { display: block; flex-shrink: 0; }
   .nav-links { display: flex; gap: 26px; align-items: center; font-weight: 500; font-size: 15px; }
   .nav-links a { color: var(--muted); transition: color .2s; }
   .nav-links a:hover { color: var(--green); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .lang { display: flex; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .lang button { border: none; background: transparent; font-family: inherit; font-weight: 700; font-size: 13px; color: var(--muted); padding: 7px 11px; cursor: pointer; transition: all .18s; }
+  .lang button.active { background: var(--neon); color: var(--ink); }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--neon); color: var(--ink); font-weight: 700; font-size: 15px;
@@ -61,7 +65,8 @@
   .btn:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
   .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); font-weight: 600; }
   .btn-ghost:hover { background: var(--neon-light); border-color: var(--green-dark); }
-  @media (max-width: 720px) { .nav-links { display: none; } }
+  @media (max-width: 820px) { .nav-links { display: none; } }
+  @media (max-width: 520px) { .header-cta { display: none; } }
 
   /* Hero */
   .hero { padding: 72px 0 48px; text-align: center; position: relative; overflow: hidden; }
@@ -173,6 +178,16 @@
   .steps li { margin-bottom: 7px; padding-left: 4px; }
   .tab .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
   .tab .btn:last-of-type { margin-bottom: 0; }
+
+  /* WhatsApp */
+  .wa-fab { position: fixed; right: 22px; bottom: 22px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+  .wa-bubble { background: var(--white); border: 1px solid var(--line); box-shadow: 0 8px 30px rgba(20,51,43,.16); border-radius: 16px 16px 4px 16px; padding: 13px 16px; max-width: 230px; font-size: 14px; color: var(--ink); position: relative; animation: waPop .3s ease; }
+  .wa-bubble strong { display: block; font-weight: 700; margin-bottom: 2px; }
+  .wa-bubble .wa-x { position: absolute; top: -8px; left: -8px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); background: var(--white); color: var(--muted); font-size: 13px; cursor: pointer; line-height: 1; }
+  .wa-btn { display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; border-radius: 50%; background: #25D366; box-shadow: 0 6px 20px rgba(37,211,102,.45); transition: transform .15s, box-shadow .2s; align-self: flex-end; }
+  .wa-btn:hover { transform: scale(1.06); box-shadow: 0 8px 26px rgba(37,211,102,.55); }
+  @keyframes waPop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 520px) { .wa-bubble { max-width: 180px; } }
 </style>
 </head>
 <body>
@@ -181,22 +196,28 @@
   <div class="wrap nav">
     <a href="#" class="logo"><svg class="mark" viewBox="0 0 34 50" width="24" height="35" aria-hidden="true"><rect x="4" y="4" width="26" height="42" rx="13" fill="none" stroke="var(--neon)" stroke-width="7"/></svg>Clero</a>
     <nav class="nav-links">
-      <a href="#finder">Communities</a>
-      <a href="#mitmachen">Mitmachen</a>
+      <a href="#finder" data-i18n="nav.communities">Communities</a>
+      <a href="#mitmachen" data-i18n="nav.join">Mitmachen</a>
       <a href="https://instagram.com/clero.app" target="_blank" rel="noopener">Instagram</a>
     </nav>
-    <button class="btn" data-open-modal>Community eintragen</button>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Sprache / Language">
+        <button data-lang="de" type="button">DE</button>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+      <button class="btn header-cta" data-open-modal data-i18n="btn.register">Community eintragen</button>
+    </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <span class="pill">💚 Jetzt in München · Launch August 2026</span>
-    <h1>Finde die <span class="hl">Communities</span>, die zu dir passen.</h1>
-    <p class="sub">Wir möchten Städte wieder zu Orten machen, an denen Communities sichtbar werden. Entdecke lokale Gruppen in München, von Yoga über Surfen bis zu Sprache und Kultur.</p>
+    <span class="pill" data-i18n="hero.pill">💚 Jetzt in München · Launch August 2026</span>
+    <h1 data-i18n="hero.h1">Finde die <span class="hl">Communities</span>, die zu dir passen.</h1>
+    <p class="sub" data-i18n="hero.sub">Wir möchten Städte wieder zu Orten machen, an denen Communities sichtbar werden. Entdecke lokale Gruppen in München, von Yoga über Surfen bis zu Sprache und Kultur.</p>
     <div class="hero-cta">
-      <a href="#finder" class="btn">Communities entdecken</a>
-      <a href="#mitmachen" class="btn btn-ghost">Eigene Gruppe eintragen</a>
+      <a href="#finder" class="btn" data-i18n="hero.cta1">Communities entdecken</a>
+      <a href="#mitmachen" class="btn btn-ghost" data-i18n="hero.cta2">Eigene Gruppe eintragen</a>
     </div>
   </div>
 </section>
@@ -204,13 +225,13 @@
 <section class="finder wrap" id="finder">
   <div class="search-box">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-    <input type="text" id="search" placeholder="Suche nach Community, Thema oder Stichwort…" aria-label="Communities durchsuchen" />
+    <input type="text" id="search" data-i18n-ph="search.ph" placeholder="Suche nach Community, Thema oder Stichwort…" aria-label="Communities durchsuchen" />
   </div>
   <div class="filters">
     <div class="chips" id="chips"></div>
     <div class="district-row">
-      <label for="district">Stadtteil:</label>
-      <select id="district"><option value="all">Alle Stadtteile</option></select>
+      <label for="district" data-i18n="filter.district">Stadtteil:</label>
+      <select id="district"></select>
     </div>
   </div>
   <p class="count" id="count"></p>
@@ -219,48 +240,49 @@
 
 <section class="wrap" id="mitmachen">
   <div class="host-cta">
-    <span class="founding">✨ Founding 20 · Die ersten 20 Hosts in München, dauerhaft kostenlos</span>
-    <h2>Du leitest eine Community in München?</h2>
-    <p>Trag deine Gruppe ein und sei beim Launch direkt sichtbar. Komplett unverbindlich und aktuell kostenlos. Wir freuen uns, von dir zu hören.</p>
-    <button class="btn" data-open-modal>Community eintragen</button>
+    <span class="founding" data-i18n="host.badge">✨ Founding 20 · Die ersten 20 Hosts in München, dauerhaft kostenlos</span>
+    <h2 data-i18n="host.h2">Du leitest eine Community in München?</h2>
+    <p data-i18n="host.p">Trag deine Gruppe ein und sei beim Launch direkt sichtbar. Komplett unverbindlich und aktuell kostenlos. Wir freuen uns, von dir zu hören.</p>
+    <button class="btn" data-open-modal data-i18n="btn.register">Community eintragen</button>
   </div>
 </section>
 
 <div class="overlay" id="overlay" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <button class="modal-close" id="modalClose" aria-label="Schließen">×</button>
-    <h3 id="modal-title">Community eintragen 💚</h3>
-    <p class="lead">Such dir aus, wie du loslegen möchtest.</p>
+    <h3 id="modal-title" data-i18n="modal.title">Community eintragen 💚</h3>
+    <p class="lead" data-i18n="modal.lead">Such dir aus, wie du loslegen möchtest.</p>
 
     <div class="seg">
-      <button class="seg-btn active" data-tab="founding" type="button">✨ Founding 20 (mit LOI)</button>
-      <button class="seg-btn" data-tab="basic" type="button">Nur eintragen</button>
+      <button class="seg-btn active" data-tab="founding" type="button" data-i18n="modal.segFounding">✨ Founding 20 (mit LOI)</button>
+      <button class="seg-btn" data-tab="basic" type="button" data-i18n="modal.segBasic">Nur eintragen</button>
     </div>
 
     <div class="tab" id="tab-founding">
-      <div class="info-box">Als <strong>Founding-20-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 20 Hosts in München, komplett unverbindlich.</div>
+      <div class="info-box" data-i18n="modal.foundingInfo">Als <strong>Founding-20-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 20 Hosts in München, komplett unverbindlich.</div>
       <ol class="steps">
-        <li>LOI herunterladen und ausfüllen</li>
-        <li>Unterschreiben (digital oder eingescannt)</li>
-        <li>Ausgefüllten LOI an uns zurücksenden</li>
+        <li data-i18n="modal.step1">LOI herunterladen und ausfüllen</li>
+        <li data-i18n="modal.step2">Unterschreiben (digital oder eingescannt)</li>
+        <li data-i18n="modal.step3">Ausgefüllten LOI an uns zurücksenden</li>
       </ol>
-      <a class="btn" href="clero-loi.pdf" download>📄 LOI herunterladen</a>
-      <a class="btn btn-ghost" id="loiMailBtn" href="#">Ausgefüllten LOI per Mail senden</a>
+      <a class="btn" id="loiDownload" href="clero-loi.pdf" download data-i18n="modal.loiDownload">📄 LOI herunterladen</a>
+      <a class="btn btn-ghost" id="loiMailBtn" href="#" data-i18n="modal.loiMail">Ausgefüllten LOI per Mail senden</a>
     </div>
 
     <div class="tab" id="tab-basic" hidden>
-      <div class="info-box">Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.</div>
+      <div class="info-box" data-i18n="modal.basicInfo">Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.</div>
       <form id="hostForm">
-        <div class="field"><label for="f-name">Name der Community *</label><input id="f-name" required placeholder="z.B. München Yoga Crew" /></div>
-        <div class="field"><label for="f-cat">Kategorie / Thema *</label><input id="f-cat" required placeholder="z.B. Yoga, Sport, Sprache …" /></div>
-        <div class="field"><label for="f-district">Stadtteil</label><input id="f-district" placeholder="z.B. Maxvorstadt oder München-weit" /></div>
-        <div class="field"><label for="f-desc">Kurzbeschreibung</label><textarea id="f-desc" placeholder="Was macht eure Community aus?"></textarea></div>
-        <div class="field"><label for="f-link">Instagram / Website</label><input id="f-link" placeholder="@euer_account oder https://…" /></div>
-        <button type="submit" class="btn">Per Mail an uns senden</button>
+        <div class="field"><label for="f-name" data-i18n="modal.fName">Name der Community *</label><input id="f-name" required data-i18n-ph="modal.fNamePh" placeholder="z.B. München Yoga Crew" /></div>
+        <div class="field"><label for="f-cat" data-i18n="modal.fCat">Kategorie / Thema *</label><input id="f-cat" required data-i18n-ph="modal.fCatPh" placeholder="z.B. Yoga, Sport, Sprache …" /></div>
+        <div class="field"><label for="f-district" data-i18n="modal.fDistrict">Stadtteil</label><input id="f-district" data-i18n-ph="modal.fDistrictPh" placeholder="z.B. Maxvorstadt oder München-weit" /></div>
+        <div class="field"><label for="f-desc" data-i18n="modal.fDesc">Kurzbeschreibung</label><textarea id="f-desc" data-i18n-ph="modal.fDescPh" placeholder="Was macht eure Community aus?"></textarea></div>
+        <div class="field"><label for="f-link" data-i18n="modal.fLink">Instagram / Website</label><input id="f-link" data-i18n-ph="modal.fLinkPh" placeholder="@euer_account oder https://…" /></div>
+        <button type="submit" class="btn" data-i18n="modal.submit">Per Mail an uns senden</button>
       </form>
     </div>
 
-    <p class="fallback">Mailprogramm öffnet nicht? Schreib direkt an<br><strong>n.emrich@clero.de</strong><button class="copy-btn" id="copyMail">kopieren</button></p>
+    <p class="fallback" data-i18n="modal.fallback">Mailprogramm öffnet nicht? Schreib direkt an<br><strong>n.emrich@clero.de</strong></p>
+    <p style="text-align:center;margin-top:-8px;"><button class="copy-btn" id="copyMail" data-i18n="modal.copy">kopieren</button></p>
   </div>
 </div>
 
@@ -268,17 +290,29 @@
   <div class="wrap foot-grid">
     <div>
       <a href="#" class="logo" style="font-size:19px;"><svg class="mark" viewBox="0 0 34 50" width="21" height="31" aria-hidden="true"><rect x="4" y="4" width="26" height="42" rx="13" fill="none" stroke="var(--neon)" stroke-width="7"/></svg>Clero</a>
-      <p class="muted" style="margin-top:8px;">Städte wieder zu Orten machen, an denen Communities sichtbar werden.</p>
+      <p class="muted" style="margin-top:8px;" data-i18n="footer.tagline">Städte wieder zu Orten machen, an denen Communities sichtbar werden.</p>
     </div>
     <div class="foot-links">
       <a href="https://clero.de" target="_blank" rel="noopener">clero.de</a>
       <a href="https://instagram.com/clero.app" target="_blank" rel="noopener">@clero.app</a>
-      <a href="mailto:n.emrich@clero.de">Kontakt</a>
+      <a href="mailto:n.emrich@clero.de" data-i18n="footer.contact">Kontakt</a>
     </div>
   </div>
 </footer>
 
+<div class="wa-fab">
+  <div class="wa-bubble" id="waBubble">
+    <button class="wa-x" id="waX" aria-label="schließen">×</button>
+    <span data-i18n="wa.bubble"><strong>Fragen zu Clero?</strong>Schreib mir direkt auf WhatsApp 💬</span>
+  </div>
+  <a class="wa-btn" id="waBtn" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  </a>
+</div>
+
 <script>
+const WA = '4915206772337';
+
 const communities = [
   { name: "Sober Society MUC", cat: "Nachbarschaft & Ausgehen", district: "München-weit", emoji: "🌿", desc: "Alkoholfreie High-Vibe-Events, von Rooftop-Day-Partys mit Live-DJs bis zu Coffee-Meetups für alle, die ohne Kater feiern wollen.", link: "https://instagram.com/sobersociety.muc" },
   { name: "POP UP YOGA München", cat: "Yoga & Bewegung", district: "München-weit", emoji: "🧘", desc: "Yoga an wechselnden, besonderen Orten wie Villa Stuck, Haus der Kunst oder BMW Welt, geleitet von Gina und Terry.", link: "https://instagram.com/popupyogamuc" },
@@ -311,6 +345,87 @@ const communities = [
   { name: "TANDEM München", cat: "Sprache & Kultur", district: "München-weit", emoji: "🗣️", desc: "Internationale Sprachschule seit 1989, bietet Sprach-Tandems und kulturelle Aktivitäten zum echten Eintauchen.", link: "https://instagram.com/tandemmunich" }
 ];
 
+const I18N = {
+  de: {
+    "nav.communities":"Communities","nav.join":"Mitmachen","btn.register":"Community eintragen",
+    "hero.pill":"💚 Jetzt in München · Launch August 2026",
+    "hero.h1":"Finde die <span class=\"hl\">Communities</span>, die zu dir passen.",
+    "hero.sub":"Wir möchten Städte wieder zu Orten machen, an denen Communities sichtbar werden. Entdecke lokale Gruppen in München, von Yoga über Surfen bis zu Sprache und Kultur.",
+    "hero.cta1":"Communities entdecken","hero.cta2":"Eigene Gruppe eintragen",
+    "search.ph":"Suche nach Community, Thema oder Stichwort…",
+    "filter.district":"Stadtteil:","filter.allDistricts":"Alle Stadtteile",
+    "host.badge":"✨ Founding 20 · Die ersten 20 Hosts in München, dauerhaft kostenlos",
+    "host.h2":"Du leitest eine Community in München?",
+    "host.p":"Trag deine Gruppe ein und sei beim Launch direkt sichtbar. Komplett unverbindlich und aktuell kostenlos. Wir freuen uns, von dir zu hören.",
+    "modal.title":"Community eintragen 💚","modal.lead":"Such dir aus, wie du loslegen möchtest.",
+    "modal.segFounding":"✨ Founding 20 (mit LOI)","modal.segBasic":"Nur eintragen",
+    "modal.foundingInfo":"Als <strong>Founding-20-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 20 Hosts in München, komplett unverbindlich.",
+    "modal.step1":"LOI herunterladen und ausfüllen","modal.step2":"Unterschreiben (digital oder eingescannt)","modal.step3":"Ausgefüllten LOI an uns zurücksenden",
+    "modal.loiDownload":"📄 LOI herunterladen","modal.loiMail":"Ausgefüllten LOI per Mail senden",
+    "modal.basicInfo":"Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.",
+    "modal.fName":"Name der Community *","modal.fNamePh":"z.B. München Yoga Crew",
+    "modal.fCat":"Kategorie / Thema *","modal.fCatPh":"z.B. Yoga, Sport, Sprache …",
+    "modal.fDistrict":"Stadtteil","modal.fDistrictPh":"z.B. Maxvorstadt oder München-weit",
+    "modal.fDesc":"Kurzbeschreibung","modal.fDescPh":"Was macht eure Community aus?",
+    "modal.fLink":"Instagram / Website","modal.fLinkPh":"@euer_account oder https://…",
+    "modal.submit":"Per Mail an uns senden",
+    "modal.fallback":"Mailprogramm öffnet nicht? Schreib direkt an<br><strong>n.emrich@clero.de</strong>",
+    "modal.copy":"kopieren","modal.copied":"kopiert ✓",
+    "footer.tagline":"Städte wieder zu Orten machen, an denen Communities sichtbar werden.","footer.contact":"Kontakt",
+    "wa.bubble":"<strong>Fragen zu Clero?</strong>Schreib mir direkt auf WhatsApp 💬",
+    "count.one":"Community gefunden","count.many":"Communities gefunden",
+    "empty":"<div class=\"big\">🔍</div><strong>Keine Community gefunden.</strong><br>Probier ein anderes Stichwort oder trag deine Gruppe selbst ein.",
+    "link.instagram":"Instagram →","link.facebook":"Facebook →","link.website":"Website →"
+  },
+  en: {
+    "nav.communities":"Communities","nav.join":"Join","btn.register":"List your community",
+    "hero.pill":"💚 Now in Munich · Launch August 2026",
+    "hero.h1":"Find the <span class=\"hl\">communities</span> that fit you.",
+    "hero.sub":"We want to make cities places again where communities become visible. Discover local groups in Munich, from yoga and surfing to language and culture.",
+    "hero.cta1":"Discover communities","hero.cta2":"List your own group",
+    "search.ph":"Search by community, topic or keyword…",
+    "filter.district":"District:","filter.allDistricts":"All districts",
+    "host.badge":"✨ Founding 20 · The first 20 hosts in Munich, free forever",
+    "host.h2":"Do you run a community in Munich?",
+    "host.p":"List your group and be visible right at launch. Completely non-binding and currently free. We would love to hear from you.",
+    "modal.title":"List your community 💚","modal.lead":"Choose how you would like to start.",
+    "modal.segFounding":"✨ Founding 20 (with LOI)","modal.segBasic":"Just list us",
+    "modal.foundingInfo":"As a <strong>Founding 20 host</strong> you use Clero free forever and are visible right at launch. Limited to the first 20 hosts in Munich, completely non-binding.",
+    "modal.step1":"Download and fill in the LOI","modal.step2":"Sign it (digitally or scanned)","modal.step3":"Send the completed LOI back to us",
+    "modal.loiDownload":"📄 Download LOI","modal.loiMail":"Send completed LOI by email",
+    "modal.basicInfo":"Without an LOI and without Founding 20 benefits. We are happy to add your community to the directory anyway.",
+    "modal.fName":"Community name *","modal.fNamePh":"e.g. Munich Yoga Crew",
+    "modal.fCat":"Category / topic *","modal.fCatPh":"e.g. yoga, sports, language …",
+    "modal.fDistrict":"District","modal.fDistrictPh":"e.g. Maxvorstadt or Munich-wide",
+    "modal.fDesc":"Short description","modal.fDescPh":"What makes your community special?",
+    "modal.fLink":"Instagram / website","modal.fLinkPh":"@your_handle or https://…",
+    "modal.submit":"Send to us by email",
+    "modal.fallback":"Mail app won't open? Write directly to<br><strong>n.emrich@clero.de</strong>",
+    "modal.copy":"copy","modal.copied":"copied ✓",
+    "footer.tagline":"Making cities places again where communities become visible.","footer.contact":"Contact",
+    "wa.bubble":"<strong>Questions about Clero?</strong>Message me directly on WhatsApp 💬",
+    "count.one":"community found","count.many":"communities found",
+    "empty":"<div class=\"big\">🔍</div><strong>No community found.</strong><br>Try another keyword or list your own group.",
+    "link.instagram":"Instagram →","link.facebook":"Facebook →","link.website":"Website →"
+  }
+};
+
+const CAT_EN = {
+  "Alle":"All","Yoga & Bewegung":"Yoga & Movement","Sport & Outdoor":"Sports & Outdoor",
+  "Sprache & Kultur":"Language & Culture","Handarbeit & Kreativ":"Crafts & Creative",
+  "Kunst & Kultur":"Art & Culture","Frauen & Netzwerk":"Women & Network","Familie & Eltern":"Family & Parents",
+  "Musik & Chor":"Music & Choir","Tanz & Performance":"Dance & Performance",
+  "Nachbarschaft & Ausgehen":"Neighbourhood & Going Out","Achtsamkeit & Wellness":"Mindfulness & Wellness"
+};
+const DIST_EN = { "München-weit":"Munich-wide" };
+
+let lang = 'de';
+try { const s = localStorage.getItem('clero_lang'); if (s) lang = s; else if ((navigator.language||'').toLowerCase().startsWith('en')) lang = 'en'; } catch(e){}
+
+const t = k => (I18N[lang] && I18N[lang][k]) || (I18N.de[k] || k);
+const catLabel = c => lang === 'en' ? (CAT_EN[c] || c) : c;
+const distLabel = d => lang === 'en' ? (DIST_EN[d] || d) : d;
+
 const grid = document.getElementById('grid');
 const chipsEl = document.getElementById('chips');
 const districtEl = document.getElementById('district');
@@ -319,22 +434,26 @@ const countEl = document.getElementById('count');
 
 const cats = ['Alle', ...Array.from(new Set(communities.map(c => c.cat))).sort()];
 const districts = Array.from(new Set(communities.map(c => c.district))).sort();
-
 let activeCat = 'Alle';
 
-cats.forEach(cat => {
-  const b = document.createElement('button');
-  b.className = 'chip' + (cat === 'Alle' ? ' active' : '');
-  b.textContent = cat;
-  b.onclick = () => { activeCat = cat; [...chipsEl.children].forEach(c => c.classList.remove('active')); b.classList.add('active'); render(); };
-  chipsEl.appendChild(b);
-});
+function buildChips() {
+  chipsEl.innerHTML = '';
+  cats.forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (cat === activeCat ? ' active' : '');
+    b.textContent = catLabel(cat);
+    b.onclick = () => { activeCat = cat; buildChips(); render(); };
+    chipsEl.appendChild(b);
+  });
+}
 
-districts.forEach(d => {
-  const o = document.createElement('option');
-  o.value = d; o.textContent = d;
-  districtEl.appendChild(o);
-});
+function buildDistricts() {
+  const cur = districtEl.value || 'all';
+  districtEl.innerHTML = '';
+  const all = document.createElement('option'); all.value = 'all'; all.textContent = t('filter.allDistricts'); districtEl.appendChild(all);
+  districts.forEach(d => { const o = document.createElement('option'); o.value = d; o.textContent = distLabel(d); districtEl.appendChild(o); });
+  districtEl.value = cur;
+}
 
 function render() {
   const q = searchEl.value.trim().toLowerCase();
@@ -346,42 +465,55 @@ function render() {
     return matchCat && matchDist && matchQ;
   });
 
-  countEl.textContent = list.length + ' ' + (list.length === 1 ? 'Community' : 'Communities') + ' gefunden';
+  countEl.textContent = list.length + ' ' + (list.length === 1 ? t('count.one') : t('count.many'));
   grid.innerHTML = '';
-
-  if (list.length === 0) {
-    grid.innerHTML = '<div class="empty"><div class="big">🔍</div><strong>Keine Community gefunden.</strong><br>Probier ein anderes Stichwort oder trag deine Gruppe selbst ein.</div>';
-    return;
-  }
+  if (list.length === 0) { grid.innerHTML = '<div class="empty">' + t('empty') + '</div>'; return; }
 
   list.forEach(c => {
-    const linkLabel = c.link.includes('instagram.com') ? 'Instagram →' : (c.link.includes('facebook.com') ? 'Facebook →' : 'Website →');
-    const linkHtml = c.link
-      ? `<a class="card-link" href="${c.link}" target="_blank" rel="noopener">${linkLabel}</a>`
-      : `<span class="loc">Bald auf Clero</span>`;
+    const label = c.link.includes('instagram.com') ? t('link.instagram') : (c.link.includes('facebook.com') ? t('link.facebook') : t('link.website'));
+    const linkHtml = c.link ? `<a class="card-link" href="${c.link}" target="_blank" rel="noopener">${label}</a>` : '';
     const card = document.createElement('article');
     card.className = 'card';
     card.innerHTML = `
       <div class="card-top">
         <div class="emoji">${c.emoji}</div>
-        <div><h3>${c.name}</h3><span class="badge">${c.cat}</span></div>
+        <div><h3>${c.name}</h3><span class="badge">${catLabel(c.cat)}</span></div>
       </div>
       <p>${c.desc}</p>
       <div class="card-foot">
-        <span class="loc">📍 ${c.district}</span>
+        <span class="loc">📍 ${distLabel(c.district)}</span>
         ${linkHtml}
       </div>`;
     grid.appendChild(card);
   });
 }
 
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.getElementById('loiDownload').setAttribute('href', lang === 'en' ? 'clero-loi-en.pdf' : 'clero-loi.pdf');
+  document.getElementById('waBtn').setAttribute('href', waLink());
+  buildChips();
+  buildDistricts();
+  render();
+}
+
+function setLang(l) { lang = l; try { localStorage.setItem('clero_lang', l); } catch(e){} applyLang(); }
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
 searchEl.addEventListener('input', render);
 districtEl.addEventListener('change', render);
-render();
+
+// WhatsApp
+function waMsg() { return lang === 'en' ? 'Hey Nicole, I just discovered Clero and have a question' : 'Hey Nicole, ich habe gerade Clero entdeckt und habe eine Frage'; }
+function waLink() { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waMsg()); }
+document.getElementById('waX').addEventListener('click', () => { document.getElementById('waBubble').style.display = 'none'; });
 
 // Modal
 const overlay = document.getElementById('overlay');
-const openModal = () => { overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); document.getElementById('f-name').focus(); };
+const openModal = () => { overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); };
 const closeModal = () => { overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); };
 document.querySelectorAll('[data-open-modal]').forEach(b => b.addEventListener('click', openModal));
 document.getElementById('modalClose').addEventListener('click', closeModal);
@@ -391,26 +523,25 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 document.getElementById('hostForm').addEventListener('submit', e => {
   e.preventDefault();
   const v = id => document.getElementById(id).value.trim();
-  const body =
-    'Hallo Nicole,\n\nich möchte meine Community bei Clero eintragen.\n\n' +
-    'Name der Community: ' + v('f-name') + '\n' +
-    'Kategorie/Thema: ' + v('f-cat') + '\n' +
-    'Stadtteil: ' + v('f-district') + '\n' +
-    'Kurzbeschreibung: ' + v('f-desc') + '\n' +
-    'Instagram/Website: ' + v('f-link') + '\n\nLiebe Grüße';
-  const url = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent('Community bei Clero eintragen: ' + v('f-name')) + '&body=' + encodeURIComponent(body);
-  window.location.href = url;
+  let subject, body;
+  if (lang === 'en') {
+    subject = 'List my community on Clero: ' + v('f-name');
+    body = 'Hi Nicole,\n\nI would like to list my community on Clero.\n\nCommunity name: ' + v('f-name') + '\nCategory/topic: ' + v('f-cat') + '\nDistrict: ' + v('f-district') + '\nShort description: ' + v('f-desc') + '\nInstagram/website: ' + v('f-link') + '\n\nBest regards';
+  } else {
+    subject = 'Community bei Clero eintragen: ' + v('f-name');
+    body = 'Hallo Nicole,\n\nich möchte meine Community bei Clero eintragen.\n\nName der Community: ' + v('f-name') + '\nKategorie/Thema: ' + v('f-cat') + '\nStadtteil: ' + v('f-district') + '\nKurzbeschreibung: ' + v('f-desc') + '\nInstagram/Website: ' + v('f-link') + '\n\nLiebe Grüße';
+  }
+  window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 });
 
 document.getElementById('copyMail').addEventListener('click', function() {
   const btn = this;
   navigator.clipboard.writeText('n.emrich@clero.de').then(() => {
-    btn.textContent = 'kopiert ✓';
-    setTimeout(() => { btn.textContent = 'kopieren'; }, 2000);
+    btn.textContent = t('modal.copied');
+    setTimeout(() => { btn.textContent = t('modal.copy'); }, 2000);
   }).catch(() => { btn.textContent = 'n.emrich@clero.de'; });
 });
 
-// Tabs
 document.querySelectorAll('.seg-btn').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('.seg-btn').forEach(x => x.classList.remove('active'));
   b.classList.add('active');
@@ -419,12 +550,20 @@ document.querySelectorAll('.seg-btn').forEach(b => b.addEventListener('click', (
   document.getElementById('tab-basic').hidden = (tab !== 'basic');
 }));
 
-// LOI per Mail zurücksenden
 document.getElementById('loiMailBtn').addEventListener('click', e => {
   e.preventDefault();
-  const body = 'Hallo Nicole,\n\nanbei unser ausgefüllter und unterschriebener Letter of Intent für das Founding-20-Programm.\n\n(Bitte die ausgefüllte LOI-Datei an diese Mail anhängen.)\n\nName der Community: \nAnsprechpartner:in: \n\nLiebe Grüße';
-  window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent('Founding 20 – Ausgefüllter LOI') + '&body=' + encodeURIComponent(body);
+  let subject, body;
+  if (lang === 'en') {
+    subject = 'Founding 20 – completed LOI';
+    body = 'Hi Nicole,\n\nplease find attached our completed and signed Letter of Intent for the Founding 20 programme.\n\n(Please attach the completed LOI file to this email.)\n\nCommunity name: \nContact person: \n\nBest regards';
+  } else {
+    subject = 'Founding 20 – Ausgefüllter LOI';
+    body = 'Hallo Nicole,\n\nanbei unser ausgefüllter und unterschriebener Letter of Intent für das Founding-20-Programm.\n\n(Bitte die ausgefüllte LOI-Datei an diese Mail anhängen.)\n\nName der Community: \nAnsprechpartner:in: \n\nLiebe Grüße';
+  }
+  window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 });
+
+applyLang();
 </script>
 </body>
 </html>
