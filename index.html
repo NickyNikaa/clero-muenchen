@@ -814,10 +814,11 @@ async function sendLoi() {
   btn.textContent = t('loi.sending'); btn.disabled = true;
   const place = lv('loi-place') || (lang === 'en' ? 'Munich' : 'München');
   const form = document.createElement('form');
-  form.action = 'https://formsubmit.co/n.emrich@clero.de';
+  form.action = 'https://formsubmit.co/588e8d43be349a56d2acc52f584fc4d6';
   form.method = 'POST'; form.enctype = 'multipart/form-data'; form.style.display = 'none';
   const add = (n, val) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = val || ''; form.appendChild(i); };
   add('_subject', (lang === 'en' ? 'New Founding 20 LOI: ' : 'Neuer Founding-20 LOI: ') + lv('loi-gname'));
+  add('_cc', 'n.emrich@clero.de');
   add('_captcha', 'false');
   add('_template', 'table');
   add('_next', location.origin + location.pathname + '?loi=sent');
