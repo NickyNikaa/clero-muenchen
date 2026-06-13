@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clero · Communities in München finden</title>
+<meta name="description" content="Clero macht Münchens Communities sichtbar. Finde lokale Gruppen für Sport, Yoga, Sprache, Kultur und mehr, die zu dir passen." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #0E8F5E;
+    --green-dark: #0A6F49;
+    --green-light: #E6F5EF;
+    --green-soft: #F2FAF6;
+    --ink: #14201B;
+    --muted: #5B6B64;
+    --line: #E2EAE6;
+    --bg: #FBFCFB;
+    --white: #FFFFFF;
+    --radius: 18px;
+    --shadow: 0 4px 24px rgba(14, 143, 94, 0.08);
+    --shadow-hover: 0 10px 34px rgba(14, 143, 94, 0.16);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 22px; }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(251, 252, 251, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
+  .logo .dot { width: 26px; height: 26px; border-radius: 50%; background: var(--green); display: grid; place-items: center; color: #fff; font-size: 15px; }
+  .nav-links { display: flex; gap: 26px; align-items: center; font-weight: 500; font-size: 15px; }
+  .nav-links a { color: var(--muted); transition: color .2s; }
+  .nav-links a:hover { color: var(--green); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green); color: #fff; font-weight: 600; font-size: 15px;
+    padding: 11px 20px; border-radius: 999px; border: none; cursor: pointer;
+    transition: transform .15s, box-shadow .2s, background .2s;
+  }
+  .btn:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+  .btn-ghost { background: transparent; color: var(--green); border: 1.5px solid var(--green); }
+  .btn-ghost:hover { background: var(--green-light); color: var(--green-dark); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* Hero */
+  .hero { padding: 72px 0 48px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: radial-gradient(680px 320px at 50% -10%, var(--green-light), transparent 70%);
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--white); border: 1px solid var(--line); color: var(--green-dark);
+    font-weight: 600; font-size: 13.5px; padding: 7px 15px; border-radius: 999px; margin-bottom: 22px;
+    box-shadow: var(--shadow);
+  }
+  .hero h1 { font-size: clamp(34px, 5.2vw, 56px); line-height: 1.07; letter-spacing: -0.03em; font-weight: 800; max-width: 760px; margin: 0 auto 18px; }
+  .hero h1 .hl { color: var(--green); }
+  .hero p.sub { font-size: clamp(16px, 2vw, 19px); color: var(--muted); max-width: 560px; margin: 0 auto 30px; }
+  .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* Search & Filter */
+  .finder { padding: 8px 0 14px; }
+  .search-box { position: relative; max-width: 620px; margin: 0 auto 22px; }
+  .search-box input {
+    width: 100%; padding: 16px 18px 16px 50px; font-size: 16px; font-family: inherit;
+    border: 1.5px solid var(--line); border-radius: 999px; background: var(--white);
+    outline: none; transition: border .2s, box-shadow .2s;
+  }
+  .search-box input:focus { border-color: var(--green); box-shadow: 0 0 0 4px var(--green-light); }
+  .search-box svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+
+  .filters { display: flex; flex-direction: column; gap: 14px; align-items: center; margin-bottom: 8px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; }
+  .chip {
+    border: 1.5px solid var(--line); background: var(--white); color: var(--muted);
+    font-family: inherit; font-weight: 600; font-size: 14px; padding: 9px 16px;
+    border-radius: 999px; cursor: pointer; transition: all .18s; white-space: nowrap;
+  }
+  .chip:hover { border-color: var(--green); color: var(--green); }
+  .chip.active { background: var(--green); color: #fff; border-color: var(--green); }
+  .district-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .district-row label { font-size: 14px; color: var(--muted); font-weight: 500; }
+  select {
+    font-family: inherit; font-size: 14px; font-weight: 600; color: var(--ink);
+    padding: 9px 36px 9px 15px; border: 1.5px solid var(--line); border-radius: 999px;
+    background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235B6B64' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;
+    appearance: none; cursor: pointer; outline: none;
+  }
+  select:focus { border-color: var(--green); }
+
+  .count { text-align: center; color: var(--muted); font-size: 14px; margin: 18px 0 6px; font-weight: 500; }
+
+  /* Grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; padding: 14px 0 40px; }
+  .card {
+    background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px; display: flex; flex-direction: column; gap: 12px;
+    transition: transform .18s, box-shadow .2s, border-color .2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: var(--green-light); }
+  .card-top { display: flex; align-items: flex-start; gap: 13px; }
+  .emoji { width: 48px; height: 48px; border-radius: 13px; background: var(--green-soft); display: grid; place-items: center; font-size: 24px; flex-shrink: 0; }
+  .card h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
+  .badge { display: inline-block; font-size: 12px; font-weight: 600; color: var(--green-dark); background: var(--green-light); padding: 3px 10px; border-radius: 999px; margin-top: 5px; }
+  .card p { color: var(--muted); font-size: 14.5px; flex-grow: 1; }
+  .card-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 6px; border-top: 1px solid var(--line); margin-top: 2px; }
+  .loc { font-size: 13px; color: var(--muted); font-weight: 500; display: flex; align-items: center; gap: 5px; }
+  .card-link { font-size: 14px; font-weight: 600; color: var(--green); display: inline-flex; align-items: center; gap: 4px; }
+  .card-link:hover { color: var(--green-dark); }
+
+  .empty { text-align: center; padding: 50px 20px; color: var(--muted); grid-column: 1 / -1; }
+  .empty .big { font-size: 40px; margin-bottom: 10px; }
+
+  /* CTA host */
+  .host-cta { background: var(--green); color: #fff; border-radius: 26px; padding: 52px 32px; text-align: center; margin: 30px 0 60px; }
+  .host-cta h2 { font-size: clamp(26px, 3.5vw, 36px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .host-cta p { font-size: 17px; opacity: .92; max-width: 520px; margin: 0 auto 26px; }
+  .host-cta .btn { background: #fff; color: var(--green-dark); }
+  .host-cta .btn:hover { background: var(--green-light); }
+  .founding { display: inline-block; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); font-size: 13.5px; font-weight: 600; padding: 7px 16px; border-radius: 999px; margin-bottom: 22px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding: 40px 0; }
+  .foot-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px; }
+  .foot-grid .muted { color: var(--muted); font-size: 14px; }
+  .foot-links { display: flex; gap: 22px; font-size: 14px; font-weight: 500; }
+  .foot-links a { color: var(--muted); transition: color .2s; }
+  .foot-links a:hover { color: var(--green); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo"><span class="dot">💚</span>Clero</a>
+    <nav class="nav-links">
+      <a href="#finder">Communities</a>
+      <a href="#mitmachen">Mitmachen</a>
+      <a href="https://instagram.com/clero.app" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <a href="#mitmachen" class="btn">Community eintragen</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="pill">💚 Jetzt in München · Launch Sommer 2026</span>
+    <h1>Finde die <span class="hl">Communities</span>, die zu dir passen.</h1>
+    <p class="sub">Wir möchten Städte wieder zu Orten machen, an denen Communities sichtbar werden. Entdecke lokale Gruppen in München, von Yoga über Surfen bis zu Sprache und Kultur.</p>
+    <div class="hero-cta">
+      <a href="#finder" class="btn">Communities entdecken</a>
+      <a href="#mitmachen" class="btn btn-ghost">Eigene Gruppe eintragen</a>
+    </div>
+  </div>
+</section>
+
+<section class="finder wrap" id="finder">
+  <div class="search-box">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" id="search" placeholder="Suche nach Community, Thema oder Stichwort…" aria-label="Communities durchsuchen" />
+  </div>
+  <div class="filters">
+    <div class="chips" id="chips"></div>
+    <div class="district-row">
+      <label for="district">Stadtteil:</label>
+      <select id="district"><option value="all">Alle Stadtteile</option></select>
+    </div>
+  </div>
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="wrap" id="mitmachen">
+  <div class="host-cta">
+    <span class="founding">✨ Founding 20 · Die ersten 20 Hosts in München, dauerhaft kostenlos</span>
+    <h2>Du leitest eine Community in München?</h2>
+    <p>Trag deine Gruppe ein und sei beim Launch direkt sichtbar. Komplett unverbindlich und aktuell kostenlos. Wir freuen uns, von dir zu hören.</p>
+    <a class="btn" href="mailto:n.emrich@clero.de?subject=Community%20bei%20Clero%20eintragen&body=Hallo%20Nicole%2C%0A%0Aich%20m%C3%B6chte%20meine%20Community%20bei%20Clero%20eintragen.%0A%0AName%20der%20Community%3A%20%0AKategorie%2FThema%3A%20%0AStadtteil%3A%20%0AKurzbeschreibung%3A%20%0AInstagram%2FWebsite%3A%20%0A%0ALiebe%20Gr%C3%BC%C3%9Fe">Community eintragen</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <a href="#" class="logo" style="font-size:19px;"><span class="dot" style="width:22px;height:22px;font-size:13px;">💚</span>Clero</a>
+      <p class="muted" style="margin-top:8px;">Städte wieder zu Orten machen, an denen Communities sichtbar werden.</p>
+    </div>
+    <div class="foot-links">
+      <a href="https://clero.de" target="_blank" rel="noopener">clero.de</a>
+      <a href="https://instagram.com/clero.app" target="_blank" rel="noopener">@clero.app</a>
+      <a href="mailto:n.emrich@clero.de">Kontakt</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const communities = [
+  { name: "Sober Society MUC", cat: "Achtsamkeit & Wellness", district: "München-weit", emoji: "🌿", desc: "Sober-curious Community für alkoholfreie Treffen, Events und ehrlichen Austausch in München.", link: "https://instagram.com/sobercommunity.muc" },
+  { name: "POP UP YOGA München", cat: "Yoga & Bewegung", district: "Wechselnde Orte", emoji: "🧘", desc: "Yoga an besonderen Pop-up-Locations in der ganzen Stadt, draußen wie drinnen.", link: "https://instagram.com/popupyoga.muenchen" },
+  { name: "At Peace", cat: "Achtsamkeit & Wellness", district: "München-weit", emoji: "🕯️", desc: "Breathwork, Meditation und Wellness-Sessions abseits des klassischen Yogastudios.", link: "" },
+  { name: "BeCommunity Pilates", cat: "Yoga & Bewegung", district: "München-weit", emoji: "🤸", desc: "Pilates-Community mit Fokus auf Kraft, Mobilität und ein starkes Miteinander.", link: "" },
+  { name: "KEFAI · Italian Pulses", cat: "Sprache & Kultur", district: "München-weit", emoji: "🇮🇹", desc: "Italienisches Collective für alle, die Sprache, Aperitivo und La Dolce Vita lieben.", link: "https://instagram.com/kefai.munich" },
+  { name: "Münchner Strickeria", cat: "Handarbeit & Kreativ", district: "München-weit", emoji: "🧶", desc: "Münchens erste Strickgruppe zum gemeinsamen Stricken, Plaudern und Maschen zählen.", link: "mailto:muenchner-strickeria@gmx.de" },
+  { name: "IGSM Surf-Community", cat: "Sport & Outdoor", district: "München-weit", emoji: "🏄", desc: "Münchens Surf-Community von Eisbach bis Roadtrip an die Welle.", link: "mailto:kontakt@igsm.info" },
+  { name: "Türkenstraße", cat: "Nachbarschaft & Ausgehen", district: "Maxvorstadt", emoji: "🌹", desc: "Vom Sakura Picnic über Baklava bis Çay on Ferry, die Crew rund um die Türkenstraße.", link: "https://instagram.com/tuerkenstrasse" },
+  { name: "Munich Girls & Gatherings", cat: "Frauen & Netzwerk", district: "München-weit", emoji: "💃", desc: "Treffen, Netzwerken und neue Freundinnen finden für Frauen in München.", link: "https://instagram.com/muc_girlsandgatherings" },
+  { name: "MILA · Munich Int. Ladies", cat: "Frauen & Netzwerk", district: "München-weit", emoji: "🌸", desc: "Munich International Ladies Association für internationale Frauen in der Stadt.", link: "" },
+  { name: "München Moms", cat: "Familie & Eltern", district: "München-weit", emoji: "👶", desc: "Community für Mütter in München, von Spielgruppen bis Mama-Abenden.", link: "" },
+  { name: "Munich Mountain Girls", cat: "Sport & Outdoor", district: "Voralpenland", emoji: "🏔️", desc: "Frauen, die zusammen wandern, klettern und die Berge rund um München erobern.", link: "" },
+  { name: "Rapha München", cat: "Sport & Outdoor", district: "München-weit", emoji: "🚴", desc: "Rennrad-Community für gemeinsame Ausfahrten und Kaffee danach.", link: "" },
+  { name: "Beauty Club Munich", cat: "Lifestyle", district: "München-weit", emoji: "💄", desc: "Community rund um Beauty, Self-Care und Events in München.", link: "" },
+  { name: "Münchner Kammerspiele", cat: "Kunst & Kultur", district: "Altstadt", emoji: "🎭", desc: "Theater-Community für alle, die Bühne, Kunst und Kultur leben.", link: "" },
+  { name: "Improart", cat: "Tanz & Performance", district: "München-weit", emoji: "🕺", desc: "Improtheater und Tanz-Events zum Mitmachen und Zuschauen.", link: "mailto:info@improart.de" },
+  { name: "The Munich Caledonians", cat: "Sprache & Kultur", district: "München-weit", emoji: "🏴", desc: "Schottischer Verein in München, Deutscher Meistertitel 2026 inklusive.", link: "mailto:info@the-munich-caledonians.org" },
+  { name: "Münchner Frauenchor", cat: "Musik & Chor", district: "München-weit", emoji: "🎶", desc: "Gemeinsam singen im Frauenchor, von Klassik bis Moderne.", link: "mailto:look@muenchner-frauenchor.de" },
+  { name: "Herrenbesuch", cat: "Musik & Chor", district: "München-weit", emoji: "🎤", desc: "Männerchor mit Charakter, der Singen und Geselligkeit verbindet.", link: "mailto:kontakt@herrenbesuch.net" },
+  { name: "Drops · Spontan treffen", cat: "Nachbarschaft & Ausgehen", district: "München-weit", emoji: "☕", desc: "Spontane Treffen und lockere Hangouts für alle, die offen für Neues sind.", link: "" }
+];
+
+const grid = document.getElementById('grid');
+const chipsEl = document.getElementById('chips');
+const districtEl = document.getElementById('district');
+const searchEl = document.getElementById('search');
+const countEl = document.getElementById('count');
+
+const cats = ['Alle', ...Array.from(new Set(communities.map(c => c.cat))).sort()];
+const districts = Array.from(new Set(communities.map(c => c.district))).sort();
+
+let activeCat = 'Alle';
+
+cats.forEach(cat => {
+  const b = document.createElement('button');
+  b.className = 'chip' + (cat === 'Alle' ? ' active' : '');
+  b.textContent = cat;
+  b.onclick = () => { activeCat = cat; [...chipsEl.children].forEach(c => c.classList.remove('active')); b.classList.add('active'); render(); };
+  chipsEl.appendChild(b);
+});
+
+districts.forEach(d => {
+  const o = document.createElement('option');
+  o.value = d; o.textContent = d;
+  districtEl.appendChild(o);
+});
+
+function render() {
+  const q = searchEl.value.trim().toLowerCase();
+  const dist = districtEl.value;
+  const list = communities.filter(c => {
+    const matchCat = activeCat === 'Alle' || c.cat === activeCat;
+    const matchDist = dist === 'all' || c.district === dist;
+    const matchQ = !q || (c.name + ' ' + c.cat + ' ' + c.desc + ' ' + c.district).toLowerCase().includes(q);
+    return matchCat && matchDist && matchQ;
+  });
+
+  countEl.textContent = list.length + ' ' + (list.length === 1 ? 'Community' : 'Communities') + ' gefunden';
+  grid.innerHTML = '';
+
+  if (list.length === 0) {
+    grid.innerHTML = '<div class="empty"><div class="big">🔍</div><strong>Keine Community gefunden.</strong><br>Probier ein anderes Stichwort oder trag deine Gruppe selbst ein.</div>';
+    return;
+  }
+
+  list.forEach(c => {
+    const linkHtml = c.link
+      ? `<a class="card-link" href="${c.link}" target="_blank" rel="noopener">Ansehen →</a>`
+      : `<span class="loc">Bald auf Clero</span>`;
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="emoji">${c.emoji}</div>
+        <div><h3>${c.name}</h3><span class="badge">${c.cat}</span></div>
+      </div>
+      <p>${c.desc}</p>
+      <div class="card-foot">
+        <span class="loc">📍 ${c.district}</span>
+        ${linkHtml}
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+searchEl.addEventListener('input', render);
+districtEl.addEventListener('change', render);
+render();
+</script>
+</body>
+</html>
