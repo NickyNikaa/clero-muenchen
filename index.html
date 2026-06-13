@@ -455,6 +455,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script>
 const WA = '4915206772337';
+// WhatsApp-Benachrichtigung an Nicole bei jeder LOI-Einreichung (CallMeBot)
+const CMB_PHONE = '4915206772337';
+const CMB_KEY = ''; // CallMeBot-APIKEY hier eintragen, dann ist die WhatsApp-Benachrichtigung aktiv
 
 const communities = [
   { name: "Sober Society MUC", cat: "Nachbarschaft & Ausgehen", district: "München-weit", emoji: "🌿", desc: "Alkoholfreie High-Vibe-Events, von Rooftop-Day-Partys mit Live-DJs bis zu Coffee-Meetups für alle, die ohne Kater feiern wollen.", link: "https://instagram.com/sobersociety.muc" },
@@ -858,7 +861,7 @@ async function sendLoi() {
   add('_cc', 'n.emrich@clero.de');
   add('_captcha', 'false');
   add('_template', 'table');
-  add('_next', location.origin + location.pathname + '?loi=sent');
+  add('_next', location.origin + location.pathname + '?loi=sent&g=' + encodeURIComponent(lv('loi-gname')));
   add(lang === 'en' ? 'Group' : 'Gruppe', lv('loi-gname'));
   add(lang === 'en' ? 'Contact' : 'Ansprechpartner', lv('loi-contact'));
   add(lang === 'en' ? 'Role' : 'Rolle', lv('loi-role'));
@@ -883,10 +886,17 @@ document.getElementById('loiDownloadFilled').addEventListener('click', downloadF
 
 applyLang();
 
-if (new URLSearchParams(location.search).get('loi') === 'sent') {
+(() => {
+  const params = new URLSearchParams(location.search);
+  if (params.get('loi') !== 'sent') return;
+  const g = params.get('g') || (lang === 'en' ? '(no name)' : '(ohne Name)');
+  if (CMB_KEY) {
+    const msg = (lang === 'en' ? '🟢 New Founding 20 LOI via Clero: ' : '🟢 Neuer Founding-20 LOI über Clero: ') + g + (lang === 'en' ? '. Details + PDF in your email. 💚' : '. Details + PDF in deiner Mail. 💚');
+    fetch('https://api.callmebot.com/whatsapp.php?phone=' + CMB_PHONE + '&text=' + encodeURIComponent(msg) + '&apikey=' + CMB_KEY, { mode: 'no-cors' }).catch(() => {});
+  }
   showToast(t('loi.sentToast'));
   history.replaceState({}, '', location.pathname);
-}
+})();
 </script>
 </body>
 </html>
