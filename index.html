@@ -692,7 +692,7 @@ document.getElementById('loiDownload').addEventListener('click', async function(
     const doc = await PDFLib.PDFDocument.load(bytes);
     const page = doc.getPages()[1];
     const font = await doc.embedFont(PDFLib.StandardFonts.Helvetica);
-    const coords = lang === 'en' ? { x: 180, y: 165 } : { x: 191, y: 168 };
+    const coords = lang === 'en' ? { x: 180, y: 170 } : { x: 191, y: 173 };
     page.drawText(todayStr(), { x: coords.x, y: coords.y, size: 10, font, color: PDFLib.rgb(0.08, 0.2, 0.17) });
     const out = await doc.save();
     const blob = new Blob([out], { type: 'application/pdf' });
@@ -755,13 +755,13 @@ function showToast(msg) {
 
 const LOI_FIELDS = {
   de: { url: 'clero-loi.pdf',
-    gname: {p:0,x:46,y:662}, contactP0: {p:0,x:341,y:662}, members: {p:0,x:327,y:248},
+    gname: {p:0,x:46,y:666}, contactP0: {p:0,x:341,y:666}, members: {p:0,x:327,y:252},
     hName: {p:1,x:94,y:415}, hRole: {p:1,x:89,y:391}, hMail: {p:1,x:209,y:367}, hOrt: {p:1,x:128,y:315},
-    tjard: {p:1,x:191,y:169} },
+    tjard: {p:1,x:191,y:173} },
   en: { url: 'clero-loi-en.pdf',
-    gname: {p:0,x:46,y:637}, contactP0: null, members: {p:0,x:363,y:245},
+    gname: {p:0,x:46,y:641}, contactP0: null, members: {p:0,x:363,y:249},
     hName: {p:1,x:94,y:411}, hRole: {p:1,x:85,y:387}, hMail: {p:1,x:145,y:363}, hOrt: {p:1,x:128,y:311},
-    tjard: {p:1,x:180,y:166} }
+    tjard: {p:1,x:180,y:170} }
 };
 const lv = id => (document.getElementById(id).value || '').trim();
 const safeName = () => (lv('loi-gname') || 'Community').replace(/[^\w\-]+/g, '_');
