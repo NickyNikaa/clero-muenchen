@@ -531,6 +531,8 @@ const I18N = {
     "loi.required":"Bitte fülle Name der Gruppe, Ansprechpartner:in und E-Mail aus.",
     "loi.sigRequired":"Bitte unterschreibe im Unterschrift-Feld.",
     "loi.sentToast":"Danke! Dein LOI ist bei Nicole eingegangen. 💚",
+    "basic.sentToast":"Danke! Deine Community ist bei Nicole eingegangen. 💚",
+    "basic.required":"Bitte fülle mindestens Name der Community und Kategorie aus.",
     "modal.basicInfo":"Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.",
     "modal.fName":"Name der Community *","modal.fNamePh":"z.B. München Yoga Crew",
     "modal.fCat":"Kategorie / Thema *","modal.fCatPh":"z.B. Yoga, Sport, Sprache …",
@@ -581,6 +583,8 @@ const I18N = {
     "loi.required":"Please fill in group name, contact person and email.",
     "loi.sigRequired":"Please sign in the signature field.",
     "loi.sentToast":"Thank you! Your LOI has reached Nicole. 💚",
+    "basic.sentToast":"Thank you! Your community has reached Nicole. 💚",
+    "basic.required":"Please fill in at least community name and category.",
     "modal.basicInfo":"Without an LOI and without Founding 20 benefits. We are happy to add your community to the directory anyway.",
     "modal.fName":"Community name *","modal.fNamePh":"e.g. Munich Yoga Crew",
     "modal.fCat":"Category / topic *","modal.fCatPh":"e.g. yoga, sports, language …",
@@ -739,18 +743,43 @@ document.getElementById('modalClose').addEventListener('click', closeModal);
 overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-document.getElementById('hostForm').addEventListener('submit', e => {
+document.getElementById('hostForm').addEventListener('submit', async e => {
   e.preventDefault();
   const v = id => document.getElementById(id).value.trim();
-  let subject, body;
-  if (lang === 'en') {
-    subject = 'List my community on Clero: ' + v('f-name');
-    body = 'Hi Nicole,\n\nI would like to list my community on Clero.\n\nCommunity name: ' + v('f-name') + '\nCategory/topic: ' + v('f-cat') + '\nDistrict: ' + v('f-district') + '\nShort description: ' + v('f-desc') + '\nInstagram/website: ' + v('f-link') + '\n\nBest regards';
-  } else {
-    subject = 'Community bei Clero eintragen: ' + v('f-name');
-    body = 'Hallo Nicole,\n\nich möchte meine Community bei Clero eintragen.\n\nName der Community: ' + v('f-name') + '\nKategorie/Thema: ' + v('f-cat') + '\nStadtteil: ' + v('f-district') + '\nKurzbeschreibung: ' + v('f-desc') + '\nInstagram/Website: ' + v('f-link') + '\n\nLiebe Grüße';
+  if (!v('f-name') || !v('f-cat')) { showToast(t('basic.required')); return; }
+  const en = lang === 'en';
+  const btn = document.querySelector('#hostForm button[type="submit"]');
+  const orig = btn.textContent; btn.textContent = t('loi.sending'); btn.disabled = true;
+  const payload = {
+    _subject: (en ? 'New community on Clero: ' : 'Neue Community auf Clero: ') + v('f-name'),
+    _cc: 'n.emrich@clero.de',
+    _template: 'table'
+  };
+  payload[en ? 'Group' : 'Gruppe'] = v('f-name');
+  payload[en ? 'Category' : 'Kategorie'] = v('f-cat');
+  payload[en ? 'District' : 'Stadtteil'] = v('f-district');
+  payload[en ? 'Description' : 'Beschreibung'] = v('f-desc');
+  payload['Instagram/Website'] = v('f-link');
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/588e8d43be349a56d2acc52f584fc4d6', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
+    const j = await r.json().catch(() => ({}));
+    if (String(j.success) !== 'true') throw new Error('no success');
+    if (CMB_KEY) { const msg = (en ? '🟢 New community entry via Clero: ' : '🟢 Neue Community-Eintragung über Clero: ') + v('f-name'); fetch('https://api.callmebot.com/whatsapp.php?phone=' + CMB_PHONE + '&text=' + encodeURIComponent(msg) + '&apikey=' + CMB_KEY, { mode: 'no-cors' }).catch(() => {}); }
+    document.getElementById('hostForm').reset();
+    closeModal();
+    showToast(t('basic.sentToast'));
+  } catch (err) {
+    const subject = (en ? 'List my community on Clero: ' : 'Community bei Clero eintragen: ') + v('f-name');
+    const body = (en ? 'Hi Nicole,\n\nI would like to list my community on Clero.\n\n' : 'Hallo Nicole,\n\nich möchte meine Community bei Clero eintragen.\n\n') +
+      (en ? 'Community name: ' : 'Name der Community: ') + v('f-name') + '\n' +
+      (en ? 'Category: ' : 'Kategorie/Thema: ') + v('f-cat') + '\n' +
+      (en ? 'District: ' : 'Stadtteil: ') + v('f-district') + '\n' +
+      (en ? 'Description: ' : 'Kurzbeschreibung: ') + v('f-desc') + '\n' +
+      'Instagram/Website: ' + v('f-link');
+    window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  } finally {
+    btn.textContent = orig; btn.disabled = false;
   }
-  window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 });
 
 document.getElementById('copyMail').addEventListener('click', function() {
