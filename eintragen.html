@@ -115,7 +115,6 @@
   <div class="wrap">
     <span class="pill" data-i18n="hero.pill">💚 Founding 20 · München</span>
     <h1 data-i18n="hero.h1">Trag deine <span class="hl">Community</span> bei Clero ein</h1>
-    <p data-i18n="hero.sub">In zwei kurzen Schritten. Am Ende entscheidest du, ob du als Founding-20-Host mit Letter of Intent dabei sein willst oder erstmal nur eingetragen werden möchtest.</p>
   </div>
 </section>
 
@@ -214,12 +213,11 @@ const I18N = {
     "back":"← Zur Übersicht",
     "hero.pill":"💚 Founding 20 · München",
     "hero.h1":"Trag deine <span class=\"hl\">Community</span> bei Clero ein",
-    "hero.sub":"In zwei kurzen Schritten. Am Ende entscheidest du, ob du als Founding-20-Host mit Letter of Intent dabei sein willst oder erstmal nur eingetragen werden möchtest.",
     "prog":"Schritt %s von 2",
     "s1.h":"Deine Community","s1.sub":"Erzähl uns kurz, wer ihr seid.","s1.next":"Weiter →",
     "f.name":"Name der Gruppe / Community *","f.namePh":"z.B. München Yoga Crew",
     "f.cat":"Kategorie / Thema *","f.catPh":"z.B. Yoga, Sport, Sprache …",
-    "f.district":"Stadtteil","f.districtPh":"z.B. Schwabing",
+    "f.district":"Stadt","f.districtPh":"z.B. München",
     "f.members":"Mitglieder (ca.)","f.membersPh":"z.B. 80",
     "f.link":"Instagram / Website","f.linkPh":"@euer_account oder https://…",
     "f.desc":"Kurzbeschreibung","f.descPh":"Was macht eure Community aus?",
@@ -243,12 +241,11 @@ const I18N = {
     "back":"← Back to overview",
     "hero.pill":"💚 Founding 20 · Munich",
     "hero.h1":"List your <span class=\"hl\">community</span> on Clero",
-    "hero.sub":"In two short steps. At the end you decide whether to join as a Founding 20 host with a Letter of Intent, or just get listed for now.",
     "prog":"Step %s of 2",
     "s1.h":"Your community","s1.sub":"Tell us briefly who you are.","s1.next":"Next →",
     "f.name":"Group / community name *","f.namePh":"e.g. Munich Yoga Crew",
     "f.cat":"Category / topic *","f.catPh":"e.g. yoga, sports, language …",
-    "f.district":"District","f.districtPh":"e.g. Schwabing",
+    "f.district":"City","f.districtPh":"e.g. Munich",
     "f.members":"Members (approx.)","f.membersPh":"e.g. 80",
     "f.link":"Instagram / website","f.linkPh":"@your_handle or https://…",
     "f.desc":"Short description","f.descPh":"What makes your community special?",
@@ -378,13 +375,13 @@ function commonFields(en) {
   const o = {};
   o[en ? 'Group' : 'Gruppe'] = lv('loi-gname');
   o[en ? 'Category' : 'Kategorie'] = lv('loi-cat');
-  o[en ? 'District' : 'Stadtteil'] = lv('loi-district');
+  o[en ? 'City' : 'Stadt'] = lv('loi-district');
   o[en ? 'Members' : 'Mitglieder'] = lv('loi-members');
   o['Instagram/Website'] = lv('loi-link');
   o[en ? 'Description' : 'Beschreibung'] = lv('loi-desc');
   o[en ? 'Contact' : 'Ansprechpartner'] = lv('loi-contact');
   o[en ? 'Role' : 'Rolle'] = lv('loi-role');
-  o['E-Mail'] = lv('loi-mail');
+  o['email'] = lv('loi-mail');
   o[en ? 'Phone' : 'Telefon'] = lv('loi-phone');
   return o;
 }
@@ -411,6 +408,9 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     add('_next', location.origin + location.pathname + '?done=founding&g=' + encodeURIComponent(lv('loi-gname')));
     const cf = commonFields(en); Object.keys(cf).forEach(k => add(k, cf[k]));
     add(en ? 'Place' : 'Ort', place); add(en ? 'Date' : 'Datum', todayStr());
+    add('_autoresponse', en
+      ? 'Hello and thank you for your Letter of Intent for Clero! We have received your LOI and will get back to you personally very soon. Great to have you in the Founding 20 circle in Munich. Warm regards, Nicole from the Clero Team'
+      : 'Hallo und danke für deinen Letter of Intent für Clero! Wir haben deinen LOI erhalten und melden uns in Kürze persönlich bei dir. Schön, dass du beim Founding-20-Kreis in München dabei bist. Liebe Grüße, Nicole vom Clero Team');
     try {
       if (window.PDFLib) {
         const bytes = await buildFilledLoi();
