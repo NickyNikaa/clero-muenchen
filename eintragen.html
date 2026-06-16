@@ -7,18 +7,18 @@
 <meta name="description" content="Trag deine Münchner Community bei Clero ein. In wenigen Schritten, optional als Founding-20-Host mit Letter of Intent." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <style>
   :root {
-    --neon: #76EE2E; --neon-hover: #67DC1E; --neon-light: #E9FCD8; --neon-soft: #F4FDEC;
-    --green: #3A8F2C; --green-dark: #2C6E20; --green-light: #E9FCD8; --green-soft: #F4FDEC;
-    --ink: #14332B; --muted: #5B6B64; --line: #E3EBDF; --bg: #FBFCF9; --white: #FFFFFF;
-    --radius: 18px; --shadow: 0 4px 24px rgba(20,51,43,.07); --shadow-hover: 0 10px 34px rgba(20,51,43,.13);
+    --neon: #82FF41; --neon-hover: #6BF026; --neon-light: #DAFFEA; --neon-soft: #EEFFF4;
+    --green: #213B2C; --green-dark: #16291E; --green-light: #DAFFEA; --green-soft: #EEFFF4;
+    --ink: #213B2C; --muted: #666666; --line: #E0E2DF; --bg: #FAFAFA; --white: #FFFFFF;
+    --radius: 18px; --shadow: 0 4px 24px rgba(33,59,44,.07); --shadow-hover: 0 10px 34px rgba(33,59,44,.14);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Rubik', system-ui, -apple-system, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 640px; margin: 0 auto; padding: 0 22px; }
 
@@ -50,8 +50,12 @@
 
   .field { margin-bottom: 14px; }
   .field label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 5px; color: var(--ink); }
-  .field input, .field textarea { width: 100%; font-family: inherit; font-size: 15px; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 12px; outline: none; transition: border .2s, box-shadow .2s; background: var(--bg); }
-  .field input:focus, .field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-light); }
+  .field input, .field textarea, .field select { width: 100%; font-family: inherit; font-size: 15px; padding: 11px 13px; border: 1.5px solid var(--line); border-radius: 12px; outline: none; transition: border .2s, box-shadow .2s; background: var(--bg); color: var(--ink); }
+  .field select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-light); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 4px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--green); cursor: pointer; }
+  .consent a { color: var(--green); font-weight: 600; text-decoration: underline; }
   .field textarea { resize: vertical; min-height: 70px; }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 480px) { .row2 { grid-template-columns: 1fr; } }
@@ -100,7 +104,7 @@
 
 <header>
   <div class="nav">
-    <a href="index.html" class="logo"><svg class="mark" viewBox="0 0 26 50" width="18" height="35" aria-hidden="true"><rect x="3.5" y="3" width="19" height="44" rx="9.5" fill="none" stroke="var(--neon)" stroke-width="6"/></svg>Clero</a>
+    <a href="https://www.clero.de/host" class="logo"><svg class="mark" viewBox="0 0 26 50" width="18" height="35" aria-hidden="true"><rect x="3.5" y="3" width="19" height="44" rx="9.5" fill="none" stroke="var(--neon)" stroke-width="6"/></svg><span style="letter-spacing:.04em">CLERO</span></a>
     <div class="nav-right">
       <div class="lang" role="group" aria-label="Sprache / Language">
         <button data-lang="de" type="button">DE</button>
@@ -129,7 +133,19 @@
     <div class="step" id="step1">
       <h2 data-i18n="s1.h">Deine Community</h2>
       <div class="field"><label for="loi-gname" data-i18n="f.name">Name der Gruppe / Community *</label><input id="loi-gname" required data-i18n-ph="f.namePh" placeholder="z.B. München Yoga Crew" /></div>
-      <div class="field"><label for="loi-cat" data-i18n="f.cat">Kategorie / Thema *</label><input id="loi-cat" required data-i18n-ph="f.catPh" placeholder="z.B. Yoga, Sport, Sprache …" /></div>
+      <div class="field"><label for="loi-cat" data-i18n="f.cat">Kategorie / Thema *</label>
+        <select id="loi-cat" required>
+          <option value="" data-i18n="f.catSelect">Bitte wählen …</option>
+          <optgroup label="Sport">
+            <option>American Football</option><option>Basketball</option><option>Crossfit</option><option>Darts</option><option>Fitness</option><option>Fußball</option><option>Golf</option><option>HYROX</option><option>Kampfsport</option><option>Klettern</option><option>Laufen</option><option>Padel</option><option>Pilates</option><option>Pickleball</option><option>Radfahren</option><option>Reiten</option><option>Schwimmen</option><option>Segeln</option><option>Surfen</option><option>Tanzen</option><option>Tennis</option><option>Tischtennis</option><option>Volleyball</option><option>Wandern</option><option>Wintersport</option><option>Yoga</option>
+          </optgroup>
+          <optgroup label="Freizeit">
+            <option>Backen</option><option>Brettspiele</option><option>DIY</option><option>Elternzeit</option><option>Fotografie &amp; Videografie</option><option>Gaming</option><option>Kaffee</option><option>Kino</option><option>Kochen</option><option>Konzerte</option><option>Kunst &amp; Malen</option><option>Lesen &amp; Bücher</option><option>Museen</option><option>Nähen</option><option>New in Town</option><option>Party &amp; Nightlife</option><option>Restaurants &amp; Cafés</option><option>Serien</option><option>Stricken</option><option>Tierliebhaber</option><option>Theater &amp; Oper</option>
+          </optgroup>
+          <option value="Sonstiges" data-i18n="f.catOther">Sonstiges</option>
+        </select>
+      </div>
+      <div class="field" id="catOtherWrap" hidden><label for="loi-cat-other" data-i18n="f.catOtherLabel">Dein Thema *</label><input id="loi-cat-other" data-i18n-ph="f.catOtherPh" placeholder="z.B. Imkern" /></div>
       <div class="row2">
         <div class="field"><label for="loi-district" data-i18n="f.district">Stadtteil</label><input id="loi-district" data-i18n-ph="f.districtPh" placeholder="z.B. Schwabing" /></div>
         <div class="field"><label for="loi-members" data-i18n="f.members">Mitglieder (ca.)</label><input id="loi-members" inputmode="numeric" data-i18n-ph="f.membersPh" placeholder="z.B. 80" /></div>
@@ -177,6 +193,7 @@
         </div>
       </div>
 
+      <label class="consent"><input type="checkbox" id="consent" /><span data-i18n="s2.consent">Ich stimme der Verarbeitung meiner Daten gemäß der <a href="https://www.clero.de/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> zu.</span></label>
       <div class="btn-row">
         <button type="button" class="btn btn-ghost" id="backStep1" data-i18n="s2.back">← Zurück</button>
         <button type="button" class="btn" id="submitBtn" data-i18n="s2.sendFounding">LOI absenden</button>
@@ -190,7 +207,7 @@
         <div class="big">💚</div>
         <h2 id="doneH" data-i18n="done.h">Danke, das hat geklappt!</h2>
         <p id="doneP" data-i18n="done.p">Deine Community ist bei uns eingegangen. Wir melden uns bei dir.</p>
-        <a href="index.html" class="btn" data-i18n="done.btn">Zurück zur Übersicht</a>
+        <a href="https://www.clero.de/host" class="btn" data-i18n="done.btn">Zur Clero-Website</a>
       </div>
     </div>
 
@@ -198,7 +215,7 @@
 </div>
 
 <footer>
-  <span data-i18n="foot">Fragen? Schreib uns auf</span> <a href="https://wa.me/4915206772337?text=Hey%20Nicole%2C%20ich%20habe%20gerade%20Clero%20entdeckt%20und%20habe%20eine%20Frage%3A" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:n.emrich@clero.de">n.emrich@clero.de</a>
+  <span data-i18n="foot">Fragen? Schreib uns auf</span> <a href="https://wa.me/4915206772337?text=Hey%20Nicole%2C%20ich%20habe%20gerade%20Clero%20entdeckt%20und%20habe%20eine%20Frage%3A" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:n.emrich@clero.de">n.emrich@clero.de</a> · <a href="https://www.clero.de/host" target="_blank" rel="noopener" data-i18n="foot.back">zur Clero-Website</a>
 </footer>
 
 <script>
@@ -214,9 +231,9 @@ const I18N = {
     "prog":"Schritt %s von 2",
     "s1.h":"Deine Community","s1.next":"Weiter →",
     "f.name":"Name der Gruppe / Community *","f.namePh":"z.B. München Yoga Crew",
-    "f.cat":"Kategorie / Thema *","f.catPh":"z.B. Yoga, Sport, Sprache …",
+    "f.cat":"Kategorie / Thema *","f.catSelect":"Bitte wählen …","f.catOther":"Sonstiges","f.catOtherLabel":"Dein Thema *","f.catOtherPh":"z.B. Imkern",
     "f.district":"Stadt","f.districtPh":"z.B. München",
-    "f.members":"Mitglieder (ca.)","f.membersPh":"z.B. 80",
+    "f.members":"Mitglieder (ca.) *","f.membersPh":"z.B. 80",
     "f.link":"Instagram / Website","f.linkPh":"@euer_account oder https://…",
     "f.desc":"Kurzbeschreibung","f.descPh":"Was macht eure Community aus?",
     "f.contact":"Ansprechpartner:in *","f.contactPh":"Vor- und Nachname",
@@ -226,14 +243,16 @@ const I18N = {
     "f.place":"Ort","f.placePh":"München",
     "f.sig":"Deine Unterschrift *","f.sigClear":"Löschen","f.sigHint":"Mit Maus oder Finger unterschreiben.",
     "s2.h":"Letzter Schritt: Wie möchtest du dabei sein?","s2.sub":"Beides ist komplett unverbindlich und aktuell kostenlos.",
-    "s2.foundingT":"✨ Founding 20 (mit LOI)","s2.foundingD":"Gehört zu den ersten 20 Hosts in München, nutzt Clero dauerhaft kostenlos und ist beim Launch direkt sichtbar. Dafür unterschreibst du kurz einen Letter of Intent (unverbindlich).",
+    "s2.consent":"Ich stimme der Verarbeitung meiner Daten gemäß der <a href=\"https://www.clero.de/datenschutz\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> zu.",
+    "s2.foundingT":"✨ Founding 20 (mit LOI)","s2.foundingD":"Bewirb dich als einer der ersten 20 Founding-Hosts in München. Für dich bringt das nur Vorteile: Clero dauerhaft kostenlos, beim Launch direkt sichtbar, bevorzugte Ausspielung und eine persönliche Ansprechpartnerin. Komplett unverbindlich, du bestätigst dein Interesse nur kurz mit einem Letter of Intent.",
     "s2.basicT":"Erstmal nur eintragen","s2.basicD":"Wir nehmen eure Community ins Verzeichnis auf, ohne LOI und ohne Founding-20-Vorteile.",
     "s2.step1":"Felder sind schon ausgefüllt, wir setzen sie automatisch in den LOI ein","s2.step2":"Unterschreib unten kurz mit Maus oder Finger","s2.step3":"Absenden, fertig. Der LOI kommt direkt bei uns an",
     "s2.back":"← Zurück","s2.sendFounding":"LOI absenden","s2.sendBasic":"Community eintragen","s2.blank":"Oder leeres LOI-PDF herunterladen","s2.sending":"Wird gesendet …",
-    "done.h":"Danke, das hat geklappt!","done.p":"Deine Community ist bei uns eingegangen. Wir melden uns bei dir.","done.pFounding":"Vielen Dank, dein Letter of Intent ist bei uns eingegangen! Clero startet im August in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden.","done.btn":"Zurück zur Übersicht",
-    "foot":"Fragen? Schreib uns auf",
-    "err.req":"Bitte fülle Name der Gruppe, Ansprechpartner:in und E-Mail aus.",
-    "err.sig":"Bitte unterschreibe im Unterschrift-Feld."
+    "done.h":"Danke, das hat geklappt!","done.p":"Deine Community ist bei uns eingegangen. Wir melden uns bei dir.","done.pFounding":"Vielen Dank, dein Letter of Intent ist bei uns eingegangen! Clero startet im August in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden.","done.btn":"Zur Clero-Website",
+    "foot":"Fragen? Schreib uns auf","foot.back":"zur Clero-Website",
+    "err.req":"Bitte fülle alle Pflichtfelder (mit *) aus.",
+    "err.sig":"Bitte unterschreibe im Unterschrift-Feld.",
+    "err.consent":"Bitte stimme der Datenschutzerklärung zu."
   },
   en: {
     "back":"← Back to overview",
@@ -242,9 +261,9 @@ const I18N = {
     "prog":"Step %s of 2",
     "s1.h":"Your community","s1.next":"Next →",
     "f.name":"Group / community name *","f.namePh":"e.g. Munich Yoga Crew",
-    "f.cat":"Category / topic *","f.catPh":"e.g. yoga, sports, language …",
+    "f.cat":"Category / topic *","f.catSelect":"Please select …","f.catOther":"Other","f.catOtherLabel":"Your topic *","f.catOtherPh":"e.g. beekeeping",
     "f.district":"City","f.districtPh":"e.g. Munich",
-    "f.members":"Members (approx.)","f.membersPh":"e.g. 80",
+    "f.members":"Members (approx.) *","f.membersPh":"e.g. 80",
     "f.link":"Instagram / website","f.linkPh":"@your_handle or https://…",
     "f.desc":"Short description","f.descPh":"What makes your community special?",
     "f.contact":"Contact person *","f.contactPh":"First and last name",
@@ -254,14 +273,16 @@ const I18N = {
     "f.place":"Place","f.placePh":"Munich",
     "f.sig":"Your signature *","f.sigClear":"Clear","f.sigHint":"Sign with your mouse or finger.",
     "s2.h":"Last step: how would you like to join?","s2.sub":"Both are completely non-binding and currently free.",
-    "s2.foundingT":"✨ Founding 20 (with LOI)","s2.foundingD":"Be one of the first 20 hosts in Munich, use Clero free forever and be visible right at launch. For this you briefly sign a Letter of Intent (non-binding).",
+    "s2.consent":"I agree to the processing of my data in accordance with the <a href=\"https://www.clero.de/datenschutz\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.",
+    "s2.foundingT":"✨ Founding 20 (with LOI)","s2.foundingD":"Apply as one of the first 20 founding hosts in Munich. For you this only brings advantages: Clero free forever, visible right at launch, preferred placement and a personal contact. Completely non-binding, you simply confirm your interest with a Letter of Intent.",
     "s2.basicT":"Just list us for now","s2.basicD":"We add your community to the directory, without an LOI and without Founding 20 benefits.",
     "s2.step1":"Your details are already filled in, we add them to the LOI automatically","s2.step2":"Sign below with your mouse or finger","s2.step3":"Send it off, done. The LOI reaches us directly",
     "s2.back":"← Back","s2.sendFounding":"Send LOI","s2.sendBasic":"List community","s2.blank":"Or download a blank LOI PDF","s2.sending":"Sending …",
-    "done.h":"Thank you, that worked!","done.p":"Your community has reached us. We will get back to you.","done.pFounding":"Thank you, your Letter of Intent has reached us! Clero launches in Munich in August. A few weeks before launch we will get in touch with you personally to integrate your community.","done.btn":"Back to overview",
-    "foot":"Questions? Message us on",
-    "err.req":"Please fill in group name, contact person and email.",
-    "err.sig":"Please sign in the signature field."
+    "done.h":"Thank you, that worked!","done.p":"Your community has reached us. We will get back to you.","done.pFounding":"Thank you, your Letter of Intent has reached us! Clero launches in Munich in August. A few weeks before launch we will get in touch with you personally to integrate your community.","done.btn":"Back to Clero",
+    "foot":"Questions? Message us on","foot.back":"back to Clero website",
+    "err.req":"Please fill in all required fields (marked with *).",
+    "err.sig":"Please sign in the signature field.",
+    "err.consent":"Please agree to the privacy policy."
   }
 };
 
@@ -309,11 +330,17 @@ function gotoStep(n) {
   document.getElementById('progLbl').textContent = t('prog').replace('%s', n === 1 ? '1' : '2');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+const catValue = () => { const s = document.getElementById('loi-cat').value; return s === 'Sonstiges' ? lv('loi-cat-other') : s; };
+document.getElementById('loi-cat').addEventListener('change', e => {
+  document.getElementById('catOtherWrap').hidden = e.target.value !== 'Sonstiges';
+});
+function fail(el) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); }
 function step1Valid() {
-  for (const id of ['loi-gname','loi-cat','loi-contact','loi-mail']) {
+  for (const id of ['loi-gname','loi-cat','loi-members','loi-contact','loi-mail']) {
     const el = document.getElementById(id);
-    if (!el.value.trim()) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); showToast(t('err.req')); return false; }
+    if (!el.value.trim()) { fail(el); showToast(t('err.req')); return false; }
   }
+  if (document.getElementById('loi-cat').value === 'Sonstiges' && !lv('loi-cat-other')) { fail(document.getElementById('loi-cat-other')); showToast(t('err.req')); return false; }
   return true;
 }
 document.getElementById('toStep2').addEventListener('click', () => { if (step1Valid()) gotoStep(2); });
@@ -372,7 +399,7 @@ async function buildFilledLoi() {
 function commonFields(en) {
   const o = {};
   o[en ? 'Group' : 'Gruppe'] = lv('loi-gname');
-  o[en ? 'Category' : 'Kategorie'] = lv('loi-cat');
+  o[en ? 'Category' : 'Kategorie'] = catValue();
   o[en ? 'City' : 'Stadt'] = lv('loi-district');
   o[en ? 'Members' : 'Mitglieder'] = lv('loi-members');
   o['Instagram/Website'] = lv('loi-link');
@@ -393,6 +420,7 @@ function waPing(kind) {
 
 document.getElementById('submitBtn').addEventListener('click', async () => {
   const en = lang === 'en';
+  if (!document.getElementById('consent').checked) { showToast(t('err.consent')); return; }
   const btn = document.getElementById('submitBtn');
   if (choice === 'founding') {
     if (!sigHas) { showToast(t('err.sig')); document.querySelector('.sig-wrap').style.borderColor = '#e23b3b'; setTimeout(() => { document.querySelector('.sig-wrap').style.borderColor = ''; }, 2500); return; }
