@@ -230,7 +230,7 @@ const I18N = {
     "s2.basicT":"Erstmal nur eintragen","s2.basicD":"Wir nehmen eure Community ins Verzeichnis auf, ohne LOI und ohne Founding-20-Vorteile.",
     "s2.step1":"Felder sind schon ausgefüllt, wir setzen sie automatisch in den LOI ein","s2.step2":"Unterschreib unten kurz mit Maus oder Finger","s2.step3":"Absenden, fertig. Der LOI kommt direkt bei uns an",
     "s2.back":"← Zurück","s2.sendFounding":"LOI absenden","s2.sendBasic":"Community eintragen","s2.blank":"Oder leeres LOI-PDF herunterladen","s2.sending":"Wird gesendet …",
-    "done.h":"Danke, das hat geklappt!","done.p":"Deine Community ist bei uns eingegangen. Wir melden uns bei dir.","done.pFounding":"Dein Letter of Intent ist bei uns eingegangen. Willkommen im Founding-20-Kreis, wir melden uns bei dir!","done.btn":"Zurück zur Übersicht",
+    "done.h":"Danke, das hat geklappt!","done.p":"Deine Community ist bei uns eingegangen. Wir melden uns bei dir.","done.pFounding":"Vielen Dank, dein Letter of Intent ist bei uns eingegangen! Clero startet im August in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden.","done.btn":"Zurück zur Übersicht",
     "foot":"Fragen? Schreib uns auf",
     "err.req":"Bitte fülle Name der Gruppe, Ansprechpartner:in und E-Mail aus.",
     "err.sig":"Bitte unterschreibe im Unterschrift-Feld."
@@ -258,7 +258,7 @@ const I18N = {
     "s2.basicT":"Just list us for now","s2.basicD":"We add your community to the directory, without an LOI and without Founding 20 benefits.",
     "s2.step1":"Your details are already filled in, we add them to the LOI automatically","s2.step2":"Sign below with your mouse or finger","s2.step3":"Send it off, done. The LOI reaches us directly",
     "s2.back":"← Back","s2.sendFounding":"Send LOI","s2.sendBasic":"List community","s2.blank":"Or download a blank LOI PDF","s2.sending":"Sending …",
-    "done.h":"Thank you, that worked!","done.p":"Your community has reached us. We will get back to you.","done.pFounding":"Your Letter of Intent has reached us. Welcome to the Founding 20 circle, we will be in touch!","done.btn":"Back to overview",
+    "done.h":"Thank you, that worked!","done.p":"Your community has reached us. We will get back to you.","done.pFounding":"Thank you, your Letter of Intent has reached us! Clero launches in Munich in August. A few weeks before launch we will get in touch with you personally to integrate your community.","done.btn":"Back to overview",
     "foot":"Questions? Message us on",
     "err.req":"Please fill in group name, contact person and email.",
     "err.sig":"Please sign in the signature field."
@@ -407,8 +407,8 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     const cf = commonFields(en); Object.keys(cf).forEach(k => add(k, cf[k]));
     add(en ? 'Place' : 'Ort', place); add(en ? 'Date' : 'Datum', todayStr());
     add('_autoresponse', en
-      ? 'Hello and thank you for your Letter of Intent for Clero! We have received your LOI and will get back to you personally very soon. Great to have you in the Founding 20 circle in Munich. Warm regards, Nicole from the Clero Team'
-      : 'Hallo und danke für deinen Letter of Intent für Clero! Wir haben deinen LOI erhalten und melden uns in Kürze persönlich bei dir. Schön, dass du beim Founding-20-Kreis in München dabei bist. Liebe Grüße, Nicole vom Clero Team');
+      ? 'Hello and thank you for your community submission to Clero!\n\nWe have received your details and your Letter of Intent, and we are really happy that you want to be part of it.\n\nA little about us: Clero is a new platform that makes local communities in Munich visible. People discover matching groups in their city through Clero, and hosts like you get one place where your community grows, stays organised and finds new members, without all the hassle of WhatsApp, DMs and Instagram.\n\nWhat happens next: Clero launches in Munich in August. A few weeks before launch we will get in touch with you personally to integrate your community in a relaxed way and to answer any open questions. So there is nothing else you need to do for now.\n\nIf you have any questions in the meantime, simply reply to this email or message us on WhatsApp.\n\nWarm regards\nNicole from the Clero Team'
+      : 'Hallo und vielen Dank für deinen Community-Eintrag bei Clero!\n\nWir haben deine Angaben und deinen Letter of Intent erhalten und freuen uns sehr, dass du dabei sein möchtest.\n\nKurz zu uns: Clero ist eine neue Plattform, die lokale Communities in München sichtbar macht. Menschen finden über Clero passende Gruppen in ihrer Stadt, und Hosts wie du bekommen einen festen Ort, an dem eure Community wächst, organisiert bleibt und neue Mitglieder findet, ohne den ganzen Aufwand über WhatsApp, DMs und Instagram.\n\nWie es weitergeht: Clero startet im August in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden und offene Fragen zu klären. Du musst also erstmal nichts weiter tun.\n\nWenn du vorher Fragen hast, antworte einfach auf diese Mail oder schreib uns auf WhatsApp.\n\nLiebe Grüße\nNicole vom Clero Team');
     try {
       if (window.PDFLib) {
         const bytes = await buildFilledLoi();
