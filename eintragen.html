@@ -404,7 +404,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     form.action = 'https://formsubmit.co/' + FS_ENDPOINT; form.method = 'POST'; form.enctype = 'multipart/form-data'; form.style.display = 'none';
     const add = (n, v) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v || ''; form.appendChild(i); };
     add('_subject', (en ? 'New Founding 20 LOI: ' : 'Neuer Founding-20 LOI: ') + lv('loi-gname'));
-    add('_cc', 'n.emrich@clero.de'); add('_captcha', 'false'); add('_template', 'table');
+    add('_cc', 'n.emrich@clero.de'); add('_template', 'table');
     add('_next', location.origin + location.pathname + '?done=founding&g=' + encodeURIComponent(lv('loi-gname')));
     const cf = commonFields(en); Object.keys(cf).forEach(k => add(k, cf[k]));
     add(en ? 'Place' : 'Ort', place); add(en ? 'Date' : 'Datum', todayStr());
