@@ -13,7 +13,7 @@
   :root {
     --neon: #82FF41; --neon-hover: #6BF026; --neon-light: #DAFFEA; --neon-soft: #EEFFF4;
     --green: #213B2C; --green-dark: #16291E; --green-light: #DAFFEA; --green-soft: #EEFFF4;
-    --ink: #213B2C; --muted: #666666; --line: #E0E2DF; --bg: #FAFAFA; --white: #FFFFFF;
+    --ink: #213B2C; --muted: #666666; --line: #E0E2DF; --bg: #F1FAF5; --white: #FFFFFF;
     --radius: 18px; --shadow: 0 4px 24px rgba(33,59,44,.07); --shadow-hover: 0 10px 34px rgba(33,59,44,.14);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,13 +22,13 @@
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: 640px; margin: 0 auto; padding: 0 22px; }
 
-  header { border-bottom: 1px solid var(--line); background: var(--white); }
+  header { border-bottom: 1px solid #C7ECD8; background: var(--neon-light); }
   .topbar { position: relative; max-width: 980px; margin: 0 auto; padding: 16px 22px 22px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
   .lang { display: inline-flex; gap: 2px; background: var(--white); border: 1.5px solid var(--line); border-radius: 999px; padding: 3px; }
   .lang button { border: none; background: transparent; font-size: 17px; line-height: 1; padding: 5px 13px; border-radius: 999px; cursor: pointer; transition: background .18s; filter: grayscale(.4) opacity(.7); }
   .lang button.active { background: var(--ink); filter: none; }
   .brandmark { display: block; }
-  .brandmark svg { display: block; height: 74px; width: auto; }
+  .brandmark img { display: block; height: 82px; width: auto; }
   .btn-back { position: absolute; top: 16px; right: 22px; display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: #fff; font-weight: 600; font-size: 13.5px; padding: 9px 16px; border-radius: 999px; white-space: nowrap; transition: background .2s, transform .15s; }
   .btn-back:hover { background: var(--green-dark); transform: translateY(-1px); }
   @media (max-width: 560px) { .btn-back { position: static; order: -1; padding: 8px 14px; font-size: 12.5px; } }
@@ -109,18 +109,7 @@
       <button data-lang="de" type="button" aria-label="Deutsch">🇩🇪</button>
       <button data-lang="en" type="button" aria-label="English">🇬🇧</button>
     </div>
-    <a href="https://www.clero.de/host" class="brandmark" aria-label="Clero">
-      <svg viewBox="0 0 1389 1368" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Clero" font-family="Rubik, sans-serif">
-        <rect x="400" y="124" width="538" height="1128" rx="269" fill="none" stroke="#82FF41" stroke-width="217"/>
-        <g fill="#213B2C" font-weight="800" font-size="500" text-anchor="middle">
-          <text x="120" y="880">C</text>
-          <text x="430" y="880">L</text>
-          <text x="690" y="880">E</text>
-          <text x="980" y="880">R</text>
-        </g>
-        <rect x="1210" y="535" width="150" height="320" rx="75" fill="none" stroke="#82FF41" stroke-width="52"/>
-      </svg>
-    </a>
+    <a href="https://www.clero.de/host" class="brandmark" aria-label="Clero"><img src="logo.png" alt="Clero" /></a>
   </div>
 </header>
 
