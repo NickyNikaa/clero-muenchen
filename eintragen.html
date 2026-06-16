@@ -29,9 +29,8 @@
   .lang button.active { background: var(--ink); filter: none; }
   .brandmark { display: block; }
   .brandmark img { display: block; height: 82px; width: auto; }
-  .btn-back { position: absolute; top: 16px; right: 22px; display: inline-flex; align-items: center; gap: 6px; background: var(--ink); color: #fff; font-weight: 600; font-size: 13.5px; padding: 9px 16px; border-radius: 999px; white-space: nowrap; transition: background .2s, transform .15s; }
-  .btn-back:hover { background: var(--green-dark); transform: translateY(-1px); }
-  @media (max-width: 560px) { .btn-back { position: static; order: -1; padding: 8px 14px; font-size: 12.5px; } }
+  .btn-close { position: absolute; top: 14px; right: 18px; width: 40px; height: 40px; display: grid; place-items: center; background: var(--ink); color: #fff; border: none; border-radius: 50%; font-size: 18px; line-height: 1; cursor: pointer; transition: background .2s, transform .15s; }
+  .btn-close:hover { background: var(--green-dark); transform: scale(1.06); }
 
   .hero { text-align: center; padding: 44px 0 8px; }
   .hero .pill { display: inline-flex; align-items: center; gap: 7px; background: var(--white); border: 1px solid var(--line); color: var(--green-dark); font-weight: 600; font-size: 13px; padding: 6px 14px; border-radius: 999px; margin-bottom: 16px; box-shadow: var(--shadow); }
@@ -104,7 +103,7 @@
 
 <header>
   <div class="topbar">
-    <a href="https://www.clero.de/host" class="btn-back" data-i18n="nav.back">← Clero Website</a>
+    <button type="button" class="btn-close" id="closeBtn" aria-label="Schließen" title="Schließen">✕</button>
     <div class="lang" role="group" aria-label="Sprache / Language">
       <button data-lang="de" type="button" aria-label="Deutsch">🇩🇪</button>
       <button data-lang="en" type="button" aria-label="English">🇬🇧</button>
@@ -317,6 +316,11 @@ function applyLang() {
 }
 function setLang(l) { lang = l; try { localStorage.setItem('clero_lang', l); } catch(e){} applyLang(); }
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+document.getElementById('closeBtn').addEventListener('click', () => {
+  try { window.open('', '_self'); window.close(); } catch (e) {}
+  setTimeout(() => { window.location.href = 'https://www.clero.de/host'; }, 200);
+});
 
 function showToast(msg) { const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg; document.body.appendChild(el); setTimeout(() => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4500); }
 
