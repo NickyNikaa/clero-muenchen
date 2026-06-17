@@ -343,6 +343,7 @@ document.getElementById('closeBtn').addEventListener('click', () => {
   setTimeout(() => { window.location.href = 'https://www.clero.de/host'; }, 200);
 });
 
+function postSubmitUrl() { return lang === 'en' ? 'https://www.clero.de/thank-you' : 'https://host.clero.de'; }
 function waMsg() { return lang === 'en' ? 'Hey Nicole, I just discovered Clero and have a question:' : 'Hey Nicole, ich habe gerade Clero entdeckt und habe eine Frage:'; }
 function waLink() { return 'https://wa.me/' + CMB_PHONE + '?text=' + encodeURIComponent(waMsg()); }
 document.getElementById('waX').addEventListener('click', () => { document.getElementById('waBubble').style.display = 'none'; });
@@ -459,7 +460,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     const add = (n, v) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v || ''; form.appendChild(i); };
     add('_subject', (en ? 'New Founding 20 LOI: ' : 'Neuer Founding-20 LOI: ') + lv('loi-gname'));
     add('_cc', 'n.emrich@clero.de'); add('_template', 'table');
-    add('_next', location.origin + location.pathname + '?done=founding&g=' + encodeURIComponent(lv('loi-gname')));
+    add('_next', postSubmitUrl());
     const cf = commonFields(en); Object.keys(cf).forEach(k => add(k, cf[k]));
     add(en ? 'Place' : 'Ort', place); add(en ? 'Date' : 'Datum', todayStr());
     add('_autoresponse', en
@@ -473,6 +474,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
         const dt = new DataTransfer(); dt.items.add(file); fi.files = dt.files;
       }
     } catch (e) {}
+    waPing('founding');
     document.body.appendChild(form); form.submit();
   } else {
     btn.textContent = t('s2.sending'); btn.disabled = true;
@@ -482,8 +484,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
       const j = await r.json().catch(() => ({}));
       if (String(j.success) !== 'true') throw new Error('no success');
       waPing('basic');
-      document.getElementById('doneP').textContent = t('done.p');
-      gotoStep(3);
+      window.location.href = postSubmitUrl();
     } catch (err) {
       const subject = (en ? 'List my community on Clero: ' : 'Community bei Clero eintragen: ') + lv('loi-gname');
       const cf = commonFields(en); const body = Object.keys(cf).map(k => k + ': ' + cf[k]).join('\n');
