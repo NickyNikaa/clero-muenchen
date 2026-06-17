@@ -97,6 +97,14 @@
   .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 14px; font-size: 14.5px; font-weight: 600; box-shadow: 0 10px 30px rgba(20,51,43,.32); z-index: 200; max-width: 90%; text-align: center; }
   footer { text-align: center; color: var(--muted); font-size: 13px; padding: 0 0 40px; }
   footer a { color: var(--muted); font-weight: 600; }
+  .wa-fab { position: fixed; right: 22px; bottom: 22px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+  .wa-bubble { background: var(--white); border: 1px solid var(--line); box-shadow: 0 8px 30px rgba(33,59,44,.16); border-radius: 16px 16px 4px 16px; padding: 13px 16px; max-width: 230px; font-size: 14px; color: var(--ink); position: relative; animation: waPop .3s ease; }
+  .wa-bubble strong { display: block; font-weight: 700; margin-bottom: 2px; }
+  .wa-bubble .wa-x { position: absolute; top: -8px; left: -8px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); background: var(--white); color: var(--muted); font-size: 13px; cursor: pointer; line-height: 1; }
+  .wa-btn { display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; border-radius: 50%; background: #25D366; box-shadow: 0 6px 20px rgba(37,211,102,.45); transition: transform .15s, box-shadow .2s; align-self: flex-end; }
+  .wa-btn:hover { transform: scale(1.06); box-shadow: 0 8px 26px rgba(37,211,102,.55); }
+  @keyframes waPop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 520px) { .wa-bubble { max-width: 180px; } }
 </style>
 </head>
 <body>
@@ -216,6 +224,16 @@
   <span data-i18n="foot">Fragen? Schreib uns auf</span> <a href="https://wa.me/4915206772337?text=Hey%20Nicole%2C%20ich%20habe%20gerade%20Clero%20entdeckt%20und%20habe%20eine%20Frage%3A" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:n.emrich@clero.de">n.emrich@clero.de</a> · <a href="https://www.clero.de/host" target="_blank" rel="noopener" data-i18n="foot.back">zur Clero-Website</a>
 </footer>
 
+<div class="wa-fab">
+  <div class="wa-bubble" id="waBubble">
+    <button class="wa-x" id="waX" aria-label="schließen">×</button>
+    <span data-i18n="wa.bubble"><strong>Fragen zu Clero?</strong>Schreib mir direkt auf WhatsApp 💬</span>
+  </div>
+  <a class="wa-btn" id="waBtn" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  </a>
+</div>
+
 <script>
 const FS_ENDPOINT = '588e8d43be349a56d2acc52f584fc4d6';
 const CMB_PHONE = '4915206772337';
@@ -248,6 +266,7 @@ const I18N = {
     "s2.back":"← Zurück","s2.sendFounding":"LOI absenden","s2.sendBasic":"Community eintragen","s2.blank":"Oder leeres LOI-PDF herunterladen","s2.sending":"Wird gesendet …",
     "done.h":"Danke, das hat geklappt!","done.p":"Deine Community ist bei uns eingegangen. Wir melden uns bei dir.","done.pFounding":"Vielen Dank, dein Letter of Intent ist bei uns eingegangen! Clero startet im August in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden.","done.btn":"Zur Clero-Website",
     "foot":"Fragen? Schreib uns auf","foot.back":"zur Clero-Website","nav.back":"← Clero Website",
+    "wa.bubble":"<strong>Fragen zu Clero?</strong>Schreib mir direkt auf WhatsApp 💬",
     "err.req":"Bitte fülle alle Pflichtfelder (mit *) aus.",
     "err.sig":"Bitte unterschreibe im Unterschrift-Feld.",
     "err.consent":"Bitte stimme der Datenschutzerklärung zu."
@@ -278,6 +297,7 @@ const I18N = {
     "s2.back":"← Back","s2.sendFounding":"Send LOI","s2.sendBasic":"List community","s2.blank":"Or download a blank LOI PDF","s2.sending":"Sending …",
     "done.h":"Thank you, that worked!","done.p":"Your community has reached us. We will get back to you.","done.pFounding":"Thank you, your Letter of Intent has reached us! Clero launches in Munich in August. A few weeks before launch we will get in touch with you personally to integrate your community.","done.btn":"Back to Clero",
     "foot":"Questions? Message us on","foot.back":"back to Clero website","nav.back":"← Clero website",
+    "wa.bubble":"<strong>Questions about Clero?</strong>Message me directly on WhatsApp 💬",
     "err.req":"Please fill in all required fields (marked with *).",
     "err.sig":"Please sign in the signature field.",
     "err.consent":"Please agree to the privacy policy."
@@ -312,6 +332,7 @@ function applyLang() {
   document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
   document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
   document.getElementById('loiDownload').setAttribute('href', lang === 'en' ? 'clero-loi-en.pdf' : 'clero-loi.pdf');
+  const _wb = document.getElementById('waBtn'); if (_wb) _wb.setAttribute('href', waLink());
   updateSubmitLabel();
 }
 function setLang(l) { lang = l; try { localStorage.setItem('clero_lang', l); } catch(e){} applyLang(); }
@@ -321,6 +342,10 @@ document.getElementById('closeBtn').addEventListener('click', () => {
   try { window.open('', '_self'); window.close(); } catch (e) {}
   setTimeout(() => { window.location.href = 'https://www.clero.de/host'; }, 200);
 });
+
+function waMsg() { return lang === 'en' ? 'Hey Nicole, I just discovered Clero and have a question:' : 'Hey Nicole, ich habe gerade Clero entdeckt und habe eine Frage:'; }
+function waLink() { return 'https://wa.me/' + CMB_PHONE + '?text=' + encodeURIComponent(waMsg()); }
+document.getElementById('waX').addEventListener('click', () => { document.getElementById('waBubble').style.display = 'none'; });
 
 function showToast(msg) { const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg; document.body.appendChild(el); setTimeout(() => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4500); }
 
