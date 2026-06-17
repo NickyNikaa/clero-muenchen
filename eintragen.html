@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root {
     --neon: #82FF41; --neon-hover: #6BF026; --neon-light: #DAFFEA; --neon-soft: #EEFFF4;
@@ -430,12 +431,13 @@ document.getElementById('skipBtn').addEventListener('click', async (e) => {
   if (!document.getElementById('consent').checked) { showToast(t('err.consent')); return; }
   const link = document.getElementById('skipBtn');
   link.style.pointerEvents = 'none'; link.textContent = t('s2.sending');
-  const payload = { _subject: (en ? 'New community on Clero: ' : 'Neue Community auf Clero: ') + lv('loi-gname'), _cc: 'n.emrich@clero.de', _template: 'table', _autoresponse: autoresp(en, false), ...commonFields(en) };
+  const payload = { _subject: (en ? 'New community on Clero: ' : 'Neue Community auf Clero: ') + lv('loi-gname'), _cc: 'n.emrich@clero.de', _template: 'table', ...commonFields(en) };
   try {
     const r = await fetch('https://formsubmit.co/ajax/' + FS_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
     const j = await r.json().catch(() => ({}));
     if (String(j.success) !== 'true') throw new Error('no success');
     waPing('basic');
+    await sendLeadMail(en, false);
     window.location.href = postSubmitUrl();
   } catch (err) {
     const subject = (en ? 'List my community on Clero: ' : 'Community bei Clero eintragen: ') + lv('loi-gname');
@@ -470,6 +472,23 @@ function autoresp(en, founding) {
     + intro + gotIt + about + next + contact + sign + '</div>';
 }
 
+// Versand der formatierten Bestätigungsmail an den Lead via EmailJS
+const EMAILJS_SERVICE = 'service_u1i5e3o';
+const EMAILJS_TEMPLATE = 'template_yq07rwe';
+const EMAILJS_PUBLIC = '6v00neIQWHklsBrpc';
+try { if (window.emailjs) emailjs.init({ publicKey: EMAILJS_PUBLIC }); } catch (e) {}
+async function sendLeadMail(en, founding) {
+  const to = lv('loi-mail');
+  if (!to || !window.emailjs) return;
+  const subject = en ? 'Thank you for your community submission to Clero 💚'
+                     : 'Vielen Dank für deinen Community-Eintrag bei Clero 💚';
+  try {
+    await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE,
+      { to_email: to, subject: subject, message_html: autoresp(en, founding) },
+      { publicKey: EMAILJS_PUBLIC });
+  } catch (e) {}
+}
+
 document.getElementById('submitBtn').addEventListener('click', async () => {
   const en = lang === 'en';
   if (!document.getElementById('consent').checked) { showToast(t('err.consent')); return; }
@@ -485,7 +504,6 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   add('_next', postSubmitUrl());
   const cf = commonFields(en); Object.keys(cf).forEach(k => add(k, cf[k]));
   add(en ? 'Place' : 'Ort', place); add(en ? 'Date' : 'Datum', todayStr());
-  add('_autoresponse', autoresp(en, true));
   try {
     if (window.PDFLib) {
       const bytes = await buildFilledLoi();
@@ -495,6 +513,7 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     }
   } catch (e) {}
   waPing('founding');
+  await sendLeadMail(en, true);
   document.body.appendChild(form); form.submit();
 });
 
