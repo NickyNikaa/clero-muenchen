@@ -221,7 +221,7 @@
 </div>
 
 <footer>
-  <span data-i18n="foot">Fragen? Schreib uns auf</span> <a href="https://wa.me/4915206772337?text=Hey%20Nicole%2C%20ich%20habe%20gerade%20Clero%20entdeckt%20und%20habe%20eine%20Frage%3A" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:n.emrich@clero.de">n.emrich@clero.de</a> · <a href="https://www.clero.de/host" target="_blank" rel="noopener" data-i18n="foot.back">zur Clero-Website</a>
+  <span data-i18n="foot">Fragen? Schreib uns auf</span> <a href="https://wa.me/4915566000890?text=Hallo%20Clero-Team%2C%20ich%20habe%20gerade%20Clero%20entdeckt%20und%20habe%20eine%20Frage%3A" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:n.emrich@clero.de">n.emrich@clero.de</a> · <a href="https://www.clero.de/host" target="_blank" rel="noopener" data-i18n="foot.back">zur Clero-Website</a>
 </footer>
 
 <div class="wa-fab">
@@ -237,6 +237,7 @@
 <script>
 const FS_ENDPOINT = '588e8d43be349a56d2acc52f584fc4d6';
 const CMB_PHONE = '4915206772337';
+const WA = '4915566000890';
 const CMB_KEY = ''; // CallMeBot-APIKEY eintragen fuer WhatsApp-Benachrichtigung
 
 const I18N = {
@@ -343,9 +344,9 @@ document.getElementById('closeBtn').addEventListener('click', () => {
   setTimeout(() => { window.location.href = 'https://www.clero.de/host'; }, 200);
 });
 
-function postSubmitUrl() { return lang === 'en' ? 'https://www.clero.de/thank-you' : 'https://host.clero.de'; }
-function waMsg() { return lang === 'en' ? 'Hey Nicole, I just discovered Clero and have a question:' : 'Hey Nicole, ich habe gerade Clero entdeckt und habe eine Frage:'; }
-function waLink() { return 'https://wa.me/' + CMB_PHONE + '?text=' + encodeURIComponent(waMsg()); }
+function postSubmitUrl() { return lang === 'en' ? 'https://www.clero.de/thank-you' : 'https://www.clero.de/host'; }
+function waMsg() { return lang === 'en' ? 'Hi Clero team, I just discovered Clero and have a question:' : 'Hallo Clero-Team, ich habe gerade Clero entdeckt und habe eine Frage:'; }
+function waLink() { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waMsg()); }
 document.getElementById('waX').addEventListener('click', () => { document.getElementById('waBubble').style.display = 'none'; });
 
 function showToast(msg) { const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg; document.body.appendChild(el); setTimeout(() => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4500); }
@@ -464,8 +465,8 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     const cf = commonFields(en); Object.keys(cf).forEach(k => add(k, cf[k]));
     add(en ? 'Place' : 'Ort', place); add(en ? 'Date' : 'Datum', todayStr());
     add('_autoresponse', en
-      ? 'Hello and thank you for your community submission to Clero!<br><br>We have received your details and your Letter of Intent, and we are really happy that you want to be part of it.<br><br>A little about us: Clero is a new platform that makes local communities in Munich visible. People discover matching groups in their city through Clero, and hosts like you get one place where your community grows, stays organised and finds new members, without all the hassle of WhatsApp, DMs and Instagram.<br><br>What happens next: Clero launches in Munich in August. A few weeks before launch we will get in touch with you personally to integrate your community and answer any open questions. So there is nothing else you need to do for now.<br><br>If you have any questions, reach us directly at n.emrich@clero.de or via WhatsApp at +49 152 06772337.<br><br>Warm regards<br>Nicole from the Clero Team'
-      : 'Hallo und vielen Dank für deinen Community-Eintrag bei Clero!<br><br>Wir haben deine Angaben und deinen Letter of Intent erhalten und freuen uns sehr, dass du dabei sein möchtest.<br><br>Kurz zu uns: Clero ist eine neue Plattform, die lokale Communities in München sichtbar macht. Menschen finden über Clero passende Gruppen in ihrer Stadt, und Hosts wie du bekommen einen festen Ort, an dem eure Community wächst, organisiert bleibt und neue Mitglieder findet, ohne den ganzen Aufwand über WhatsApp, DMs und Instagram.<br><br>Wie es weitergeht: Clero startet im August in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden und offene Fragen zu klären. Du musst also erstmal nichts weiter tun.<br><br>Bei Fragen erreichst du uns direkt unter n.emrich@clero.de oder per WhatsApp unter +49 152 06772337.<br><br>Liebe Grüße<br>Nicole vom Clero Team');
+      ? 'Hello and thank you for your community submission to Clero!<br><br>We have received your details and your Letter of Intent, and we are really happy that you want to be part of it.<br><br>A little about us: Clero is a new platform that makes local communities in Munich visible. People discover matching groups in their city through Clero, and hosts like you get one place where your community grows, stays organised and finds new members, without all the hassle of WhatsApp, DMs and Instagram.<br><br>What happens next: Clero launches in Munich in August. A few weeks before launch we will get in touch with you personally to integrate your community and answer any open questions. So there is nothing else you need to do for now.<br><br>If you have any questions, reach us directly at n.emrich@clero.de or via WhatsApp at +49 1556 6000890.<br><br>Warm regards<br>Nicole from the Clero Team'
+      : 'Hallo und vielen Dank für deinen Community-Eintrag bei Clero!<br><br>Wir haben deine Angaben und deinen Letter of Intent erhalten und freuen uns sehr, dass du dabei sein möchtest.<br><br>Kurz zu uns: Clero ist eine neue Plattform, die lokale Communities in München sichtbar macht. Menschen finden über Clero passende Gruppen in ihrer Stadt, und Hosts wie du bekommen einen festen Ort, an dem eure Community wächst, organisiert bleibt und neue Mitglieder findet, ohne den ganzen Aufwand über WhatsApp, DMs und Instagram.<br><br>Wie es weitergeht: Clero startet im August in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden und offene Fragen zu klären. Du musst also erstmal nichts weiter tun.<br><br>Bei Fragen erreichst du uns direkt unter n.emrich@clero.de oder per WhatsApp unter +49 1556 6000890.<br><br>Liebe Grüße<br>Nicole vom Clero Team');
     try {
       if (window.PDFLib) {
         const bytes = await buildFilledLoi();
