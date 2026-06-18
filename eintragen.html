@@ -507,9 +507,14 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   try {
     if (window.PDFLib) {
       const bytes = await buildFilledLoi();
-      const file = new File([new Blob([bytes], { type: 'application/pdf' })], 'Clero-LOI-' + safeName() + '.pdf', { type: 'application/pdf' });
+      const fname = 'Clero-LOI-' + safeName() + '.pdf';
+      const file = new File([new Blob([bytes], { type: 'application/pdf' })], fname, { type: 'application/pdf' });
       const fi = document.createElement('input'); fi.type = 'file'; fi.name = 'attachment'; fi.style.display = 'none'; form.appendChild(fi);
       const dt = new DataTransfer(); dt.items.add(file); fi.files = dt.files;
+      // Kopie der ausgefuellten LOI fuer den Lead automatisch herunterladen
+      const dlUrl = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+      const a = document.createElement('a'); a.href = dlUrl; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(dlUrl), 8000);
     }
   } catch (e) {}
   waPing('founding');
