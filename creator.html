@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Creator werden · Clero</title>
-<meta name="description" content="Werde Clero Creator in München. Bewirb dich, mach lokale Communities sichtbar und sei beim Launch von Anfang an dabei." />
+<meta name="description" content="Werde Clero Creator in München. Bewirb dich, bring Menschen zusammen und mach lokale Communities sichtbar – egal wie groß deine Reichweite ist." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -105,14 +105,14 @@
   <div class="wrap">
     <span class="pill" data-i18n="hero.pill">💚 München · Creator</span>
     <h1 data-i18n="hero.h1">Werde <span class="hl">Clero Creator</span> in München</h1>
-    <p data-i18n="hero.p">Du kennst München, du hast Reichweite und du bringst Menschen gerne zusammen? Sei beim Launch von Anfang an dabei und mach lokale Communities sichtbar.</p>
+    <p data-i18n="hero.p">Du bringst gerne Menschen zusammen und hast Lust, in München etwas aufzubauen? Ob große oder kleine Community – als Clero Creator machst du deine Gruppe sichtbar und bist von Anfang an dabei.</p>
 
     <ul class="benefits">
-      <li><span class="bic">🚀</span><div><div class="bt" data-i18n="ben1.t">Von Tag 1 dabei</div><div class="bd" data-i18n="ben1.d">Du gestaltest den Münchner Launch aktiv mit und bekommst früh Zugang zur App.</div></div></li>
+      <li><span class="bic">🚀</span><div><div class="bt" data-i18n="ben1.t">Von Tag 1 dabei</div><div class="bd" data-i18n="ben1.d">Du bist von Anfang an dabei und bekommst früh Zugang zu neuen Features.</div></div></li>
       <li><span class="bic">📣</span><div><div class="bt" data-i18n="ben2.t">Sichtbarkeit</div><div class="bd" data-i18n="ben2.d">Wir featuren dich auf Cleros Kanälen – Reels, Kooperations-Posts, Shoutouts.</div></div></li>
       <li><span class="bic">⭐</span><div><div class="bt" data-i18n="ben3.t">Creator-Status</div><div class="bd" data-i18n="ben3.d">Verifiziertes Creator-Badge und bevorzugte Platzierung deiner Inhalte in der App.</div></div></li>
       <li><span class="bic">💚</span><div><div class="bt" data-i18n="ben4.t">Direkter Draht</div><div class="bd" data-i18n="ben4.d">Kurze Wege und persönlicher Kontakt zum Founder-Team.</div></div></li>
-      <li><span class="bic">🎟️</span><div><div class="bt" data-i18n="ben5.t">Perks & Events</div><div class="bd" data-i18n="ben5.d">Zugang zu Launch-Events und lokalen Location-Partnern in München.</div></div></li>
+      <li><span class="bic">🎟️</span><div><div class="bt" data-i18n="ben5.t">Perks & Events</div><div class="bd" data-i18n="ben5.d">Zugang zu Events und lokalen Location-Partnern in München.</div></div></li>
     </ul>
   </div>
 </section>
@@ -141,39 +141,37 @@
         <div class="field"><label for="c-tiktok" data-i18n="f.tiktok">TikTok</label><input id="c-tiktok" data-i18n-ph="f.tiktokPh" placeholder="@dein_handle" /></div>
       </div>
       <div class="field"><label for="c-other" data-i18n="f.other">Weitere Kanäle</label><input id="c-other" data-i18n-ph="f.otherPh" placeholder="YouTube, Podcast, Blog, …" /></div>
-      <div class="row2">
-        <div class="field"><label for="c-reach" data-i18n="f.reach">Reichweite gesamt (ca.) *</label>
-          <select id="c-reach" required>
-            <option value="" data-i18n="f.reachSelect">Bitte wählen …</option>
-            <option value="&lt; 1.000">&lt; 1.000</option>
-            <option value="1.000–5.000">1.000–5.000</option>
-            <option value="5.000–10.000">5.000–10.000</option>
-            <option value="10.000–50.000">10.000–50.000</option>
-            <option value="50.000–100.000">50.000–100.000</option>
-            <option value="100.000+">100.000+</option>
-          </select>
-        </div>
-        <div class="field"><label for="c-niche" data-i18n="f.niche">Content-Nische *</label>
-          <select id="c-niche" required>
-            <option value="" data-i18n="f.nicheSelect">Bitte wählen …</option>
-            <option>🌆 München &amp; Lifestyle</option>
-            <option>🍽️ Food, Café &amp; Restaurants</option>
-            <option>🏋️ Sport &amp; Fitness</option>
-            <option>✈️ Reisen</option>
-            <option>👗 Fashion &amp; Beauty</option>
-            <option>🎨 Kunst &amp; Kultur</option>
-            <option>🎉 Events &amp; Nightlife</option>
-            <option>😄 Comedy &amp; Entertainment</option>
-            <option>🌱 Nachhaltigkeit</option>
-            <option>👶 Familie &amp; Eltern</option>
-            <option>💼 Business &amp; Finance</option>
-            <option value="Sonstiges" data-i18n="f.nicheOther">Sonstiges</option>
-          </select>
-        </div>
+      <div class="field"><label for="c-channel" data-i18n="f.channel">Dein Hauptkanal</label>
+        <select id="c-channel">
+          <option value="" data-i18n="f.channelSelect">Bitte wählen …</option>
+          <option>Instagram</option>
+          <option>TikTok</option>
+          <option>YouTube</option>
+          <option value="Instagram & TikTok" data-i18n="f.channelBoth">Instagram &amp; TikTok</option>
+          <option value="Weitere" data-i18n="f.channelMore">Weitere</option>
+        </select>
       </div>
-      <div class="field" id="nicheOtherWrap" hidden><label for="c-niche-other" data-i18n="f.nicheOtherLabel">Deine Nische *</label><input id="c-niche-other" data-i18n-ph="f.nicheOtherPh" placeholder="z.B. Urban Gardening" /></div>
 
-      <div class="section-lbl" data-i18n="sec.motivation">Warum du?</div>
+      <div class="section-lbl" data-i18n="sec.motivation">Erzähl uns von dir</div>
+      <div class="field"><label for="c-niche" data-i18n="f.niche">Kategorie</label>
+        <select id="c-niche">
+          <option value="" data-i18n="f.nicheSelect">Hast du eine spitze Kategorie? Sonst einfach frei lassen</option>
+          <option>🌆 München &amp; Lifestyle</option>
+          <option>🍽️ Food, Café &amp; Restaurants</option>
+          <option>🏋️ Sport &amp; Fitness</option>
+          <option>✈️ Reisen</option>
+          <option>👗 Fashion &amp; Beauty</option>
+          <option>🎨 Kunst &amp; Kultur</option>
+          <option>🎉 Events &amp; Nightlife</option>
+          <option>😄 Comedy &amp; Entertainment</option>
+          <option>🌱 Nachhaltigkeit</option>
+          <option>👶 Familie &amp; Eltern</option>
+          <option>💼 Business &amp; Finance</option>
+          <option value="Sonstiges" data-i18n="f.nicheOther">Sonstiges</option>
+        </select>
+      </div>
+      <div class="field" id="nicheOtherWrap" hidden><label for="c-niche-other" data-i18n="f.nicheOtherLabel">Deine Kategorie</label><input id="c-niche-other" data-i18n-ph="f.nicheOtherPh" placeholder="z.B. Urban Gardening" /></div>
+
       <div class="field"><label for="c-desc" data-i18n="f.desc">Warum passt du zu Clero?</label><textarea id="c-desc" data-i18n-ph="f.descPh" placeholder="Erzähl uns kurz, was du machst und warum du Clero in München mit aufbauen willst."></textarea></div>
 
       <label class="consent"><input type="checkbox" id="consent" /><span data-i18n="s1.consent">Ich stimme der Verarbeitung meiner Daten gemäß der <a href="https://www.clero.de/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> zu.</span></label>
@@ -187,7 +185,7 @@
       <div class="success">
         <div class="big">💚</div>
         <h2 id="doneH" data-i18n="done.h">Danke, deine Bewerbung ist da!</h2>
-        <p id="doneP" data-i18n="done.p">Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir. Clero startet im August in München – schön, dass du dabei sein willst.</p>
+        <p id="doneP" data-i18n="done.p">Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir. Schön, dass du Clero in München mit aufbauen willst.</p>
         <a href="https://www.clero.de" class="btn" data-i18n="done.btn">Zur Clero-Website</a>
       </div>
     </div>
@@ -219,14 +217,14 @@ const I18N = {
   de: {
     "hero.pill":"💚 München · Creator",
     "hero.h1":"Werde <span class=\"hl\">Clero Creator</span> in München",
-    "hero.p":"Du kennst München, du hast Reichweite und du bringst Menschen gerne zusammen? Sei beim Launch von Anfang an dabei und mach lokale Communities sichtbar.",
-    "ben1.t":"Von Tag 1 dabei","ben1.d":"Du gestaltest den Münchner Launch aktiv mit und bekommst früh Zugang zur App.",
+    "hero.p":"Du bringst gerne Menschen zusammen und hast Lust, in München etwas aufzubauen? Ob große oder kleine Community – als Clero Creator machst du deine Gruppe sichtbar und bist von Anfang an dabei.",
+    "ben1.t":"Von Tag 1 dabei","ben1.d":"Du bist von Anfang an dabei und bekommst früh Zugang zu neuen Features.",
     "ben2.t":"Sichtbarkeit","ben2.d":"Wir featuren dich auf Cleros Kanälen – Reels, Kooperations-Posts, Shoutouts.",
     "ben3.t":"Creator-Status","ben3.d":"Verifiziertes Creator-Badge und bevorzugte Platzierung deiner Inhalte in der App.",
     "ben4.t":"Direkter Draht","ben4.d":"Kurze Wege und persönlicher Kontakt zum Founder-Team.",
-    "ben5.t":"Perks & Events","ben5.d":"Zugang zu Launch-Events und lokalen Location-Partnern in München.",
+    "ben5.t":"Perks & Events","ben5.d":"Zugang zu Events und lokalen Location-Partnern in München.",
     "s1.h":"Bewirb dich als Creator","s1.sub":"Dauert 2 Minuten. Wir schauen uns deine Bewerbung an und melden uns persönlich bei dir. ✨",
-    "sec.you":"Über dich","sec.channels":"Deine Kanäle","sec.motivation":"Warum du?",
+    "sec.you":"Über dich","sec.channels":"Deine Kanäle","sec.motivation":"Erzähl uns von dir",
     "f.name":"Name *","f.namePh":"Vor- und Nachname",
     "f.district":"Wo in München?","f.districtPh":"z.B. Glockenbach",
     "f.mail":"E-Mail *","f.mailPh":"name@mail.de",
@@ -234,13 +232,13 @@ const I18N = {
     "f.insta":"Instagram","f.instaPh":"@dein_handle",
     "f.tiktok":"TikTok","f.tiktokPh":"@dein_handle",
     "f.other":"Weitere Kanäle","f.otherPh":"YouTube, Podcast, Blog, …",
-    "f.reach":"Reichweite gesamt (ca.) *","f.reachSelect":"Bitte wählen …",
-    "f.niche":"Content-Nische *","f.nicheSelect":"Bitte wählen …","f.nicheOther":"Sonstiges","f.nicheOtherLabel":"Deine Nische *","f.nicheOtherPh":"z.B. Urban Gardening",
+    "f.channel":"Dein Hauptkanal","f.channelSelect":"Bitte wählen …","f.channelBoth":"Instagram & TikTok","f.channelMore":"Weitere",
+    "f.niche":"Kategorie","f.nicheSelect":"Hast du eine spitze Kategorie? Sonst einfach frei lassen","f.nicheOther":"Sonstiges","f.nicheOtherLabel":"Deine Kategorie","f.nicheOtherPh":"z.B. Urban Gardening",
     "f.desc":"Warum passt du zu Clero?","f.descPh":"Erzähl uns kurz, was du machst und warum du Clero in München mit aufbauen willst.",
     "s1.consent":"Ich stimme der Verarbeitung meiner Daten gemäß der <a href=\"https://www.clero.de/datenschutz\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> zu.",
     "s1.send":"Jetzt als Creator bewerben 🚀","s1.sending":"Wird gesendet …",
     "s1.wa":"Lieber direkt schreiben?","s1.waLink":"Per WhatsApp melden",
-    "done.h":"Danke, deine Bewerbung ist da!","done.p":"Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir. Clero startet im August in München – schön, dass du dabei sein willst.","done.btn":"Zur Clero-Website",
+    "done.h":"Danke, deine Bewerbung ist da!","done.p":"Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir. Schön, dass du Clero in München mit aufbauen willst.","done.btn":"Zur Clero-Website",
     "foot":"Fragen? Schreib uns auf","foot.back":"zur Clero-Website",
     "wa.bubble":"<strong>Fragen zum Creator-Programm?</strong>Schreib uns direkt auf WhatsApp 💬",
     "err.req":"Bitte fülle alle Pflichtfelder (mit *) aus.",
@@ -250,14 +248,14 @@ const I18N = {
   en: {
     "hero.pill":"💚 Munich · Creator",
     "hero.h1":"Become a <span class=\"hl\">Clero Creator</span> in Munich",
-    "hero.p":"You know Munich, you have reach and you love bringing people together? Be part of the launch from day one and make local communities visible.",
-    "ben1.t":"In from day one","ben1.d":"You actively shape the Munich launch and get early access to the app.",
+    "hero.p":"You love bringing people together and want to build something in Munich? Whether your community is big or small – as a Clero Creator you make your group visible and you're in from the start.",
+    "ben1.t":"In from day one","ben1.d":"You're in from the start and get early access to new features.",
     "ben2.t":"Visibility","ben2.d":"We feature you on Clero's channels – reels, collab posts, shoutouts.",
     "ben3.t":"Creator status","ben3.d":"Verified creator badge and preferred placement for your content in the app.",
     "ben4.t":"Direct line","ben4.d":"Short paths and personal contact with the founder team.",
-    "ben5.t":"Perks & events","ben5.d":"Access to launch events and local venue partners in Munich.",
+    "ben5.t":"Perks & events","ben5.d":"Access to events and local venue partners in Munich.",
     "s1.h":"Apply as a creator","s1.sub":"Takes 2 minutes. We review your application and get back to you personally. ✨",
-    "sec.you":"About you","sec.channels":"Your channels","sec.motivation":"Why you?",
+    "sec.you":"About you","sec.channels":"Your channels","sec.motivation":"Tell us about you",
     "f.name":"Name *","f.namePh":"First and last name",
     "f.district":"Where in Munich?","f.districtPh":"e.g. Glockenbach",
     "f.mail":"Email *","f.mailPh":"name@mail.com",
@@ -265,13 +263,13 @@ const I18N = {
     "f.insta":"Instagram","f.instaPh":"@your_handle",
     "f.tiktok":"TikTok","f.tiktokPh":"@your_handle",
     "f.other":"Other channels","f.otherPh":"YouTube, podcast, blog, …",
-    "f.reach":"Total reach (approx.) *","f.reachSelect":"Please select …",
-    "f.niche":"Content niche *","f.nicheSelect":"Please select …","f.nicheOther":"Other","f.nicheOtherLabel":"Your niche *","f.nicheOtherPh":"e.g. urban gardening",
+    "f.channel":"Your main channel","f.channelSelect":"Please select …","f.channelBoth":"Instagram & TikTok","f.channelMore":"Other",
+    "f.niche":"Category","f.nicheSelect":"Got a clear category? Otherwise just leave it","f.nicheOther":"Other","f.nicheOtherLabel":"Your category","f.nicheOtherPh":"e.g. urban gardening",
     "f.desc":"Why are you a fit for Clero?","f.descPh":"Tell us briefly what you do and why you want to help build Clero in Munich.",
     "s1.consent":"I agree to the processing of my data in accordance with the <a href=\"https://www.clero.de/datenschutz\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.",
     "s1.send":"Apply as a creator 🚀","s1.sending":"Sending …",
     "s1.wa":"Prefer to write directly?","s1.waLink":"Reach us on WhatsApp",
-    "done.h":"Thank you, your application is in!","done.p":"We'll review it carefully and get back to you personally. Clero launches in Munich in August – great to have you on board.","done.btn":"Back to Clero",
+    "done.h":"Thank you, your application is in!","done.p":"We'll review it carefully and get back to you personally. Great that you want to help build Clero in Munich.","done.btn":"Back to Clero",
     "foot":"Questions? Message us on","foot.back":"back to Clero website",
     "wa.bubble":"<strong>Questions about the creator program?</strong>Message us directly on WhatsApp 💬",
     "err.req":"Please fill in all required fields (marked with *).",
@@ -315,7 +313,7 @@ document.getElementById('c-niche').addEventListener('change', e => {
 
 function fail(el) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); }
 function formValid() {
-  for (const id of ['c-name','c-mail','c-reach','c-niche']) {
+  for (const id of ['c-name','c-mail']) {
     const el = document.getElementById(id);
     if (!el.value.trim()) { fail(el); showToast(t('err.req')); return false; }
   }
@@ -335,8 +333,8 @@ function commonFields(en) {
   o['Instagram'] = lv('c-insta');
   o['TikTok'] = lv('c-tiktok');
   o[en ? 'Other channels' : 'Weitere Kanäle'] = lv('c-other');
-  o[en ? 'Reach' : 'Reichweite'] = lv('c-reach');
-  o[en ? 'Niche' : 'Nische'] = nicheValue();
+  o[en ? 'Main channel' : 'Hauptkanal'] = lv('c-channel');
+  o[en ? 'Category' : 'Kategorie'] = nicheValue();
   o[en ? 'Motivation' : 'Motivation'] = lv('c-desc');
   return o;
 }
@@ -344,7 +342,7 @@ function waPing() {
   if (!CMB_KEY) return;
   const en = lang === 'en';
   const label = en ? 'New creator application' : 'Neue Creator-Bewerbung';
-  const msg = '🟢 ' + label + ' via Clero: ' + lv('c-name') + ' (' + lv('c-reach') + ')';
+  const msg = '🟢 ' + label + ' via Clero: ' + lv('c-name');
   fetch('https://api.callmebot.com/whatsapp.php?phone=' + CMB_PHONE + '&text=' + encodeURIComponent(msg) + '&apikey=' + CMB_KEY, { mode: 'no-cors' }).catch(() => {});
 }
 
@@ -360,8 +358,8 @@ function autoresp(en) {
     ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">A little about us</h3><p style="margin:0 0 14px;">Clero is a new platform that makes local communities in Munich visible. As a creator you help people discover the groups, places and moments that fit them – and you get early access, visibility on our channels and a direct line to the team.</p>'
     : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Kurz zu uns</h3><p style="margin:0 0 14px;">Clero ist eine neue Plattform, die lokale Communities in München sichtbar macht. Als Creator hilfst du Menschen, die Gruppen, Orte und Momente zu entdecken, die zu ihnen passen – und bekommst dafür früh Zugang, Sichtbarkeit auf unseren Kanälen und einen direkten Draht zum Team.</p>';
   const next = en
-    ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What happens next</h3><p style="margin:0 0 14px;">We review every application personally. If it is a match, we get back to you before the Munich launch in <strong>August</strong> to talk through the details. So there is nothing else you need to do for now. 🙌</p>'
-    : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Wie es weitergeht</h3><p style="margin:0 0 14px;">Wir schauen uns jede Bewerbung persönlich an. Wenn es passt, melden wir uns vor dem Münchner Launch im <strong>August</strong> bei dir, um die Details zu besprechen. Du musst also erstmal nichts weiter tun. 🙌</p>';
+    ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What happens next</h3><p style="margin:0 0 14px;">We review every application personally. If it is a match, we get back to you to talk through the details. So there is nothing else you need to do for now. 🙌</p>'
+    : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Wie es weitergeht</h3><p style="margin:0 0 14px;">Wir schauen uns jede Bewerbung persönlich an. Wenn es passt, melden wir uns bei dir, um die Details zu besprechen. Du musst also erstmal nichts weiter tun. 🙌</p>';
   const contact = en
     ? '<p style="margin:0 0 14px;">Any questions? Reach us at <a href="mailto:n.emrich@clero.de" style="color:#213B2C;">n.emrich@clero.de</a> or via WhatsApp at <strong>+49 1556 6000890</strong>.</p>'
     : '<p style="margin:0 0 14px;">Fragen? Erreichst du uns direkt unter <a href="mailto:n.emrich@clero.de" style="color:#213B2C;">n.emrich@clero.de</a> oder per WhatsApp unter <strong>+49 1556 6000890</strong>.</p>';
