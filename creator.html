@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Creator werden · Clero</title>
+<meta name="description" content="Werde Clero Creator in München. Bewirb dich, mach lokale Communities sichtbar und sei beim Launch von Anfang an dabei." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root {
+    --neon: #82FF41; --neon-hover: #6BF026; --neon-light: #DAFFEA; --neon-soft: #EEFFF4;
+    --green: #213B2C; --green-dark: #16291E; --green-light: #DAFFEA; --green-soft: #EEFFF4;
+    --ink: #213B2C; --muted: #666666; --line: #E0E2DF; --bg: #F1FAF5; --white: #FFFFFF;
+    --radius: 18px; --shadow: 0 4px 24px rgba(33,59,44,.07); --shadow-hover: 0 10px 34px rgba(33,59,44,.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Rubik', system-ui, -apple-system, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 22px; }
+
+  header { border-bottom: 1px solid #C7ECD8; background: var(--neon-light); }
+  .topbar { position: relative; max-width: 980px; margin: 0 auto; padding: 16px 22px 22px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .lang { display: inline-flex; gap: 2px; background: var(--white); border: 1.5px solid var(--line); border-radius: 999px; padding: 3px; }
+  .lang button { border: none; background: transparent; font-size: 17px; line-height: 1; padding: 5px 13px; border-radius: 999px; cursor: pointer; transition: background .18s; filter: grayscale(.4) opacity(.7); }
+  .lang button.active { background: var(--ink); filter: none; }
+  .brandmark { display: block; }
+  .brandmark img { display: block; height: 82px; width: auto; }
+  .btn-close { position: absolute; top: 14px; right: 18px; width: 40px; height: 40px; display: grid; place-items: center; background: var(--ink); color: #fff; border: none; border-radius: 50%; font-size: 18px; line-height: 1; cursor: pointer; transition: background .2s, transform .15s; }
+  .btn-close:hover { background: var(--green-dark); transform: scale(1.06); }
+
+  .hero { text-align: center; padding: 44px 0 8px; }
+  .hero .pill { display: inline-flex; align-items: center; gap: 7px; background: var(--white); border: 1px solid var(--line); color: var(--green-dark); font-weight: 600; font-size: 13px; padding: 6px 14px; border-radius: 999px; margin-bottom: 16px; box-shadow: var(--shadow); }
+  .hero h1 { font-size: clamp(26px, 4.5vw, 38px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 800; margin-bottom: 12px; }
+  .hero h1 .hl { color: var(--green); }
+  .hero p { color: var(--muted); font-size: 16px; max-width: 500px; margin: 0 auto; }
+
+  .benefits { list-style: none; margin: 26px auto 0; max-width: 560px; display: grid; gap: 10px; }
+  .benefits li { display: flex; gap: 12px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; box-shadow: var(--shadow); text-align: left; }
+  .benefits .bic { font-size: 20px; line-height: 1.3; flex-shrink: 0; }
+  .benefits .bt { font-weight: 700; font-size: 15px; }
+  .benefits .bd { color: var(--muted); font-size: 13.5px; margin-top: 2px; }
+
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 22px; padding: 30px 28px; box-shadow: var(--shadow); margin: 26px 0 60px; }
+  .step h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .step .sub { color: var(--muted); font-size: 14.5px; margin-bottom: 20px; }
+  .section-lbl { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--green); margin: 22px 0 12px; }
+  .section-lbl:first-of-type { margin-top: 4px; }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 5px; color: var(--ink); }
+  .field input, .field textarea, .field select { width: 100%; font-family: inherit; font-size: 15px; padding: 13px 19px; border: 1.5px solid var(--line); border-radius: 999px; outline: none; transition: border .2s, box-shadow .2s; background: var(--bg); color: var(--ink); }
+  .field select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; padding-right: 44px; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--green); box-shadow: 0 0 0 3px var(--green-light); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 4px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--green); cursor: pointer; }
+  .consent a { color: var(--green); font-weight: 600; text-decoration: underline; }
+  .field textarea { border-radius: 22px; resize: vertical; min-height: 84px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .row2 { grid-template-columns: 1fr; } }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--neon); color: var(--ink); font-weight: 700; font-size: 15px; padding: 14px 22px; border-radius: 999px; border: none; cursor: pointer; transition: transform .15s, box-shadow .2s, background .2s; font-family: inherit; }
+  .btn:hover { background: var(--neon-hover); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+  .btn[disabled] { opacity: .6; cursor: default; transform: none; }
+  .btn-full { width: 100%; }
+
+  .blank-link { text-align: center; margin-top: 14px; }
+  .blank-link a { color: var(--green); font-weight: 600; font-size: 13.5px; }
+
+  .success { text-align: center; padding: 20px 0; }
+  .success .big { font-size: 52px; margin-bottom: 8px; }
+  .success h2 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+  .success p { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
+
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 14px 22px; border-radius: 14px; font-size: 14.5px; font-weight: 600; box-shadow: 0 10px 30px rgba(20,51,43,.32); z-index: 200; max-width: 90%; text-align: center; }
+  footer { text-align: center; color: var(--muted); font-size: 13px; padding: 0 0 40px; }
+  footer a { color: var(--muted); font-weight: 600; }
+  .wa-fab { position: fixed; right: 22px; bottom: 22px; z-index: 90; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+  .wa-bubble { background: var(--white); border: 1px solid var(--line); box-shadow: 0 8px 30px rgba(33,59,44,.16); border-radius: 16px 16px 4px 16px; padding: 13px 16px; max-width: 230px; font-size: 14px; color: var(--ink); position: relative; animation: waPop .3s ease; }
+  .wa-bubble strong { display: block; font-weight: 700; margin-bottom: 2px; }
+  .wa-bubble .wa-x { position: absolute; top: -8px; left: -8px; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); background: var(--white); color: var(--muted); font-size: 13px; cursor: pointer; line-height: 1; }
+  .wa-btn { display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; border-radius: 50%; background: #25D366; box-shadow: 0 6px 20px rgba(37,211,102,.45); transition: transform .15s, box-shadow .2s; align-self: flex-end; }
+  .wa-btn:hover { transform: scale(1.06); box-shadow: 0 8px 26px rgba(37,211,102,.55); }
+  @keyframes waPop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 520px) { .wa-bubble { max-width: 180px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <button type="button" class="btn-close" id="closeBtn" aria-label="Schließen" title="Schließen">✕</button>
+    <div class="lang" role="group" aria-label="Sprache / Language">
+      <button data-lang="de" type="button" aria-label="Deutsch">🇩🇪</button>
+      <button data-lang="en" type="button" aria-label="English">🇬🇧</button>
+    </div>
+    <a href="https://www.clero.de" class="brandmark" aria-label="Clero"><img src="logo.png" alt="Clero" /></a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="pill" data-i18n="hero.pill">💚 München · Creator</span>
+    <h1 data-i18n="hero.h1">Werde <span class="hl">Clero Creator</span> in München</h1>
+    <p data-i18n="hero.p">Du kennst München, du hast Reichweite und du bringst Menschen gerne zusammen? Sei beim Launch von Anfang an dabei und mach lokale Communities sichtbar.</p>
+
+    <ul class="benefits">
+      <li><span class="bic">🚀</span><div><div class="bt" data-i18n="ben1.t">Von Tag 1 dabei</div><div class="bd" data-i18n="ben1.d">Du gestaltest den Münchner Launch aktiv mit und bekommst früh Zugang zur App.</div></div></li>
+      <li><span class="bic">📣</span><div><div class="bt" data-i18n="ben2.t">Sichtbarkeit</div><div class="bd" data-i18n="ben2.d">Wir featuren dich auf Cleros Kanälen – Reels, Kooperations-Posts, Shoutouts.</div></div></li>
+      <li><span class="bic">⭐</span><div><div class="bt" data-i18n="ben3.t">Creator-Status</div><div class="bd" data-i18n="ben3.d">Verifiziertes Creator-Badge und bevorzugte Platzierung deiner Inhalte in der App.</div></div></li>
+      <li><span class="bic">💚</span><div><div class="bt" data-i18n="ben4.t">Direkter Draht</div><div class="bd" data-i18n="ben4.d">Kurze Wege und persönlicher Kontakt zum Founder-Team.</div></div></li>
+      <li><span class="bic">🎟️</span><div><div class="bt" data-i18n="ben5.t">Perks & Events</div><div class="bd" data-i18n="ben5.d">Zugang zu Launch-Events und lokalen Location-Partnern in München.</div></div></li>
+    </ul>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="card" id="card">
+
+    <!-- FORM -->
+    <div class="step" id="step1">
+      <h2 data-i18n="s1.h">Bewirb dich als Creator</h2>
+      <div class="sub" data-i18n="s1.sub">Dauert 2 Minuten. Wir schauen uns deine Bewerbung an und melden uns persönlich bei dir. ✨</div>
+
+      <div class="section-lbl" data-i18n="sec.you">Über dich</div>
+      <div class="row2">
+        <div class="field"><label for="c-name" data-i18n="f.name">Name *</label><input id="c-name" required data-i18n-ph="f.namePh" placeholder="Vor- und Nachname" /></div>
+        <div class="field"><label for="c-district" data-i18n="f.district">Wo in München?</label><input id="c-district" data-i18n-ph="f.districtPh" placeholder="z.B. Glockenbach" /></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="c-mail" data-i18n="f.mail">E-Mail *</label><input id="c-mail" type="email" required data-i18n-ph="f.mailPh" placeholder="name@mail.de" /></div>
+        <div class="field"><label for="c-phone" data-i18n="f.phone">Telefon</label><input id="c-phone" type="tel" data-i18n-ph="f.phonePh" placeholder="+49 …" /></div>
+      </div>
+
+      <div class="section-lbl" data-i18n="sec.channels">Deine Kanäle</div>
+      <div class="row2">
+        <div class="field"><label for="c-insta" data-i18n="f.insta">Instagram</label><input id="c-insta" data-i18n-ph="f.instaPh" placeholder="@dein_handle" /></div>
+        <div class="field"><label for="c-tiktok" data-i18n="f.tiktok">TikTok</label><input id="c-tiktok" data-i18n-ph="f.tiktokPh" placeholder="@dein_handle" /></div>
+      </div>
+      <div class="field"><label for="c-other" data-i18n="f.other">Weitere Kanäle</label><input id="c-other" data-i18n-ph="f.otherPh" placeholder="YouTube, Podcast, Blog, …" /></div>
+      <div class="row2">
+        <div class="field"><label for="c-reach" data-i18n="f.reach">Reichweite gesamt (ca.) *</label>
+          <select id="c-reach" required>
+            <option value="" data-i18n="f.reachSelect">Bitte wählen …</option>
+            <option value="&lt; 1.000">&lt; 1.000</option>
+            <option value="1.000–5.000">1.000–5.000</option>
+            <option value="5.000–10.000">5.000–10.000</option>
+            <option value="10.000–50.000">10.000–50.000</option>
+            <option value="50.000–100.000">50.000–100.000</option>
+            <option value="100.000+">100.000+</option>
+          </select>
+        </div>
+        <div class="field"><label for="c-niche" data-i18n="f.niche">Content-Nische *</label>
+          <select id="c-niche" required>
+            <option value="" data-i18n="f.nicheSelect">Bitte wählen …</option>
+            <option>🌆 München &amp; Lifestyle</option>
+            <option>🍽️ Food, Café &amp; Restaurants</option>
+            <option>🏋️ Sport &amp; Fitness</option>
+            <option>✈️ Reisen</option>
+            <option>👗 Fashion &amp; Beauty</option>
+            <option>🎨 Kunst &amp; Kultur</option>
+            <option>🎉 Events &amp; Nightlife</option>
+            <option>😄 Comedy &amp; Entertainment</option>
+            <option>🌱 Nachhaltigkeit</option>
+            <option>👶 Familie &amp; Eltern</option>
+            <option>💼 Business &amp; Finance</option>
+            <option value="Sonstiges" data-i18n="f.nicheOther">Sonstiges</option>
+          </select>
+        </div>
+      </div>
+      <div class="field" id="nicheOtherWrap" hidden><label for="c-niche-other" data-i18n="f.nicheOtherLabel">Deine Nische *</label><input id="c-niche-other" data-i18n-ph="f.nicheOtherPh" placeholder="z.B. Urban Gardening" /></div>
+
+      <div class="section-lbl" data-i18n="sec.motivation">Warum du?</div>
+      <div class="field"><label for="c-desc" data-i18n="f.desc">Warum passt du zu Clero?</label><textarea id="c-desc" data-i18n-ph="f.descPh" placeholder="Erzähl uns kurz, was du machst und warum du Clero in München mit aufbauen willst."></textarea></div>
+
+      <label class="consent"><input type="checkbox" id="consent" /><span data-i18n="s1.consent">Ich stimme der Verarbeitung meiner Daten gemäß der <a href="https://www.clero.de/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> zu.</span></label>
+
+      <button type="button" class="btn btn-full" id="submitBtn" data-i18n="s1.send" style="margin-top:18px;">Jetzt als Creator bewerben 🚀</button>
+      <p class="blank-link"><span data-i18n="s1.wa">Lieber direkt schreiben?</span> <a id="waInline" href="#" target="_blank" rel="noopener" data-i18n="s1.waLink">Per WhatsApp melden</a></p>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="step" id="stepDone" hidden>
+      <div class="success">
+        <div class="big">💚</div>
+        <h2 id="doneH" data-i18n="done.h">Danke, deine Bewerbung ist da!</h2>
+        <p id="doneP" data-i18n="done.p">Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir. Clero startet im August in München – schön, dass du dabei sein willst.</p>
+        <a href="https://www.clero.de" class="btn" data-i18n="done.btn">Zur Clero-Website</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span data-i18n="foot">Fragen? Schreib uns auf</span> <a href="https://wa.me/4915566000890?text=Hallo%20Clero-Team%2C%20ich%20interessiere%20mich%20f%C3%BCr%20das%20Creator-Programm%3A" target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:n.emrich@clero.de">n.emrich@clero.de</a> · <a href="https://www.clero.de" target="_blank" rel="noopener" data-i18n="foot.back">zur Clero-Website</a>
+</footer>
+
+<div class="wa-fab">
+  <div class="wa-bubble" id="waBubble">
+    <button class="wa-x" id="waX" aria-label="schließen">×</button>
+    <span data-i18n="wa.bubble"><strong>Fragen zum Creator-Programm?</strong>Schreib uns direkt auf WhatsApp 💬</span>
+  </div>
+  <a class="wa-btn" id="waBtn" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  </a>
+</div>
+
+<script>
+const FS_ENDPOINT = '588e8d43be349a56d2acc52f584fc4d6';
+const CMB_PHONE = '4915206772337';
+const WA = '4915566000890';
+const CMB_KEY = ''; // CallMeBot-APIKEY eintragen fuer WhatsApp-Benachrichtigung
+
+const I18N = {
+  de: {
+    "hero.pill":"💚 München · Creator",
+    "hero.h1":"Werde <span class=\"hl\">Clero Creator</span> in München",
+    "hero.p":"Du kennst München, du hast Reichweite und du bringst Menschen gerne zusammen? Sei beim Launch von Anfang an dabei und mach lokale Communities sichtbar.",
+    "ben1.t":"Von Tag 1 dabei","ben1.d":"Du gestaltest den Münchner Launch aktiv mit und bekommst früh Zugang zur App.",
+    "ben2.t":"Sichtbarkeit","ben2.d":"Wir featuren dich auf Cleros Kanälen – Reels, Kooperations-Posts, Shoutouts.",
+    "ben3.t":"Creator-Status","ben3.d":"Verifiziertes Creator-Badge und bevorzugte Platzierung deiner Inhalte in der App.",
+    "ben4.t":"Direkter Draht","ben4.d":"Kurze Wege und persönlicher Kontakt zum Founder-Team.",
+    "ben5.t":"Perks & Events","ben5.d":"Zugang zu Launch-Events und lokalen Location-Partnern in München.",
+    "s1.h":"Bewirb dich als Creator","s1.sub":"Dauert 2 Minuten. Wir schauen uns deine Bewerbung an und melden uns persönlich bei dir. ✨",
+    "sec.you":"Über dich","sec.channels":"Deine Kanäle","sec.motivation":"Warum du?",
+    "f.name":"Name *","f.namePh":"Vor- und Nachname",
+    "f.district":"Wo in München?","f.districtPh":"z.B. Glockenbach",
+    "f.mail":"E-Mail *","f.mailPh":"name@mail.de",
+    "f.phone":"Telefon","f.phonePh":"+49 …",
+    "f.insta":"Instagram","f.instaPh":"@dein_handle",
+    "f.tiktok":"TikTok","f.tiktokPh":"@dein_handle",
+    "f.other":"Weitere Kanäle","f.otherPh":"YouTube, Podcast, Blog, …",
+    "f.reach":"Reichweite gesamt (ca.) *","f.reachSelect":"Bitte wählen …",
+    "f.niche":"Content-Nische *","f.nicheSelect":"Bitte wählen …","f.nicheOther":"Sonstiges","f.nicheOtherLabel":"Deine Nische *","f.nicheOtherPh":"z.B. Urban Gardening",
+    "f.desc":"Warum passt du zu Clero?","f.descPh":"Erzähl uns kurz, was du machst und warum du Clero in München mit aufbauen willst.",
+    "s1.consent":"Ich stimme der Verarbeitung meiner Daten gemäß der <a href=\"https://www.clero.de/datenschutz\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> zu.",
+    "s1.send":"Jetzt als Creator bewerben 🚀","s1.sending":"Wird gesendet …",
+    "s1.wa":"Lieber direkt schreiben?","s1.waLink":"Per WhatsApp melden",
+    "done.h":"Danke, deine Bewerbung ist da!","done.p":"Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir. Clero startet im August in München – schön, dass du dabei sein willst.","done.btn":"Zur Clero-Website",
+    "foot":"Fragen? Schreib uns auf","foot.back":"zur Clero-Website",
+    "wa.bubble":"<strong>Fragen zum Creator-Programm?</strong>Schreib uns direkt auf WhatsApp 💬",
+    "err.req":"Bitte fülle alle Pflichtfelder (mit *) aus.",
+    "err.mail":"Bitte gib eine gültige E-Mail-Adresse an.",
+    "err.consent":"Bitte stimme der Datenschutzerklärung zu."
+  },
+  en: {
+    "hero.pill":"💚 Munich · Creator",
+    "hero.h1":"Become a <span class=\"hl\">Clero Creator</span> in Munich",
+    "hero.p":"You know Munich, you have reach and you love bringing people together? Be part of the launch from day one and make local communities visible.",
+    "ben1.t":"In from day one","ben1.d":"You actively shape the Munich launch and get early access to the app.",
+    "ben2.t":"Visibility","ben2.d":"We feature you on Clero's channels – reels, collab posts, shoutouts.",
+    "ben3.t":"Creator status","ben3.d":"Verified creator badge and preferred placement for your content in the app.",
+    "ben4.t":"Direct line","ben4.d":"Short paths and personal contact with the founder team.",
+    "ben5.t":"Perks & events","ben5.d":"Access to launch events and local venue partners in Munich.",
+    "s1.h":"Apply as a creator","s1.sub":"Takes 2 minutes. We review your application and get back to you personally. ✨",
+    "sec.you":"About you","sec.channels":"Your channels","sec.motivation":"Why you?",
+    "f.name":"Name *","f.namePh":"First and last name",
+    "f.district":"Where in Munich?","f.districtPh":"e.g. Glockenbach",
+    "f.mail":"Email *","f.mailPh":"name@mail.com",
+    "f.phone":"Phone","f.phonePh":"+49 …",
+    "f.insta":"Instagram","f.instaPh":"@your_handle",
+    "f.tiktok":"TikTok","f.tiktokPh":"@your_handle",
+    "f.other":"Other channels","f.otherPh":"YouTube, podcast, blog, …",
+    "f.reach":"Total reach (approx.) *","f.reachSelect":"Please select …",
+    "f.niche":"Content niche *","f.nicheSelect":"Please select …","f.nicheOther":"Other","f.nicheOtherLabel":"Your niche *","f.nicheOtherPh":"e.g. urban gardening",
+    "f.desc":"Why are you a fit for Clero?","f.descPh":"Tell us briefly what you do and why you want to help build Clero in Munich.",
+    "s1.consent":"I agree to the processing of my data in accordance with the <a href=\"https://www.clero.de/datenschutz\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.",
+    "s1.send":"Apply as a creator 🚀","s1.sending":"Sending …",
+    "s1.wa":"Prefer to write directly?","s1.waLink":"Reach us on WhatsApp",
+    "done.h":"Thank you, your application is in!","done.p":"We'll review it carefully and get back to you personally. Clero launches in Munich in August – great to have you on board.","done.btn":"Back to Clero",
+    "foot":"Questions? Message us on","foot.back":"back to Clero website",
+    "wa.bubble":"<strong>Questions about the creator program?</strong>Message us directly on WhatsApp 💬",
+    "err.req":"Please fill in all required fields (marked with *).",
+    "err.mail":"Please enter a valid email address.",
+    "err.consent":"Please agree to the privacy policy."
+  }
+};
+
+let lang = 'de';
+try { const s = localStorage.getItem('clero_lang'); if (s) lang = s; else if ((navigator.language||'').toLowerCase().startsWith('en')) lang = 'en'; } catch(e){}
+
+const t = k => (I18N[lang] && I18N[lang][k]) || I18N.de[k] || k;
+const lv = id => (document.getElementById(id).value || '').trim();
+
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  const wb = document.getElementById('waBtn'); if (wb) wb.setAttribute('href', waLink());
+  const wi = document.getElementById('waInline'); if (wi) wi.setAttribute('href', waLink());
+}
+function setLang(l) { lang = l; try { localStorage.setItem('clero_lang', l); } catch(e){} applyLang(); }
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+document.getElementById('closeBtn').addEventListener('click', () => {
+  try { window.open('', '_self'); window.close(); } catch (e) {}
+  setTimeout(() => { window.location.href = 'https://www.clero.de'; }, 200);
+});
+
+function waMsg() { return lang === 'en' ? 'Hi Clero team, I am interested in the creator program:' : 'Hallo Clero-Team, ich interessiere mich für das Creator-Programm:'; }
+function waLink() { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waMsg()); }
+document.getElementById('waX').addEventListener('click', () => { document.getElementById('waBubble').style.display = 'none'; });
+
+function showToast(msg) { const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg; document.body.appendChild(el); setTimeout(() => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4500); }
+
+const nicheValue = () => { const s = document.getElementById('c-niche').value; return s === 'Sonstiges' ? lv('c-niche-other') : s; };
+document.getElementById('c-niche').addEventListener('change', e => {
+  document.getElementById('nicheOtherWrap').hidden = e.target.value !== 'Sonstiges';
+});
+
+function fail(el) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); }
+function formValid() {
+  for (const id of ['c-name','c-mail','c-reach','c-niche']) {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) { fail(el); showToast(t('err.req')); return false; }
+  }
+  if (document.getElementById('c-niche').value === 'Sonstiges' && !lv('c-niche-other')) { fail(document.getElementById('c-niche-other')); showToast(t('err.req')); return false; }
+  const mail = lv('c-mail');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { fail(document.getElementById('c-mail')); showToast(t('err.mail')); return false; }
+  if (!document.getElementById('consent').checked) { showToast(t('err.consent')); return false; }
+  return true;
+}
+
+function commonFields(en) {
+  const o = {};
+  o[en ? 'Name' : 'Name'] = lv('c-name');
+  o[en ? 'District' : 'Stadtteil'] = lv('c-district');
+  o['email'] = lv('c-mail');
+  o[en ? 'Phone' : 'Telefon'] = lv('c-phone');
+  o['Instagram'] = lv('c-insta');
+  o['TikTok'] = lv('c-tiktok');
+  o[en ? 'Other channels' : 'Weitere Kanäle'] = lv('c-other');
+  o[en ? 'Reach' : 'Reichweite'] = lv('c-reach');
+  o[en ? 'Niche' : 'Nische'] = nicheValue();
+  o[en ? 'Motivation' : 'Motivation'] = lv('c-desc');
+  return o;
+}
+function waPing() {
+  if (!CMB_KEY) return;
+  const en = lang === 'en';
+  const label = en ? 'New creator application' : 'Neue Creator-Bewerbung';
+  const msg = '🟢 ' + label + ' via Clero: ' + lv('c-name') + ' (' + lv('c-reach') + ')';
+  fetch('https://api.callmebot.com/whatsapp.php?phone=' + CMB_PHONE + '&text=' + encodeURIComponent(msg) + '&apikey=' + CMB_KEY, { mode: 'no-cors' }).catch(() => {});
+}
+
+// Bestätigungs-Mail an Creator (HTML, mit Absätzen)
+function autoresp(en) {
+  const intro = en
+    ? '<h2 style="color:#213B2C;margin:0 0 12px;font-size:20px;">Thanks for applying as a Clero Creator! 💚</h2>'
+    : '<h2 style="color:#213B2C;margin:0 0 12px;font-size:20px;">Danke für deine Bewerbung als Clero Creator! 💚</h2>';
+  const gotIt = en
+    ? '<p style="margin:0 0 14px;">We have received your application and we are really happy that you want to be part of it. ✨</p>'
+    : '<p style="margin:0 0 14px;">Wir haben deine Bewerbung erhalten und freuen uns sehr, dass du dabei sein möchtest. ✨</p>';
+  const about = en
+    ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">A little about us</h3><p style="margin:0 0 14px;">Clero is a new platform that makes local communities in Munich visible. As a creator you help people discover the groups, places and moments that fit them – and you get early access, visibility on our channels and a direct line to the team.</p>'
+    : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Kurz zu uns</h3><p style="margin:0 0 14px;">Clero ist eine neue Plattform, die lokale Communities in München sichtbar macht. Als Creator hilfst du Menschen, die Gruppen, Orte und Momente zu entdecken, die zu ihnen passen – und bekommst dafür früh Zugang, Sichtbarkeit auf unseren Kanälen und einen direkten Draht zum Team.</p>';
+  const next = en
+    ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What happens next</h3><p style="margin:0 0 14px;">We review every application personally. If it is a match, we get back to you before the Munich launch in <strong>August</strong> to talk through the details. So there is nothing else you need to do for now. 🙌</p>'
+    : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Wie es weitergeht</h3><p style="margin:0 0 14px;">Wir schauen uns jede Bewerbung persönlich an. Wenn es passt, melden wir uns vor dem Münchner Launch im <strong>August</strong> bei dir, um die Details zu besprechen. Du musst also erstmal nichts weiter tun. 🙌</p>';
+  const contact = en
+    ? '<p style="margin:0 0 14px;">Any questions? Reach us at <a href="mailto:n.emrich@clero.de" style="color:#213B2C;">n.emrich@clero.de</a> or via WhatsApp at <strong>+49 1556 6000890</strong>.</p>'
+    : '<p style="margin:0 0 14px;">Fragen? Erreichst du uns direkt unter <a href="mailto:n.emrich@clero.de" style="color:#213B2C;">n.emrich@clero.de</a> oder per WhatsApp unter <strong>+49 1556 6000890</strong>.</p>';
+  const sign = en
+    ? '<p style="margin:18px 0 0;">Warm regards<br><strong>Nicole vom Clero Team</strong> 💚</p>'
+    : '<p style="margin:18px 0 0;">Liebe Grüße<br><strong>Nicole vom Clero Team</strong> 💚</p>';
+  return '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#2c3a34;max-width:560px;border-top:6px solid #82FF41;padding:20px 4px;">'
+    + intro + gotIt + about + next + contact + sign + '</div>';
+}
+
+const EMAILJS_SERVICE = 'service_u1i5e3o';
+const EMAILJS_TEMPLATE = 'template_yq07rwe';
+const EMAILJS_PUBLIC = '6v00neIQWHklsBrpc';
+try { if (window.emailjs) emailjs.init({ publicKey: EMAILJS_PUBLIC }); } catch (e) {}
+async function sendLeadMail(en) {
+  const to = lv('c-mail');
+  if (!to || !window.emailjs) return;
+  const subject = en ? 'Thanks for your Clero Creator application 💚'
+                     : 'Danke für deine Clero Creator-Bewerbung 💚';
+  try {
+    await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE,
+      { to_email: to, subject: subject, message_html: autoresp(en) },
+      { publicKey: EMAILJS_PUBLIC });
+  } catch (e) {}
+}
+
+function gotoDone() {
+  document.getElementById('step1').hidden = true;
+  document.getElementById('stepDone').hidden = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('submitBtn').addEventListener('click', async () => {
+  const en = lang === 'en';
+  if (!formValid()) return;
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = t('s1.sending'); btn.disabled = true;
+  const payload = { _subject: (en ? 'New creator application: ' : 'Neue Creator-Bewerbung: ') + lv('c-name'), _cc: 'n.emrich@clero.de', _template: 'table', ...commonFields(en) };
+  try {
+    const r = await fetch('https://formsubmit.co/ajax/' + FS_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
+    const j = await r.json().catch(() => ({}));
+    if (String(j.success) !== 'true') throw new Error('no success');
+    waPing();
+    await sendLeadMail(en);
+    gotoDone();
+  } catch (err) {
+    // Fallback: mailto
+    const subject = (en ? 'Creator application for Clero: ' : 'Creator-Bewerbung für Clero: ') + lv('c-name');
+    const cf = commonFields(en); const body = Object.keys(cf).map(k => k + ': ' + cf[k]).join('\n');
+    window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent((en ? 'Hi Nicole,\n\n' : 'Hallo Nicole,\n\n') + body);
+  } finally { btn.disabled = false; btn.textContent = t('s1.send'); }
+});
+
+// Init
+applyLang();
+</script>
+</body>
+</html>
