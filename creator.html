@@ -43,6 +43,19 @@
   .section > h2 { font-size: clamp(21px, 3.6vw, 27px); font-weight: 800; letter-spacing: -0.02em; text-align: center; }
   .section > .lead { color: var(--muted); font-size: 15px; text-align: center; max-width: 540px; margin: 9px auto 0; }
 
+  .appshots { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; align-items: start; }
+  .appshot img { width: 100%; height: auto; display: block; border-radius: 18px; box-shadow: 0 10px 30px rgba(33,59,44,.14); border: 1px solid var(--line); background: var(--white); }
+  .appshot .cap { text-align: center; color: var(--muted); font-size: 13px; line-height: 1.4; margin-top: 11px; }
+  @media (max-width: 460px) { .appshots { gap: 12px; } .appshot .cap { font-size: 12px; } }
+
+  .clabel { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--green); margin-top: 20px; margin-bottom: 2px; }
+  .creators { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin-top: 12px; }
+  .creators a { display: inline-flex; align-items: center; gap: 7px; background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 600; color: var(--ink); box-shadow: var(--shadow); transition: border .18s, transform .15s, box-shadow .2s; }
+  .creators a:hover { border-color: var(--green); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+  .creators a svg { flex-shrink: 0; }
+  .creators a .cn { color: var(--muted); font-weight: 500; font-size: 12.5px; }
+  .creators .more { align-self: center; color: var(--muted); font-size: 13.5px; }
+
   .steps-grid { display: grid; gap: 13px; margin-top: 20px; }
   .stepc { display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; box-shadow: var(--shadow); }
   .stepc .num { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--neon); color: var(--ink); font-weight: 800; display: grid; place-items: center; font-size: 15px; }
@@ -132,6 +145,22 @@
 
 <div class="wrap">
 
+  <!-- APP-VORSCHAU -->
+  <section class="section">
+    <h2 data-i18n="app.h">So sieht Clero aus</h2>
+    <p class="lead" data-i18n="app.lead">Damit du ein Gefühl bekommst, wie deine Community bei Clero lebt:</p>
+    <div class="appshots">
+      <div class="appshot">
+        <img src="app-1.webp" alt="Clero App – Feed mit Terminen und Umfragen" loading="lazy" />
+        <div class="cap" data-i18n="app.cap1">Termine, Umfragen &amp; Feed – alles an einem Ort, ohne Chat-Chaos.</div>
+      </div>
+      <div class="appshot">
+        <img src="app-2.webp" alt="Clero App – Community-Karte von München" loading="lazy" />
+        <div class="cap" data-i18n="app.cap2">Auf der Karte entdeckt werden – Menschen finden deine Gruppe in ihrer Nähe.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- SO FUNKTIONIERT'S -->
   <section class="section">
     <h2 data-i18n="how.h">So funktioniert eine Clero-Partnerschaft</h2>
@@ -167,6 +196,21 @@
       <li><span class="bic">📣</span><div><div class="bt" data-i18n="ben3.t">Sichtbarkeit</div><div class="bd" data-i18n="ben3.d">Wir featuren dich auf Cleros Kanälen und geben deiner Community in München eine Bühne.</div></div></li>
       <li><span class="bic">💚</span><div><div class="bt" data-i18n="ben4.t">Direkter Draht</div><div class="bd" data-i18n="ben4.d">Kurze Wege und persönlicher Kontakt zum Founder-Team – Konditionen klären wir individuell.</div></div></li>
     </ul>
+  </section>
+
+  <!-- FOUNDING-TEAM -->
+  <section class="section">
+    <h2 data-i18n="ft.h">Werde Teil des Founding-Teams</h2>
+    <p class="lead" data-i18n="ft.lead">Wir bringen München in echten, lokalen Gruppen zusammen und helfen Creators, aus Reichweite eine feste Community zu machen – organisieren, engagen und über Events &amp; Collabs monetarisieren.</p>
+    <p class="lead" data-i18n="ft.lead2" style="margin-top:12px;">Gerade organisieren wir unser Founding-Team: Münchner Creator, die als Erste dabei sind – mit Early Access vor dem Launch im September und priorisierter Ausspielung, damit dich neue Leute direkt finden.</p>
+    <p class="clabel" data-i18n="ft.already">Schon dabei</p>
+    <div class="creators">
+      <a href="https://www.instagram.com/irgendwiediemarie" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#213B2C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#213B2C" stroke="none"/></svg>@irgendwiediemarie</a>
+      <a href="https://www.instagram.com/felixpsychotipps" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#213B2C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#213B2C" stroke="none"/></svg>@felixpsychotipps <span class="cn">Padel</span></a>
+      <a href="https://www.instagram.com/juliabellax" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#213B2C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#213B2C" stroke="none"/></svg>@juliabellax <span class="cn">Cycling</span></a>
+      <a href="https://www.instagram.com/nymphenruns" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#213B2C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#213B2C" stroke="none"/></svg>@nymphenruns <span class="cn">Running</span></a>
+      <span class="more" data-i18n="ft.more">und viele mehr</span>
+    </div>
   </section>
 
   <!-- FORMULAR -->
@@ -249,6 +293,10 @@ const I18N = {
     "hero.h1":"Werde <span class=\"hl\">Clero Creator</span> in München",
     "hero.p":"Bau dir in München eine Community in deiner Nische auf, gewinn echte Reichweite dazu – und verdiene mit deiner Community Geld. Für dich ist und bleibt Clero kostenlos.",
     "hero.cta":"Jetzt Creator werden",
+    "app.h":"So sieht Clero aus",
+    "app.lead":"Damit du ein Gefühl bekommst, wie deine Community bei Clero lebt:",
+    "app.cap1":"Termine, Umfragen &amp; Feed – alles an einem Ort, ohne Chat-Chaos.",
+    "app.cap2":"Auf der Karte entdeckt werden – Menschen finden deine Gruppe in ihrer Nähe.",
     "how.h":"So funktioniert eine Clero-Partnerschaft",
     "how.lead":"Viele Creator wissen nicht genau, wie eine Zusammenarbeit mit Clero aussieht. Deshalb kurz und klar:",
     "how1.t":"Bau deine Community","how1.d":"Du startest auf Clero eine Gruppe in deinem Thema. Wir helfen dir, deine Nische zu besetzen und sichtbar zu werden – und du siehst endlich, wer deine Leute wirklich sind.",
@@ -266,6 +314,10 @@ const I18N = {
     "ben2.t":"Kostenloser Platz","ben2.d":"Als Founding Creator ist die Teilnahme für dich kostenlos – ohne Haken.",
     "ben3.t":"Sichtbarkeit","ben3.d":"Wir featuren dich auf Cleros Kanälen und geben deiner Community in München eine Bühne.",
     "ben4.t":"Direkter Draht","ben4.d":"Kurze Wege und persönlicher Kontakt zum Founder-Team – Konditionen klären wir individuell.",
+    "ft.h":"Werde Teil des Founding-Teams",
+    "ft.lead":"Wir bringen München in echten, lokalen Gruppen zusammen und helfen Creators, aus Reichweite eine feste Community zu machen – organisieren, engagen und über Events &amp; Collabs monetarisieren.",
+    "ft.lead2":"Gerade organisieren wir unser Founding-Team: Münchner Creator, die als Erste dabei sind – mit Early Access vor dem Launch im September und priorisierter Ausspielung, damit dich neue Leute direkt finden.",
+    "ft.already":"Schon dabei","ft.more":"und viele mehr",
     "s1.h":"Bewirb dich als Creator","s1.sub":"Dauert 1 Minute. Wir schauen uns deine Bewerbung an und melden uns persönlich bei dir. ✨",
     "sec.channels":"Deine Kanäle",
     "f.name":"Name *","f.namePh":"Vor- und Nachname",
@@ -289,6 +341,10 @@ const I18N = {
     "hero.h1":"Become a <span class=\"hl\">Clero Creator</span> in Munich",
     "hero.p":"Build a community in your niche in Munich, gain real reach on top – and earn money with your community. For you, Clero is and stays free.",
     "hero.cta":"Become a creator",
+    "app.h":"This is Clero",
+    "app.lead":"So you get a feel for how your community lives on Clero:",
+    "app.cap1":"Events, polls &amp; feed – all in one place, no chat chaos.",
+    "app.cap2":"Get discovered on the map – people find your group nearby.",
     "how.h":"How a Clero partnership works",
     "how.lead":"Many creators aren't sure what working with Clero actually looks like. So here it is, short and clear:",
     "how1.t":"Build your community","how1.d":"You start a group on Clero around your topic. We help you own your niche and get discovered – and you finally see who your people really are.",
@@ -306,6 +362,10 @@ const I18N = {
     "ben2.t":"Free spot","ben2.d":"As a Founding Creator, taking part is free for you – no catch.",
     "ben3.t":"Visibility","ben3.d":"We feature you on Clero's channels and give your community a stage in Munich.",
     "ben4.t":"Direct line","ben4.d":"Short paths and personal contact with the founder team – we clarify terms individually.",
+    "ft.h":"Join the Founding Team",
+    "ft.lead":"We bring Munich together in real, local groups and help creators turn reach into a lasting community – organise it, engage it and monetise it through events &amp; collabs.",
+    "ft.lead2":"We're currently putting together our Founding Team: Munich creators who are in first – with early access before the September launch and priority placement, so new people find you right away.",
+    "ft.already":"Already on board","ft.more":"and many more",
     "s1.h":"Apply as a creator","s1.sub":"Takes 1 minute. We review your application and get back to you personally. ✨",
     "sec.channels":"Your channels",
     "f.name":"Name *","f.namePh":"First and last name",
