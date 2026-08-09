@@ -43,10 +43,13 @@
   .section > h2 { font-size: clamp(21px, 3.6vw, 27px); font-weight: 800; letter-spacing: -0.02em; text-align: center; }
   .section > .lead { color: var(--muted); font-size: 15px; text-align: center; max-width: 540px; margin: 9px auto 0; }
 
-  .appshots { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 22px; align-items: start; }
-  .appshot img { width: 100%; height: auto; display: block; border-radius: 18px; box-shadow: 0 10px 30px rgba(33,59,44,.14); border: 1px solid var(--line); background: var(--white); }
-  .appshot .cap { text-align: center; color: var(--muted); font-size: 13px; line-height: 1.4; margin-top: 11px; }
-  @media (max-width: 460px) { .appshots { gap: 12px; } .appshot .cap { font-size: 12px; } }
+  .appshots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; align-items: end; }
+  .appcol { min-width: 0; }
+  .appshot { position: relative; border-radius: 24px 24px 0 0; overflow: hidden; box-shadow: 0 16px 34px rgba(33,59,44,.12); }
+  .appshot img { display: block; width: 100%; aspect-ratio: 400 / 700; object-fit: cover; object-position: top center; }
+  .appshot::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: linear-gradient(to bottom, rgba(241,250,245,0) 0%, var(--bg) 94%); pointer-events: none; }
+  .appcol .cap { text-align: center; color: var(--muted); font-size: 13px; line-height: 1.4; margin-top: 8px; }
+  @media (max-width: 460px) { .appshots { gap: 12px; } .appcol .cap { font-size: 12px; } }
 
   .clabel { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--green); margin-top: 20px; margin-bottom: 2px; }
   .creators { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; margin-top: 12px; }
@@ -150,12 +153,12 @@
     <h2 data-i18n="app.h">So sieht Clero aus</h2>
     <p class="lead" data-i18n="app.lead">Damit du ein Gefühl bekommst, wie deine Community bei Clero lebt:</p>
     <div class="appshots">
-      <div class="appshot">
-        <img src="app-1.webp" alt="Clero App – Feed mit Terminen und Umfragen" loading="lazy" />
+      <div class="appcol">
+        <div class="appshot"><img src="app-1.webp" alt="Clero App – Feed mit Terminen und Umfragen" loading="lazy" /></div>
         <div class="cap" data-i18n="app.cap1">Termine, Umfragen &amp; Feed – alles an einem Ort, ohne Chat-Chaos.</div>
       </div>
-      <div class="appshot">
-        <img src="app-2.webp" alt="Clero App – Community-Karte von München" loading="lazy" />
+      <div class="appcol">
+        <div class="appshot"><img src="app-2.webp" alt="Clero App – Community-Karte von München" loading="lazy" /></div>
         <div class="cap" data-i18n="app.cap2">Auf der Karte entdeckt werden – Menschen finden deine Gruppe in ihrer Nähe.</div>
       </div>
     </div>
