@@ -577,7 +577,7 @@ function submitClassic(en) {
   const add = (n, v) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v || ''; form.appendChild(i); };
   add('_subject', (en ? 'New creator application: ' : 'Neue Creator-Bewerbung: ') + lv('c-name'));
   add('_cc', 'n.emrich@clero.de'); add('_template', 'table');
-  add('_next', 'https://host.clero.de/creator.html?sent=1');
+  add('_next', en ? 'https://host.clero.de/danke.html?lang=en' : 'https://host.clero.de/danke.html');
   const cf = commonFields(en); Object.keys(cf).forEach(k => add(k, cf[k]));
   document.body.appendChild(form); form.submit();
 }
@@ -598,10 +598,10 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
       body: JSON.stringify(payload), signal: ctrl.signal
     });
     clearTimeout(timer);
-    gotoDone();
+    window.location.href = en ? 'danke.html?lang=en' : 'danke.html';
   } catch (err) {
     clearTimeout(timer);
-    // AJAX fehlgeschlagen/Timeout -> zuverlaessiger klassischer POST (leitet zurueck mit ?sent=1)
+    // AJAX fehlgeschlagen/Timeout -> zuverlaessiger klassischer POST (leitet auf die Danke-Seite)
     submitClassic(en);
   } finally {
     btn.disabled = false; btn.textContent = t('s1.send');
