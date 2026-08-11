@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Creator werden · Clero</title>
-<meta name="description" content="Werde Clero Creator in München: Bau eine engagierte Community in deiner Nische auf, gewinn Reichweite und erhalte Brand-Deals. Für dich kostenlos." />
+<meta name="description" content="Werde Clero Creator in München: Schluss mit Community-Aufbau als drittem Job. Struktur, Sichtbarkeit, Vergütung und ein Asset, das dir gehört – für dich kostenlos." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -58,8 +58,9 @@
   .ccard .n { color: var(--muted); font-size: 12px; }
   .creators .more { align-self: center; color: var(--muted); font-size: 13.5px; padding: 0 4px; }
 
-  /* Pain points */
-  .pains { display: grid; gap: 12px; margin-top: 22px; }
+  /* Problem cards */
+  .pains { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
+  @media (max-width: 520px) { .pains { grid-template-columns: 1fr; } }
   .pain { display: flex; gap: 13px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; box-shadow: var(--shadow); }
   .pain .pic { width: 38px; height: 38px; border-radius: 11px; background: #FCEDEA; color: #D9694E; display: grid; place-items: center; font-size: 18px; flex-shrink: 0; }
   .pain .pt { font-weight: 700; font-size: 15px; }
@@ -72,29 +73,19 @@
   .appcol { min-width: 0; text-align: center; }
   .appcol img { width: 100%; height: auto; display: block; filter: drop-shadow(0 20px 34px rgba(33,59,44,.22)); }
   .appcol .cap { color: var(--muted); font-size: 13px; line-height: 1.4; margin-top: 14px; }
+  .stores { text-align: center; margin-top: 18px; color: var(--muted); font-size: 13px; font-weight: 600; }
   @media (max-width: 460px) { .appshots { gap: 10px; } .appcol .cap { font-size: 12px; } }
 
-  /* Steps */
-  .steps-grid { display: grid; gap: 13px; margin-top: 22px; }
-  .stepc { display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 18px 20px; box-shadow: var(--shadow); transition: transform .16s, box-shadow .2s; }
-  .stepc:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-  .stepc .num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 12px; background: var(--neon); color: var(--ink); font-weight: 800; display: grid; place-items: center; font-size: 15px; }
-  .stepc .st { font-weight: 700; font-size: 16.5px; }
-  .stepc .sd { color: var(--muted); font-size: 14px; margin-top: 3px; }
+  /* Pillars (Lösung) */
+  .pillars { display: grid; gap: 13px; margin-top: 22px; }
+  .pillar { display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 18px 20px; box-shadow: var(--shadow); transition: transform .16s, box-shadow .2s; }
+  .pillar:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .pillar .pic2 { width: 40px; height: 40px; border-radius: 12px; background: var(--neon-soft); display: grid; place-items: center; font-size: 20px; flex-shrink: 0; }
+  .pillar .pt2 { font-weight: 700; font-size: 16.5px; }
+  .pillar .pd2 { color: var(--muted); font-size: 14px; margin-top: 3px; }
+  .pillar .before { margin-top: 8px; font-size: 12px; color: #9AA49C; }
 
-  /* Money */
-  .money { background: linear-gradient(158deg, #274634 0%, var(--green-dark) 100%); color: #fff; border-radius: 24px; padding: 30px 28px; margin-top: 24px; box-shadow: var(--shadow-hover); }
-  .money h3 { font-size: 21px; font-weight: 800; margin-bottom: 6px; }
-  .money .ml { color: #CDEFDB; font-size: 14.5px; margin-bottom: 20px; }
-  .money ul { list-style: none; display: grid; gap: 15px; }
-  .money li { display: flex; gap: 14px; align-items: flex-start; }
-  .money li .mi { width: 40px; height: 40px; border-radius: 12px; background: rgba(130,255,65,.16); display: grid; place-items: center; font-size: 19px; flex-shrink: 0; }
-  .money li b { display: block; font-size: 15.5px; margin-bottom: 2px; }
-  .money li .yr { font-weight: 700; font-size: 12px; color: var(--green-dark); background: var(--neon); padding: 1px 8px; border-radius: 999px; margin-left: 7px; vertical-align: middle; }
-  .money li span.d { color: #CDEFDB; font-size: 13.5px; }
-  .money .note { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.16); font-size: 13px; color: #CDEFDB; }
-
-  /* Benefits */
+  /* Founding "what's in it for me" */
   .benefits { list-style: none; margin: 22px auto 0; display: grid; gap: 11px; }
   .benefits li { display: flex; gap: 13px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 15px 17px; box-shadow: var(--shadow); text-align: left; }
   .benefits .bic { width: 38px; height: 38px; border-radius: 11px; background: var(--neon-soft); display: grid; place-items: center; font-size: 19px; flex-shrink: 0; }
@@ -196,17 +187,18 @@
     </div>
   </section>
 
-  <!-- PAIN POINTS -->
+  <!-- PROBLEM -->
   <section class="section">
-    <p class="eyebrow" data-i18n="pain.eyebrow">Warum Clero</p>
-    <h2 data-i18n="pain.h">Reichweite allein reicht nicht mehr</h2>
+    <p class="eyebrow" data-i18n="prob.eyebrow">Das Problem</p>
+    <h2 data-i18n="prob.h">Community-Aufbau fühlt sich an wie ein dritter Job</h2>
     <div class="pains">
-      <div class="pain"><span class="pic">🔁</span><div><div class="pt" data-i18n="pain1.t">Ständig neuer Content</div><div class="pd" data-i18n="pain1.d">Du musst permanent posten, nur um überhaupt sichtbar zu bleiben – ein Fulltime-Job.</div></div></div>
-      <div class="pain"><span class="pic">🎯</span><div><div class="pt" data-i18n="pain2.t">Kaum steuerbar</div><div class="pd" data-i18n="pain2.d">Der Algorithmus entscheidet, wer dich sieht – ob in München oder Berlin. Du hast es kaum in der Hand.</div></div></div>
-      <div class="pain"><span class="pic">💔</span><div><div class="pt" data-i18n="pain3.t">Reichweite ≠ Bindung</div><div class="pd" data-i18n="pain3.d">Viele Follower, aber wenig echte Verbindung. Hoher Aufwand, unsicheres Ergebnis.</div></div></div>
+      <div class="pain"><span class="pic">💬</span><div><div class="pt" data-i18n="prob1.t">Gruppen pflegen</div><div class="pd" data-i18n="prob1.d">Instagram- & WhatsApp-Gruppen – deine Leute stecken in 10+ Gruppen.</div></div></div>
+      <div class="pain"><span class="pic">✍️</span><div><div class="pt" data-i18n="prob2.t">Content produzieren</div><div class="pd" data-i18n="prob2.d">Eigener Content für die Community – zusätzlich zum normalen Posting.</div></div></div>
+      <div class="pain"><span class="pic">📅</span><div><div class="pt" data-i18n="prob3.t">Events koordinieren</div><div class="pd" data-i18n="prob3.d">Abstimmungen, Zu- und Absagen – auf einer separaten Plattform.</div></div></div>
+      <div class="pain"><span class="pic">💸</span><div><div class="pt" data-i18n="prob4.t">Unbezahlt</div><div class="pd" data-i18n="prob4.d">Eventorganisation, Woche für Woche – komplett gratis.</div></div></div>
     </div>
     <div class="pain-value">
-      <span data-i18n="pain.value">Viel wertvoller ist heute eine Community, die wirklich <b>engagiert und treu</b> ist. Genau die baust du mit Clero – lokal in München, mit Menschen, die dich wirklich sehen wollen.</span>
+      <span data-i18n="prob.punch">Job oder Studium + Social Media + das hier – irgendwas bleibt liegen. Meistens die Community. <b>Clero dreht das um.</b></span>
     </div>
   </section>
 
@@ -224,52 +216,31 @@
         <div class="cap" data-i18n="app.cap2">Auf der Karte entdeckt werden – Menschen finden deine Gruppe in ihrer Nähe.</div>
       </div>
     </div>
+    <p class="stores" data-i18n="app.stores">Bald im App Store &amp; Play Store</p>
   </section>
 
-  <!-- SO FUNKTIONIERT'S -->
+  <!-- LÖSUNG: 4 PILLARS -->
   <section class="section">
-    <p class="eyebrow" data-i18n="how.eyebrow">Partnerschaft</p>
-    <h2 data-i18n="how.h">So funktioniert eine Clero-Partnerschaft</h2>
-    <div class="steps-grid">
-      <div class="stepc"><div class="num">1</div><div><div class="st" data-i18n="how1.t">Baue deine Community</div><div class="sd" data-i18n="how1.d">Du startest auf Clero eine Gruppe in deinem Thema. Wir helfen dir, deine Nische zu besetzen und sichtbar zu werden und du siehst, wer deine Leute wirklich sind.</div></div></div>
-      <div class="stepc"><div class="num">2</div><div><div class="st" data-i18n="how2.t">Gewinne Reichweite dazu</div><div class="sd" data-i18n="how2.d">Verknüpf deinen Instagram- oder TikTok-Account mit deinem Clero-Profil und werde in München zusätzlich von neuen Leuten entdeckt.</div></div></div>
-      <div class="stepc"><div class="num">3</div><div><div class="st" data-i18n="how3.t">Verdiene mit deiner Community</div><div class="sd" data-i18n="how3.d">Starte mit Paid Events und später mit Memberships und Brand-Deals (falls du das möchtest). Deine Community darf auch für immer kostenlos bleiben.</div></div></div>
-      <div class="stepc"><div class="num">4</div><div><div class="st" data-i18n="how4.t">Wachse durch Clero</div><div class="sd" data-i18n="how4.d">Als Founding Creator gestaltest du mit, bekommst Early Access und priorisierte Ausspielung beim Launch – damit sicherst du dir Anfangs-Boost und bist allen anderen einen Schritt voraus.</div></div></div>
+    <p class="eyebrow" data-i18n="sol.eyebrow">Die Lösung</p>
+    <h2 data-i18n="sol.h">Vier Dinge, die mit Clero besser werden</h2>
+    <div class="pillars">
+      <div class="pillar"><span class="pic2">🧩</span><div><div class="pt2" data-i18n="sol1.t">Struktur statt Chat-Chaos</div><div class="pd2" data-i18n="sol1.d">Deine Gruppe organisiert sich fast von selbst: Infos als Beiträge im Feed, Terminabstimmung mit Kalender & Warteliste – statt sie ständig zu moderieren.</div><div class="before" data-i18n="sol1.b">Vorher: 10+ stummgeschaltete WhatsApp-Gruppen</div></div></div>
+      <div class="pillar"><span class="pic2">🔍</span><div><div class="pt2" data-i18n="sol2.t">Sichtbarkeit statt Content</div><div class="pd2" data-i18n="sol2.d">Gruppe in unter 2 Minuten erstellt und sofort auf Karte & Swipe sichtbar – passenden Leuten in der Nähe wird sie automatisch angezeigt.</div><div class="before" data-i18n="sol2.b">Vorher: Eigener Content, nur um gefunden zu werden</div></div></div>
+      <div class="pillar"><span class="pic2">💶</span><div><div class="pt2" data-i18n="sol3.t">Vergütung statt Ehrenamt</div><div class="pd2" data-i18n="sol3.d">Deine Orga wird bezahlt: Paid Events ab Start, ab 2027 Memberships & Credits – du entscheidest, was etwas kostet.</div><div class="before" data-i18n="sol3.b">Vorher: Eventmanagement Woche für Woche – gratis</div></div></div>
+      <div class="pillar"><span class="pic2">🏆</span><div><div class="pt2" data-i18n="sol4.t">Asset statt Aktion</div><div class="pd2" data-i18n="sol4.d">Du baust etwas auf, das dir gehört – nicht dem Algorithmus. Verknüpf dein IG-Profil für Wachstum in beide Richtungen und schließ Brand-Collabs über deine Community.</div><div class="before" data-i18n="sol4.b">Vorher: Reichweite gehört dem Algorithmus</div></div></div>
     </div>
   </section>
 
-  <!-- MONETARISIERUNG -->
+  <!-- WAS BRINGT'S MIR (Founding, merged) -->
   <section class="section">
-    <p class="eyebrow" data-i18n="mon.eyebrow">Verdienen</p>
-    <div class="money">
-      <h3 data-i18n="mon.h">Wie du mit Clero Geld verdienst</h3>
-      <p class="ml" data-i18n="mon.lead">Für dich als Creator ist Clero kostenlos – zahlen tun deine Mitglieder und später Marken, nicht du.</p>
-      <ul>
-        <li><span class="mi">📅</span><div><b data-i18n="mon1.t">Paid Events</b><span class="d" data-i18n="mon1.d">Biete besondere Events an, für die deine Mitglieder zahlen – von Anfang an möglich.</span></div></li>
-        <li><span class="mi">⭐</span><div><b><span data-i18n="mon2.t">Memberships &amp; Abos</span><span class="yr">2027</span></b><span class="d" data-i18n="mon2.d">Deine Community abonniert deine Gruppe – wiederkehrende Einnahmen, Preis und Umfang bestimmst du.</span></div></li>
-        <li><span class="mi">🤝</span><div><b><span data-i18n="mon3.t">Brand-Kooperationen</span><span class="yr">2027</span></b><span class="d" data-i18n="mon3.d">Clero matcht dich mit Marken, die genau deine Zielgruppe suchen – bezahlte Kooperationen inklusive.</span></div></li>
-      </ul>
-      <p class="note" data-i18n="mon.note">Die genauen Konditionen besprechen wir persönlich mit dir – fair und transparent. Am Anfang geht es darum, gemeinsam deine Community aufzubauen.</p>
-    </div>
-  </section>
-
-  <!-- FOUNDING-TEAM -->
-  <section class="section">
-    <p class="eyebrow" data-i18n="ft.eyebrow">Founding-Team</p>
-    <h2 data-i18n="ft.h">Werde Teil des Founding-Teams</h2>
-    <p class="lead" data-i18n="ft.lead">Wir bringen München in echten, lokalen Gruppen zusammen und helfen Creators, aus Reichweite eine feste Community zu machen – organisieren, engagen und über Events &amp; Collabs monetarisieren.</p>
-    <p class="lead" data-i18n="ft.lead2" style="margin-top:12px;">Gerade organisieren wir unser Founding-Team: Münchner Creator, die als Erste dabei sind – mit Early Access vor dem Launch im September und priorisierter Ausspielung, damit dich neue Leute direkt finden.</p>
-  </section>
-
-  <!-- VORTEILE -->
-  <section class="section">
-    <p class="eyebrow" data-i18n="ben.eyebrow">Deine Vorteile</p>
-    <h2 data-i18n="ben.h">Als Founding Creator bekommst du</h2>
+    <p class="eyebrow" data-i18n="fc.eyebrow">Was bringt's mir</p>
+    <h2 data-i18n="fc.h">Als Founding Creator bekommst du</h2>
+    <p class="lead" data-i18n="fc.lead">Gerade stellen wir unser Founding-Team zusammen – Münchner Creator, die als Erste dabei sind. Was du dir jetzt sicherst:</p>
     <ul class="benefits">
-      <li><span class="bic">🚀</span><div><div class="bt" data-i18n="ben1.t">Von Tag 1 dabei</div><div class="bd" data-i18n="ben1.d">Du bist von Anfang an dabei, gestaltest mit und bekommst früh Zugang zu neuen Features.</div></div></li>
-      <li><span class="bic">🆓</span><div><div class="bt" data-i18n="ben2.t">Kostenloser Platz</div><div class="bd" data-i18n="ben2.d">Als Founding Creator ist die Teilnahme für dich kostenlos – ohne Haken.</div></div></li>
-      <li><span class="bic">📣</span><div><div class="bt" data-i18n="ben3.t">Sichtbarkeit</div><div class="bd" data-i18n="ben3.d">Wir featuren dich auf Cleros Kanälen und geben deiner Community in München eine Bühne.</div></div></li>
-      <li><span class="bic">💚</span><div><div class="bt" data-i18n="ben4.t">Direkter Draht</div><div class="bd" data-i18n="ben4.d">Kurze Wege und persönlicher Kontakt zum Founder-Team – Konditionen klären wir individuell.</div></div></li>
+      <li><span class="bic">🚀</span><div><div class="bt" data-i18n="fc1.t">Early Access + Vorsprung</div><div class="bd" data-i18n="fc1.d">Vor dem September-Launch dabei und priorisiert ausgespielt – neue Leute finden dich sofort, du bist allen einen Schritt voraus.</div></div></li>
+      <li><span class="bic">🆓</span><div><div class="bt" data-i18n="fc2.t">Kostenlos & unverbindlich</div><div class="bd" data-i18n="fc2.d">Als Founding Creator ist die Teilnahme für dich kostenlos – ohne Haken.</div></div></li>
+      <li><span class="bic">💶</span><div><div class="bt" data-i18n="fc3.t">Verdienen ab Start</div><div class="bd" data-i18n="fc3.d">Paid Events sofort, Memberships & Brand-Deals ab 2027 – wenn du willst. Deine Community darf auch für immer kostenlos bleiben.</div></div></li>
+      <li><span class="bic">🎨</span><div><div class="bt" data-i18n="fc4.t">Mitgestalten & direkter Draht</div><div class="bd" data-i18n="fc4.d">Du beeinflusst, was als Nächstes gebaut wird, wirst auf Cleros Kanälen gefeatured und hast einen direkten Draht zum Founder-Team.</div></div></li>
     </ul>
   </section>
 
@@ -308,12 +279,12 @@
       <p class="blank-link"><span data-i18n="s1.wa">Oder direkt schreiben:</span> <a id="waInline" href="#" target="_blank" rel="noopener" data-i18n="s1.waLink">Per WhatsApp melden</a></p>
     </div>
 
-    <!-- SUCCESS -->
+    <!-- SUCCESS (Fallback) -->
     <div class="step" id="stepDone" hidden>
       <div class="success">
         <div class="big">💚</div>
         <h2 id="doneH" data-i18n="done.h">Danke, deine Bewerbung ist da!</h2>
-        <p id="doneP" data-i18n="done.p">Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir. Schön, dass du Clero in München mit aufbauen willst.</p>
+        <p id="doneP" data-i18n="done.p">Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir.</p>
         <a href="https://www.clero.de" class="btn" data-i18n="done.btn">Zur Clero-Website</a>
       </div>
     </div>
@@ -347,40 +318,32 @@ const I18N = {
     "hero.p":"Bau dir in München eine Community in deiner Nische auf, gewinn echte Reichweite dazu und erhalte Brand-Deals.",
     "hero.cta":"Jetzt Creator werden",
     "hero.ctaNote":"⚡ Jetzt anmelden sichert dir Early Access vor dem Launch im September und priorisierte Ausspielung – so bist du von Anfang an vorne dabei.",
-    "pain.eyebrow":"Warum Clero",
-    "pain.h":"Reichweite allein reicht nicht mehr",
-    "pain1.t":"Ständig neuer Content","pain1.d":"Du musst permanent posten, nur um überhaupt sichtbar zu bleiben – ein Fulltime-Job.",
-    "pain2.t":"Kaum steuerbar","pain2.d":"Der Algorithmus entscheidet, wer dich sieht – ob in München oder Berlin. Du hast es kaum in der Hand.",
-    "pain3.t":"Reichweite ≠ Bindung","pain3.d":"Viele Follower, aber wenig echte Verbindung. Hoher Aufwand, unsicheres Ergebnis.",
-    "pain.value":"Viel wertvoller ist heute eine Community, die wirklich <b>engagiert und treu</b> ist. Genau die baust du mit Clero – lokal in München, mit Menschen, die dich wirklich sehen wollen.",
+    "ft.already":"Schon dabei","ft.more":"und viele mehr",
+    "prob.eyebrow":"Das Problem",
+    "prob.h":"Community-Aufbau fühlt sich an wie ein dritter Job",
+    "prob1.t":"Gruppen pflegen","prob1.d":"Instagram- & WhatsApp-Gruppen – deine Leute stecken in 10+ Gruppen.",
+    "prob2.t":"Content produzieren","prob2.d":"Eigener Content für die Community – zusätzlich zum normalen Posting.",
+    "prob3.t":"Events koordinieren","prob3.d":"Abstimmungen, Zu- und Absagen – auf einer separaten Plattform.",
+    "prob4.t":"Unbezahlt","prob4.d":"Eventorganisation, Woche für Woche – komplett gratis.",
+    "prob.punch":"Job oder Studium + Social Media + das hier – irgendwas bleibt liegen. Meistens die Community. <b>Clero dreht das um.</b>",
     "app.eyebrow":"Einblick",
     "app.h":"Eine App – viele Features",
     "app.cap1":"Termine, Umfragen &amp; Feed – alles an einem Ort, ohne Chat-Chaos.",
     "app.cap2":"Auf der Karte entdeckt werden – Menschen finden deine Gruppe in ihrer Nähe.",
-    "how.eyebrow":"Partnerschaft",
-    "how.h":"So funktioniert eine Clero-Partnerschaft",
-    "how1.t":"Baue deine Community","how1.d":"Du startest auf Clero eine Gruppe in deinem Thema. Wir helfen dir, deine Nische zu besetzen und sichtbar zu werden und du siehst, wer deine Leute wirklich sind.",
-    "how2.t":"Gewinne Reichweite dazu","how2.d":"Verknüpf deinen Instagram- oder TikTok-Account mit deinem Clero-Profil und werde in München zusätzlich von neuen Leuten entdeckt.",
-    "how3.t":"Verdiene mit deiner Community","how3.d":"Starte mit Paid Events und später mit Memberships und Brand-Deals (falls du das möchtest). Deine Community darf auch für immer kostenlos bleiben.",
-    "how4.t":"Wachse durch Clero","how4.d":"Als Founding Creator gestaltest du mit, bekommst Early Access und priorisierte Ausspielung beim Launch – damit sicherst du dir Anfangs-Boost und bist allen anderen einen Schritt voraus.",
-    "mon.eyebrow":"Verdienen",
-    "mon.h":"Wie du mit Clero Geld verdienst",
-    "mon.lead":"Für dich als Creator ist Clero kostenlos – zahlen tun deine Mitglieder und später Marken, nicht du.",
-    "mon1.t":"Paid Events","mon1.d":"Biete besondere Events an, für die deine Mitglieder zahlen – von Anfang an möglich.",
-    "mon2.t":"Memberships &amp; Abos","mon2.d":"Deine Community abonniert deine Gruppe – wiederkehrende Einnahmen, Preis und Umfang bestimmst du.",
-    "mon3.t":"Brand-Kooperationen","mon3.d":"Clero matcht dich mit Marken, die genau deine Zielgruppe suchen – bezahlte Kooperationen inklusive.",
-    "mon.note":"Die genauen Konditionen besprechen wir persönlich mit dir – fair und transparent. Am Anfang geht es darum, gemeinsam deine Community aufzubauen.",
-    "ft.eyebrow":"Founding-Team",
-    "ft.h":"Werde Teil des Founding-Teams",
-    "ft.lead":"Wir bringen München in echten, lokalen Gruppen zusammen und helfen Creators, aus Reichweite eine feste Community zu machen – organisieren, engagen und über Events &amp; Collabs monetarisieren.",
-    "ft.lead2":"Gerade organisieren wir unser Founding-Team: Münchner Creator, die als Erste dabei sind – mit Early Access vor dem Launch im September und priorisierter Ausspielung, damit dich neue Leute direkt finden.",
-    "ft.already":"Schon dabei","ft.more":"und viele mehr",
-    "ben.eyebrow":"Deine Vorteile",
-    "ben.h":"Als Founding Creator bekommst du",
-    "ben1.t":"Von Tag 1 dabei","ben1.d":"Du bist von Anfang an dabei, gestaltest mit und bekommst früh Zugang zu neuen Features.",
-    "ben2.t":"Kostenloser Platz","ben2.d":"Als Founding Creator ist die Teilnahme für dich kostenlos – ohne Haken.",
-    "ben3.t":"Sichtbarkeit","ben3.d":"Wir featuren dich auf Cleros Kanälen und geben deiner Community in München eine Bühne.",
-    "ben4.t":"Direkter Draht","ben4.d":"Kurze Wege und persönlicher Kontakt zum Founder-Team – Konditionen klären wir individuell.",
+    "app.stores":"Bald im App Store &amp; Play Store",
+    "sol.eyebrow":"Die Lösung",
+    "sol.h":"Vier Dinge, die mit Clero besser werden",
+    "sol1.t":"Struktur statt Chat-Chaos","sol1.d":"Deine Gruppe organisiert sich fast von selbst: Infos als Beiträge im Feed, Terminabstimmung mit Kalender & Warteliste – statt sie ständig zu moderieren.","sol1.b":"Vorher: 10+ stummgeschaltete WhatsApp-Gruppen",
+    "sol2.t":"Sichtbarkeit statt Content","sol2.d":"Gruppe in unter 2 Minuten erstellt und sofort auf Karte & Swipe sichtbar – passenden Leuten in der Nähe wird sie automatisch angezeigt.","sol2.b":"Vorher: Eigener Content, nur um gefunden zu werden",
+    "sol3.t":"Vergütung statt Ehrenamt","sol3.d":"Deine Orga wird bezahlt: Paid Events ab Start, ab 2027 Memberships & Credits – du entscheidest, was etwas kostet.","sol3.b":"Vorher: Eventmanagement Woche für Woche – gratis",
+    "sol4.t":"Asset statt Aktion","sol4.d":"Du baust etwas auf, das dir gehört – nicht dem Algorithmus. Verknüpf dein IG-Profil für Wachstum in beide Richtungen und schließ Brand-Collabs über deine Community.","sol4.b":"Vorher: Reichweite gehört dem Algorithmus",
+    "fc.eyebrow":"Was bringt's mir",
+    "fc.h":"Als Founding Creator bekommst du",
+    "fc.lead":"Gerade stellen wir unser Founding-Team zusammen – Münchner Creator, die als Erste dabei sind. Was du dir jetzt sicherst:",
+    "fc1.t":"Early Access + Vorsprung","fc1.d":"Vor dem September-Launch dabei und priorisiert ausgespielt – neue Leute finden dich sofort, du bist allen einen Schritt voraus.",
+    "fc2.t":"Kostenlos & unverbindlich","fc2.d":"Als Founding Creator ist die Teilnahme für dich kostenlos – ohne Haken.",
+    "fc3.t":"Verdienen ab Start","fc3.d":"Paid Events sofort, Memberships & Brand-Deals ab 2027 – wenn du willst. Deine Community darf auch für immer kostenlos bleiben.",
+    "fc4.t":"Mitgestalten & direkter Draht","fc4.d":"Du beeinflusst, was als Nächstes gebaut wird, wirst auf Cleros Kanälen gefeatured und hast einen direkten Draht zum Founder-Team.",
     "s1.h":"Bewirb dich als Creator","s1.sub":"Dauert 1 Minute. Wir schauen uns deine Bewerbung an und melden uns persönlich bei dir. ✨",
     "sec.channels":"Deine Kanäle","sec.theme":"Dein Thema",
     "f.name":"Name *","f.namePh":"Vor- und Nachname",
@@ -393,7 +356,7 @@ const I18N = {
     "s1.send":"Jetzt als Creator bewerben 🚀","s1.sending":"Wird gesendet …",
     "s1.cal":"Lieber erst sprechen?","s1.calLink":"30-Min-Call mit Tjard buchen",
     "s1.wa":"Oder direkt schreiben:","s1.waLink":"Per WhatsApp melden",
-    "done.h":"Danke, deine Bewerbung ist da!","done.p":"Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir. Schön, dass du Clero in München mit aufbauen willst.","done.btn":"Zur Clero-Website",
+    "done.h":"Danke, deine Bewerbung ist da!","done.p":"Wir schauen sie uns in Ruhe an und melden uns persönlich bei dir.","done.btn":"Zur Clero-Website",
     "foot":"Fragen? Schreib uns auf","foot.back":"zur Clero-Website",
     "wa.bubble":"<strong>Fragen zum Creator-Programm?</strong>Schreib uns direkt auf WhatsApp 💬",
     "err.req":"Bitte fülle deinen Namen und deine E-Mail aus.",
@@ -407,40 +370,32 @@ const I18N = {
     "hero.p":"Build a community in your niche in Munich, gain real reach on top and land brand deals.",
     "hero.cta":"Become a creator",
     "hero.ctaNote":"⚡ Signing up now secures early access before the September launch and priority placement – so you're ahead from day one.",
-    "pain.eyebrow":"Why Clero",
-    "pain.h":"Reach alone isn't enough anymore",
-    "pain1.t":"Always new content","pain1.d":"You have to post constantly just to stay visible – a full-time job.",
-    "pain2.t":"Barely controllable","pain2.d":"The algorithm decides who sees you – whether in Munich or Berlin. You have little say.",
-    "pain3.t":"Reach ≠ connection","pain3.d":"Lots of followers, but little real connection. High effort, uncertain results.",
-    "pain.value":"Far more valuable today is a community that's truly <b>engaged and loyal</b>. That's exactly what you build with Clero – locally in Munich, with people who really want to see you.",
+    "ft.already":"Already on board","ft.more":"and many more",
+    "prob.eyebrow":"The problem",
+    "prob.h":"Building a community feels like a third job",
+    "prob1.t":"Managing groups","prob1.d":"Instagram & WhatsApp groups – your people are stuck across 10+ of them.",
+    "prob2.t":"Producing content","prob2.d":"Extra content for the community – on top of your normal posting.",
+    "prob3.t":"Coordinating events","prob3.d":"Polls, yes and no replies – on a separate platform.",
+    "prob4.t":"Unpaid","prob4.d":"Organising events, week after week – completely for free.",
+    "prob.punch":"Job or studies + social media + this – something falls behind. Usually the community. <b>Clero flips that.</b>",
     "app.eyebrow":"Inside",
     "app.h":"One app – many features",
     "app.cap1":"Events, polls &amp; feed – all in one place, no chat chaos.",
     "app.cap2":"Get discovered on the map – people find your group nearby.",
-    "how.eyebrow":"Partnership",
-    "how.h":"How a Clero partnership works",
-    "how1.t":"Build your community","how1.d":"You start a group on Clero around your topic. We help you own your niche and get visible – and you see who your people really are.",
-    "how2.t":"Gain extra reach","how2.d":"Link your Instagram or TikTok account with your Clero profile and get discovered by new people in Munich.",
-    "how3.t":"Earn with your community","how3.d":"Start with paid events and later with memberships and brand deals (if you want to). Your community can also stay free forever.",
-    "how4.t":"Grow through Clero","how4.d":"As a Founding Creator you help shape things, get early access and priority placement at launch – securing a head start over everyone else.",
-    "mon.eyebrow":"Earn",
-    "mon.h":"How you earn money with Clero",
-    "mon.lead":"For you as a creator, Clero is free – your members and later brands pay, not you.",
-    "mon1.t":"Paid events","mon1.d":"Offer special events your members pay for – available from the start.",
-    "mon2.t":"Memberships &amp; subscriptions","mon2.d":"Your community subscribes to your group – recurring income; you set the price and scope.",
-    "mon3.t":"Brand collaborations","mon3.d":"Clero matches you with brands looking for exactly your audience – paid collaborations included.",
-    "mon.note":"We discuss the exact terms with you personally – fair and transparent. At the start, it's all about building your community together.",
-    "ft.eyebrow":"Founding Team",
-    "ft.h":"Join the Founding Team",
-    "ft.lead":"We bring Munich together in real, local groups and help creators turn reach into a lasting community – organise it, engage it and monetise it through events &amp; collabs.",
-    "ft.lead2":"We're currently putting together our Founding Team: Munich creators who are in first – with early access before the September launch and priority placement, so new people find you right away.",
-    "ft.already":"Already on board","ft.more":"and many more",
-    "ben.eyebrow":"Your perks",
-    "ben.h":"As a Founding Creator you get",
-    "ben1.t":"In from day one","ben1.d":"You're in from the start, help shape things and get early access to new features.",
-    "ben2.t":"Free spot","ben2.d":"As a Founding Creator, taking part is free for you – no catch.",
-    "ben3.t":"Visibility","ben3.d":"We feature you on Clero's channels and give your community a stage in Munich.",
-    "ben4.t":"Direct line","ben4.d":"Short paths and personal contact with the founder team – we clarify terms individually.",
+    "app.stores":"Coming soon to the App Store &amp; Play Store",
+    "sol.eyebrow":"The solution",
+    "sol.h":"Four things that get better with Clero",
+    "sol1.t":"Structure instead of chat chaos","sol1.d":"Your group almost runs itself: info as posts in the feed, date polls with calendar & waitlist – instead of constant moderating.","sol1.b":"Before: 10+ muted WhatsApp groups",
+    "sol2.t":"Visibility instead of content","sol2.d":"Create a group in under 2 minutes and instantly appear on map & swipe – shown automatically to the right people nearby.","sol2.b":"Before: making content just to be found",
+    "sol3.t":"Payment instead of volunteering","sol3.d":"Your work gets paid: paid events from the start, memberships & credits from 2027 – you decide what things cost.","sol3.b":"Before: running events week after week – for free",
+    "sol4.t":"Asset instead of one-off","sol4.d":"You build something that's yours – not the algorithm's. Link your IG profile for growth both ways and land brand collabs through your community.","sol4.b":"Before: your reach belongs to the algorithm",
+    "fc.eyebrow":"What's in it for me",
+    "fc.h":"As a Founding Creator you get",
+    "fc.lead":"We're putting together our Founding Team right now – Munich creators who are in first. What you secure now:",
+    "fc1.t":"Early access + head start","fc1.d":"In before the September launch and shown with priority – new people find you right away, ahead of everyone else.",
+    "fc2.t":"Free & no strings","fc2.d":"As a Founding Creator, taking part is free for you – no catch.",
+    "fc3.t":"Earn from the start","fc3.d":"Paid events right away, memberships & brand deals from 2027 – if you want. Your community can also stay free forever.",
+    "fc4.t":"Shape it & direct line","fc4.d":"You influence what gets built next, get featured on Clero's channels and have a direct line to the founder team.",
     "s1.h":"Apply as a creator","s1.sub":"Takes 1 minute. We review your application and get back to you personally. ✨",
     "sec.channels":"Your channels","sec.theme":"Your topic",
     "f.name":"Name *","f.namePh":"First and last name",
@@ -453,7 +408,7 @@ const I18N = {
     "s1.send":"Apply as a creator 🚀","s1.sending":"Sending …",
     "s1.cal":"Prefer to talk first?","s1.calLink":"Book a 30-min call with Tjard",
     "s1.wa":"Or message us directly:","s1.waLink":"Reach us on WhatsApp",
-    "done.h":"Thank you, your application is in!","done.p":"We'll review it carefully and get back to you personally. Great that you want to help build Clero in Munich.","done.btn":"Back to Clero",
+    "done.h":"Thank you, your application is in!","done.p":"We'll review it carefully and get back to you personally.","done.btn":"Back to Clero",
     "foot":"Questions? Message us on","foot.back":"back to Clero website",
     "wa.bubble":"<strong>Questions about the creator program?</strong>Message us directly on WhatsApp 💬",
     "err.req":"Please fill in your name and email.",
@@ -491,7 +446,6 @@ document.getElementById('waX').addEventListener('click', () => { document.getEle
 
 function showToast(msg) { const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg; document.body.appendChild(el); setTimeout(() => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4500); }
 
-// Thema Ja/Nein
 document.getElementById('theme-yes').addEventListener('change', () => { document.getElementById('themeWrap').hidden = false; document.getElementById('c-theme').focus(); });
 document.getElementById('theme-no').addEventListener('change', () => { document.getElementById('themeWrap').hidden = true; document.getElementById('c-theme').value = ''; });
 
@@ -539,8 +493,8 @@ function autoresp(en) {
     ? '<p style="margin:0 0 14px;">We have received your application and we are really happy that you want to be part of it. ✨</p>'
     : '<p style="margin:0 0 14px;">Wir haben deine Bewerbung erhalten und freuen uns sehr, dass du dabei sein möchtest. ✨</p>';
   const about = en
-    ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What Clero means for you</h3><p style="margin:0 0 14px;">Clero lets you build a community in your niche in Munich, gain extra reach and earn money – starting with paid events, and later memberships and brand collaborations. The platform stays free for you.</p>'
-    : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Was Clero dir bringt</h3><p style="margin:0 0 14px;">Mit Clero baust du in München eine Community in deiner Nische auf, gewinnst zusätzliche Reichweite und verdienst Geld – zunächst über Paid Events, später über Memberships und Brand-Kooperationen. Die Plattform bleibt für dich kostenlos.</p>';
+    ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What Clero means for you</h3><p style="margin:0 0 14px;">With Clero, building a community stops feeling like a third job: structure instead of chat chaos, visibility instead of endless content, payment instead of volunteering, and an asset that\'s yours – not the algorithm\'s. The platform stays free for you.</p>'
+    : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Was Clero dir bringt</h3><p style="margin:0 0 14px;">Mit Clero fühlt sich Community-Aufbau nicht mehr wie ein dritter Job an: Struktur statt Chat-Chaos, Sichtbarkeit statt endlosem Content, Vergütung statt Ehrenamt und ein Asset, das dir gehört – nicht dem Algorithmus. Die Plattform bleibt für dich kostenlos.</p>';
   const next = en
     ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What happens next</h3><p style="margin:0 0 14px;">We review every application personally. If it is a match, we get back to you to talk through the details. So there is nothing else you need to do for now. 🙌</p>'
     : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Wie es weitergeht</h3><p style="margin:0 0 14px;">Wir schauen uns jede Bewerbung persönlich an. Wenn es passt, melden wir uns bei dir, um die Details zu besprechen. Du musst also erstmal nichts weiter tun. 🙌</p>';
@@ -574,7 +528,6 @@ function gotoDone() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Robuster Fallback: klassischer Form-POST (kein CORS, kann nicht haengen)
 function submitClassic(en) {
   const form = document.createElement('form');
   form.action = 'https://formsubmit.co/' + FS_ENDPOINT; form.method = 'POST'; form.style.display = 'none';
@@ -591,7 +544,6 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
   if (!formValid()) return;
   const btn = document.getElementById('submitBtn');
   btn.textContent = t('s1.sending'); btn.disabled = true;
-  // Benachrichtigungen feuern, ohne zu blockieren
   try { waPing(); sendLeadMail(en); } catch (e) {}
   const payload = { _subject: (en ? 'New creator application: ' : 'Neue Creator-Bewerbung: ') + lv('c-name'), _cc: 'n.emrich@clero.de', _template: 'table', ...commonFields(en) };
   const ctrl = new AbortController();
@@ -605,7 +557,6 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     window.location.href = en ? 'danke.html?lang=en' : 'danke.html';
   } catch (err) {
     clearTimeout(timer);
-    // AJAX fehlgeschlagen/Timeout -> zuverlaessiger klassischer POST (leitet auf die Danke-Seite)
     submitClassic(en);
   } finally {
     btn.disabled = false; btn.textContent = t('s1.send');
@@ -613,7 +564,6 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
 });
 
 applyLang();
-// Erfolg nach klassischem POST-Redirect
 try { if (new URLSearchParams(location.search).get('sent') === '1') { gotoDone(); history.replaceState({}, '', location.pathname); } } catch (e) {}
 </script>
 </body>
