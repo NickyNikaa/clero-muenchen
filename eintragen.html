@@ -165,7 +165,7 @@
       </div>
       <div class="row2">
         <div class="field"><label for="loi-mail" data-i18n="f.mail">E-Mail *</label><input id="loi-mail" type="email" required data-i18n-ph="f.mailPh" placeholder="name@mail.de" /></div>
-        <div class="field"><label for="loi-phone" data-i18n="f.phone">Telefon</label><input id="loi-phone" type="tel" data-i18n-ph="f.phonePh" placeholder="+49 …" /></div>
+        <div class="field"><label for="loi-phone" data-i18n="f.phone">Telefon *</label><input id="loi-phone" type="tel" required data-i18n-ph="f.phonePh" placeholder="+49 …" /></div>
       </div>
       <button type="button" class="btn btn-full" id="toStep2" data-i18n="s1.next">Weiter →</button>
     </div>
@@ -247,7 +247,7 @@ const I18N = {
     "f.contact":"Ansprechpartner:in *","f.contactPh":"Vor- und Nachname",
     "f.role":"Rolle","f.rolePh":"z.B. Host",
     "f.mail":"E-Mail *","f.mailPh":"name@mail.de",
-    "f.phone":"Telefon","f.phonePh":"+49 …",
+    "f.phone":"Telefon *","f.phonePh":"+49 …",
     "f.place":"Ort","f.placePh":"München",
     "f.sig":"Deine Unterschrift *","f.sigClear":"Löschen","f.sigHint":"Mit Maus oder Finger unterschreiben.",
     "s2.h":"Optional: Bewirb dich jetzt für die Founding 20","s2.sub":"Deine Community ist bereits eingetragen. ✨ Wenn du möchtest, bewirb dich zusätzlich für einen der 20 limitierten Founding-Plätze in München:<ul style='margin:10px 0;padding-left:0;list-style:none;'><li style='margin-bottom:5px;'>🚀 Besondere Sichtbarkeit zum Launch</li><li style='margin-bottom:5px;'>⭐ Priorisierte Platzierung</li><li style='margin-bottom:5px;'>💚 Direkter Support von uns</li></ul>Passt es diesmal nicht? Deine normale Eintragung bleibt natürlich bestehen.",
@@ -278,7 +278,7 @@ const I18N = {
     "f.contact":"Contact person *","f.contactPh":"First and last name",
     "f.role":"Role","f.rolePh":"e.g. Host",
     "f.mail":"Email *","f.mailPh":"name@mail.com",
-    "f.phone":"Phone","f.phonePh":"+49 …",
+    "f.phone":"Phone *","f.phonePh":"+49 …",
     "f.place":"Place","f.placePh":"Munich",
     "f.sig":"Your signature *","f.sigClear":"Clear","f.sigHint":"Sign with your mouse or finger.",
     "s2.h":"Optional: apply for the Founding 20 now","s2.sub":"Your community is already listed. ✨ If you like, additionally apply for one of the 20 limited founding spots in Munich:<ul style='margin:10px 0;padding-left:0;list-style:none;'><li style='margin-bottom:5px;'>🚀 Special visibility at launch</li><li style='margin-bottom:5px;'>⭐ Priority placement</li><li style='margin-bottom:5px;'>💚 Direct support from us</li></ul>Doesn't fit this time? Your normal listing of course stays.",
@@ -355,7 +355,7 @@ document.getElementById('loi-cat').addEventListener('change', e => {
 });
 function fail(el) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); }
 function step1Valid() {
-  for (const id of ['loi-gname','loi-cat','loi-members','loi-contact','loi-mail']) {
+  for (const id of ['loi-gname','loi-cat','loi-members','loi-contact','loi-mail','loi-phone']) {
     const el = document.getElementById(id);
     if (!el.value.trim()) { fail(el); showToast(t('err.req')); return false; }
   }
