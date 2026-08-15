@@ -247,7 +247,7 @@
         <div class="field"><label for="c-mail" data-i18n="f.mail">E-Mail *</label><input id="c-mail" type="email" required data-i18n-ph="f.mailPh" placeholder="name@mail.de" /></div>
       </div>
 
-      <div class="section-lbl" data-i18n="sec.channels">Deine Kanäle</div>
+      <div class="field"><label for="c-phone" data-i18n="f.phone">Telefon *</label><input id="c-phone" type="tel" required data-i18n-ph="f.phonePh" placeholder="+49 1512 3456789" /></div><div class="section-lbl" data-i18n="sec.channels">Deine Kanäle</div>
       <div class="row2">
         <div class="field"><label for="c-insta" data-i18n="f.insta">Instagram</label><input id="c-insta" data-i18n-ph="f.instaPh" placeholder="@dein_handle" /></div>
         <div class="field"><label for="c-tiktok" data-i18n="f.tiktok">TikTok</label><input id="c-tiktok" data-i18n-ph="f.tiktokPh" placeholder="@dein_handle" /></div>
@@ -339,7 +339,7 @@ const I18N = {
     "s1.h":"Bewirb dich als Creator","s1.sub":"Dauert 1 Minute. Wir schauen uns deine Bewerbung an und melden uns persönlich bei dir. ✨",
     "sec.channels":"Deine Kanäle","sec.theme":"Dein Thema",
     "f.name":"Name *","f.namePh":"Vor- und Nachname",
-    "f.mail":"E-Mail *","f.mailPh":"name@mail.de",
+    "f.mail":"E-Mail *","f.mailPh":"name@mail.de","f.phone":"Telefon *","f.phonePh":"+49 1512 3456789",
     "f.insta":"Instagram","f.instaPh":"@dein_handle",
     "f.tiktok":"TikTok","f.tiktokPh":"@dein_handle",
     "f.other":"Weitere Kanäle","f.otherPh":"YouTube, Podcast, Blog, …",
@@ -352,7 +352,7 @@ const I18N = {
     "foot":"Fragen? Schreib uns auf","foot.back":"zur Clero-Website",
     "wa.bubble":"<strong>Fragen zum Creator-Programm?</strong>Schreib uns direkt auf WhatsApp 💬",
     "err.req":"Bitte fülle deinen Namen und deine E-Mail aus.",
-    "err.mail":"Bitte gib eine gültige E-Mail-Adresse an.",
+    "err.mail":"Bitte gib eine gültige E-Mail-Adresse an.","err.phone":"Bitte gib deine Telefonnummer an.",
     "err.theme":"Bitte gib dein Thema an.",
     "err.consent":"Bitte stimme der Datenschutzerklärung zu."
   },
@@ -391,7 +391,7 @@ const I18N = {
     "s1.h":"Apply as a creator","s1.sub":"Takes 1 minute. We review your application and get back to you personally. ✨",
     "sec.channels":"Your channels","sec.theme":"Your topic",
     "f.name":"Name *","f.namePh":"First and last name",
-    "f.mail":"Email *","f.mailPh":"name@mail.com",
+    "f.mail":"Email *","f.mailPh":"name@mail.com","f.phone":"Phone *","f.phonePh":"+49 1512 3456789",
     "f.insta":"Instagram","f.instaPh":"@your_handle",
     "f.tiktok":"TikTok","f.tiktokPh":"@your_handle",
     "f.other":"Other channels","f.otherPh":"YouTube, podcast, blog, …",
@@ -404,7 +404,7 @@ const I18N = {
     "foot":"Questions? Message us on","foot.back":"back to Clero website",
     "wa.bubble":"<strong>Questions about the creator program?</strong>Message us directly on WhatsApp 💬",
     "err.req":"Please fill in your name and email.",
-    "err.mail":"Please enter a valid email address.",
+    "err.mail":"Please enter a valid email address.","err.phone":"Please enter your phone number.",
     "err.theme":"Please enter your topic.",
     "err.consent":"Please agree to the privacy policy."
   }
@@ -448,7 +448,7 @@ function formValid() {
     if (!el.value.trim()) { fail(el); showToast(t('err.req')); return false; }
   }
   const mail = lv('c-mail');
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { fail(document.getElementById('c-mail')); showToast(t('err.mail')); return false; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { fail(document.getElementById('c-mail')); showToast(t('err.mail')); return false; }  if (!lv('c-phone')) { fail(document.getElementById('c-phone')); showToast(t('err.phone')); return false; }
   if (document.getElementById('theme-yes').checked && !lv('c-theme')) { fail(document.getElementById('c-theme')); showToast(t('err.theme')); return false; }
   if (!document.getElementById('consent').checked) { showToast(t('err.consent')); return false; }
   return true;
@@ -462,7 +462,7 @@ function themeValue(en) {
 function commonFields(en) {
   const o = {};
   o['Name'] = lv('c-name');
-  o['email'] = lv('c-mail');
+  o['email'] = lv('c-mail');  o[en ? 'Phone' : 'Telefon'] = lv('c-phone');
   o['Instagram'] = lv('c-insta');
   o['TikTok'] = lv('c-tiktok');
   o[en ? 'Other channels' : 'Weitere Kanäle'] = lv('c-other');
