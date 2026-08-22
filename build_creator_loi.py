@@ -6,9 +6,11 @@ Die Seiten sind so gebaut, dass die Stempel-Koordinaten fuer pdf-lib
 gibt am Ende ein JS-Objekt aus, das 1:1 in creator.html kann.
 """
 import json
+import os
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.colors import HexColor
+from reportlab.lib.utils import ImageReader
 
 W, H = A4
 INK = HexColor('#14332B')
@@ -16,6 +18,8 @@ GREEN = HexColor('#213B2C')
 ACCENT = HexColor('#82FF41')
 GREY = HexColor('#5E6B63')
 LINE = HexColor('#C9D6CE')
+
+SIG_TJARD = 'tjard-signatur.png'   # transparente PNG, aus clero-loi.pdf uebernommen
 
 M = 56              # Seitenrand
 BODY = 10.2
@@ -312,12 +316,18 @@ def build(lang):
     c.drawString(M, y, t['l_ortdatum2'])
     lx = M + c.stringWidth(t['l_ortdatum2'], 'Helvetica', BODY) + 8
     coords['tjard'] = {'p': 1, **dotted(lx, y, 150)}
-    y -= 26
+    y -= 44
 
     c.setFillColor(INK)
     c.drawString(M, y, t['l_sig'])
+    lx = M + c.stringWidth(t['l_sig'], 'Helvetica', BODY) + 10
     c.setFillColor(LINE)
-    c.rect(M + c.stringWidth(t['l_sig'], 'Helvetica', BODY) + 10, y - 4, 210, 0.6, stroke=0, fill=1)
+    c.rect(lx, y - 4, 210, 0.6, stroke=0, fill=1)
+    if os.path.exists(SIG_TJARD):
+        img = ImageReader(SIG_TJARD)
+        iw, ih = img.getSize()
+        sw = 110.0
+        c.drawImage(img, lx + 8, y - 2, width=sw, height=sw * ih / iw, mask='auto')
 
     footer()
     c.showPage()
