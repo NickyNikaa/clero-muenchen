@@ -397,7 +397,7 @@
         </div>
         <div class="field">
           <label data-i18n="f.sig">Deine Unterschrift *</label>
-          <div class="sig-wrap"><canvas id="loi-sig" width="520" height="130"></canvas><button type="button" class="sig-clear" id="sigClear" data-i18n="f.sigClear">Löschen</button></div>
+          <div class="sig-wrap"><canvas id="loi-sig" width="1040" height="260"></canvas><button type="button" class="sig-clear" id="sigClear" data-i18n="f.sigClear">Löschen</button></div>
           <p class="sig-hint" data-i18n="f.sigHint">Mit Maus oder Finger unterschreiben.</p>
         </div>
       </div>
@@ -621,11 +621,11 @@ const LOI_FIELDS = {
   de: { url: 'clero-creator-loi.pdf',
     cName:{p:0,x:59,y:698.9}, cTheme:{p:0,x:141.3,y:423.9}, cChannels:{p:0,x:237.1,y:401.9}, cReach:{p:0,x:203.0,y:379.9},
     sName:{p:1,x:97.0,y:453.5}, sHandle:{p:1,x:167.3,y:429.5}, sContact:{p:1,x:178.7,y:405.5}, sOrtDatum:{p:1,x:119.7,y:381.5},
-    sSign:{p:1,x:127.0,y:338.5,w:120,h:32}, tjard:{p:1,x:167.3,y:211.5} },
+    sSign:{p:1,x:127.0,y:338.5,w:170,h:30}, tjard:{p:1,x:167.3,y:211.5} },
   en: { url: 'clero-creator-loi-en.pdf',
     cName:{p:0,x:59,y:698.9}, cTheme:{p:0,x:127.7,y:423.9}, cChannels:{p:0,x:238.8,y:401.9}, cReach:{p:0,x:199.1,y:379.9},
     sName:{p:1,x:97.0,y:483.9}, sHandle:{p:1,x:169.6,y:459.9}, sContact:{p:1,x:169.6,y:435.9}, sOrtDatum:{p:1,x:120.9,y:411.9},
-    sSign:{p:1,x:118.5,y:368.9,w:120,h:32}, tjard:{p:1,x:159.4,y:241.9} }
+    sSign:{p:1,x:118.5,y:368.9,w:170,h:30}, tjard:{p:1,x:159.4,y:241.9} }
 };
 const MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -737,7 +737,7 @@ function setPath(p) {
 /* ---------------- Unterschrift ---------------- */
 const sigCanvas = $('loi-sig');
 const sctx = sigCanvas.getContext('2d');
-sctx.strokeStyle = '#14332B'; sctx.lineWidth = 2.2; sctx.lineCap = 'round'; sctx.lineJoin = 'round';
+sctx.strokeStyle = '#14332B'; sctx.lineWidth = 4.6; sctx.lineCap = 'round'; sctx.lineJoin = 'round';
 let sigDrawing = false, sigHas = false;
 function sigPos(e) { const r = sigCanvas.getBoundingClientRect(); const tp = e.touches ? e.touches[0] : e; return { x: (tp.clientX - r.left) * (sigCanvas.width / r.width), y: (tp.clientY - r.top) * (sigCanvas.height / r.height) }; }
 function sigStart(e) { sigDrawing = true; const p = sigPos(e); sctx.beginPath(); sctx.moveTo(p.x, p.y); e.preventDefault(); }
@@ -763,6 +763,49 @@ function channelsValue() {
 }
 function mainHandle() { return lv('c-insta') || lv('c-tiktok') || lv('c-other'); }
 
+
+/* --- Unterschrift auf den tatsaechlich gezeichneten Bereich zuschneiden ---
+   Vorher wanderte die komplette (grossteils leere) Canvas-Flaeche ins PDF.
+   Wer klein oder am Rand unterschrieben hat, landete dadurch als winziger
+   Strich neben der Linie - oder schien ganz zu fehlen. */
+function signatureCrop() {
+  const w = sigCanvas.width, h = sigCanvas.height;
+  let d;
+  try { d = sctx.getImageData(0, 0, w, h).data; } catch (e) { return null; }
+  let minX = w, minY = h, maxX = -1, maxY = -1;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      if (d[(y * w + x) * 4 + 3] > 12) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+  if (maxX < 0) return null;
+  const pad = 10;
+  minX = Math.max(0, minX - pad); minY = Math.max(0, minY - pad);
+  maxX = Math.min(w - 1, maxX + pad); maxY = Math.min(h - 1, maxY + pad);
+  const cw = maxX - minX + 1, ch = maxY - minY + 1;
+  const out = document.createElement('canvas');
+  out.width = cw; out.height = ch;
+  out.getContext('2d').drawImage(sigCanvas, minX, minY, cw, ch, 0, 0, cw, ch);
+  return { url: out.toDataURL('image/png'), ratio: cw / ch };
+}
+
+/* Unterschrift proportional in die Box einpassen (w/h = Maximalmasse),
+   buendig auf der Unterschriftslinie. */
+async function drawSignature(doc, pages, box) {
+  const sig = signatureCrop();
+  if (!sig || !box) return false;
+  const png = await doc.embedPng(sig.url);
+  let sw = box.w, sh = sw / sig.ratio;
+  if (sh > box.h) { sh = box.h; sw = sh * sig.ratio; }
+  pages[box.p].drawImage(png, { x: box.x, y: box.y, width: sw, height: sh });
+  return true;
+}
+
 /* ---------------- LOI-PDF befuellen ---------------- */
 async function buildFilledLoi() {
   const cfg = LOI_FIELDS[lang];
@@ -783,7 +826,7 @@ async function buildFilledLoi() {
   put(cfg.sContact, lv('c-mail') + (lv('c-phone') ? '  ·  ' + lv('c-phone') : ''));
   put(cfg.sOrtDatum, place + ', ' + today);
   put(cfg.tjard, today);
-  if (sigHas && cfg.sSign) { const png = await doc.embedPng(sigCanvas.toDataURL('image/png')); const sp = cfg.sSign; pages[sp.p].drawImage(png, { x: sp.x, y: sp.y, width: sp.w, height: sp.h }); }
+  if (sigHas) await drawSignature(doc, pages, cfg.sSign);
   return await doc.save();
 }
 
