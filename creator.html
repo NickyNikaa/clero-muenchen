@@ -876,9 +876,24 @@ async function sendAjax(payload) {
 
 function postLoiFile(fields, file) {
   return new Promise(resolve => {
+    let done = false;
+    const finish = ok => { if (!done) { done = true; resolve(ok); } };
     try {
-      let ifr = document.getElementById('loiSink');
-      if (!ifr) { ifr = document.createElement('iframe'); ifr.id = 'loiSink'; ifr.name = 'loiSink'; ifr.style.display = 'none'; document.body.appendChild(ifr); }
+      const old = document.getElementById('loiSink');
+      if (old) old.remove();
+      const ifr = document.createElement('iframe');
+      ifr.id = 'loiSink'; ifr.name = 'loiSink'; ifr.style.display = 'none';
+      document.body.appendChild(ifr);
+      /* Bestaetigung: _next zeigt auf host.clero.de, also gleiche Origin.
+         Landet der iframe dort, ist der Upload durch. Bleibt er auf
+         formsubmit.co haengen (z.B. Captcha-Seite), wirft der Zugriff -
+         dann gilt der Upload als nicht bestaetigt. */
+      ifr.addEventListener('load', () => {
+        try {
+          const href = ifr.contentWindow.location.href || '';
+          if (href.indexOf('danke.html') !== -1) finish(true);
+        } catch (e) {}
+      });
       const form = document.createElement('form');
       form.action = 'https://formsubmit.co/' + FS_ENDPOINT;
       form.method = 'POST'; form.enctype = 'multipart/form-data';
@@ -892,8 +907,9 @@ function postLoiFile(fields, file) {
       const dt = new DataTransfer(); dt.items.add(file); fi.files = dt.files;
       document.body.appendChild(form);
       form.submit();
-      setTimeout(() => { try { form.remove(); } catch (e) {} resolve(true); }, 1500);
-    } catch (e) { resolve(false); }
+      setTimeout(() => { try { form.remove(); } catch (e) {} }, 3000);
+      setTimeout(() => finish(false), 20000);
+    } catch (e) { finish(false); }
   });
 }
 
@@ -985,27 +1001,6 @@ $('submitBtn').addEventListener('click', async () => {
 
   waPing(founding ? 'founding' : 'basic');
 
-  let pdfSent = false;
-  if (founding) {
-    try {
-      if (!window.PDFLib) throw new Error('pdf-lib not loaded');
-      const bytes = await buildFilledLoi();
-      const fname = 'Clero-Creator-LOI-' + safeName() + '.pdf';
-      const blob = new Blob([bytes], { type: 'application/pdf' });
-      const dlUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = dlUrl; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(dlUrl), 8000);
-      pdfSent = await postLoiFile({ _subject: (en ? 'Creator LOI PDF: ' : 'Creator-LOI-PDF: ') + lv('c-name'), _cc: MAIL_TO, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
-    } catch (e) {}
-    if (!pdfSent) {
-      sendAjax({ _subject: (en ? 'ACTION NEEDED - creator LOI PDF missing: ' : 'BITTE PRUEFEN - Creator-LOI-PDF fehlt: ') + lv('c-name'),
-                 _cc: MAIL_TO, _template: 'table', _captcha: 'false',
-                 Hinweis: en ? 'The creator signed the LOI but the PDF could not be attached automatically. Please ask for the copy that was downloaded to their device.'
-                             : 'Creator hat den LOI unterschrieben, das PDF konnte aber nicht automatisch angehaengt werden. Bitte die Kopie anfragen, die auf dem Geraet heruntergeladen wurde.',
-                 ...cf });
-    }
-  }
-
   sendLeadMail(en, founding);
 
   $('doneH').textContent = founding ? t('done.hFounding') : t('done.h');
@@ -1014,7 +1009,35 @@ $('submitBtn').addEventListener('click', async () => {
   if (founding) { fb.innerHTML = t('done.fallback'); fb.hidden = false; } else { fb.hidden = true; }
   gotoStep(3);
   sending = false;
+
+  // Die Daten sind durch, der Erfolg steht schon auf dem Bildschirm.
+  // Das LOI-PDF laeuft jetzt im Hintergrund nach.
+  if (founding) deliverLoi(en, cf);
 });
+
+/* Unterschriebenes LOI-PDF nachschieben. Kommt es nicht bestaetigt an,
+   geht eine Warnmail raus, damit keine Bewerbung unbemerkt liegen bleibt. */
+async function deliverLoi(en, cf) {
+  let pdfSent = false;
+  try {
+    if (!window.PDFLib) throw new Error('pdf-lib not loaded');
+    const bytes = await buildFilledLoi();
+    const fname = 'Clero-Creator-LOI-' + safeName() + '.pdf';
+    const blob = new Blob([bytes], { type: 'application/pdf' });
+    const dlUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = dlUrl; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(dlUrl), 8000);
+    pdfSent = await postLoiFile({ _subject: (en ? 'Creator LOI PDF: ' : 'Creator-LOI-PDF: ') + lv('c-name'), _cc: MAIL_TO, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
+  } catch (e) {}
+  if (!pdfSent) {
+    sendAjax({ _subject: (en ? 'ACTION NEEDED - creator LOI PDF missing: ' : 'BITTE PRUEFEN - Creator-LOI-PDF fehlt: ') + lv('c-name'),
+               _cc: MAIL_TO, _template: 'table', _captcha: 'false',
+               Hinweis: en ? 'The creator signed the LOI but the PDF upload was not confirmed. Please ask for the copy that was downloaded to their device.'
+                           : 'Creator hat den LOI unterschrieben, das PDF kam aber nicht bestaetigt an. Bitte die Kopie anfragen, die auf dem Geraet heruntergeladen wurde.',
+               ...cf });
+  }
+}
+
 
 /* ---------------- Leeres LOI mit Tagesdatum ---------------- */
 $('loiDownload').addEventListener('click', async function(e) {
