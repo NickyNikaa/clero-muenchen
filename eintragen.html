@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>if(!window.PDFLib){var _pl=document.createElement("script");_pl.src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js";document.head.appendChild(_pl);}</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root {
@@ -106,6 +107,34 @@
   .wa-btn:hover { transform: scale(1.06); box-shadow: 0 8px 26px rgba(37,211,102,.55); }
   @keyframes waPop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 520px) { .wa-bubble { max-width: 180px; } }
+
+  /* --- Founding-20-Block --- */
+  .fbox { background: var(--white); border: 1px solid var(--line); border-radius: 22px; padding: 26px 26px 24px; box-shadow: var(--shadow); margin-top: 26px; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+  .fbox h2 { font-size: clamp(20px, 3.6vw, 25px); font-weight: 800; letter-spacing: -.02em; line-height: 1.18; margin-bottom: 10px; }
+  .fbox .lead { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+  .perks { list-style: none; display: grid; gap: 12px; margin-bottom: 18px; }
+  .perks li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; line-height: 1.5; }
+  .perks li .pi { font-size: 19px; line-height: 1.25; flex-shrink: 0; }
+  .perks li b { display: block; font-weight: 700; }
+  .perks li span.pd { color: var(--muted); }
+  .howto { background: var(--neon-soft); border-radius: 14px; padding: 15px 17px; font-size: 14px; line-height: 1.55; }
+  .howto b { font-weight: 700; }
+  .altnote { margin-top: 14px; font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+  .jump { margin-top: 18px; }
+
+  /* --- Zwei-Wege-Auswahl --- */
+  .opt .perklist { list-style: none; margin: 12px 0 0; display: grid; gap: 7px; }
+  .opt .perklist li { font-size: 13.5px; color: var(--ink); display: flex; gap: 8px; align-items: flex-start; }
+  .opt .tick svg { display: none; }
+  .opt.active .tick svg { display: block; }
+  .hint-err { display: none; font-size: 12.5px; color: #C42B2B; font-weight: 600; margin-top: 5px; }
+  .field.bad input { border-color: #e23b3b; }
+  .field.bad .hint-err { display: block; }
+  .field .hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
+  .sending-note { text-align:center; font-size: 13px; color: var(--muted); margin-top: 12px; }
+  .success .fallback { font-size: 13px; color: var(--muted); margin-top: 18px; line-height: 1.5; }
+  .success .fallback a { color: var(--green); font-weight: 600; text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -123,12 +152,29 @@
 
 <section class="hero">
   <div class="wrap">
-    <span class="pill" data-i18n="hero.pill">💚 München</span>
+    <span class="pill" data-i18n="hero.pill">💚 München · Founding 20</span>
     <h1 data-i18n="hero.h1">Trag deine <span class="hl">Community</span> bei Clero ein</h1>
+    <p data-i18n="hero.p">Dauert zwei Minuten. Wenn du willst, bewirb dich direkt auf einen der 20 Founding-Plätze in München.</p>
   </div>
 </section>
 
 <div class="wrap">
+
+  <!-- Founding-20-Programm -->
+  <section class="fbox" id="founding">
+    <p class="eyebrow" data-i18n="f20.eyebrow">Founding 20</p>
+    <h2 data-i18n="f20.h">20 Plätze für die ersten Münchner Communities</h2>
+    <p class="lead" data-i18n="f20.lead">Clero startet in München. Die ersten 20 Communities, die von Anfang an dabei sind, starten mit Vorsprung. Kostenlos und unverbindlich.</p>
+    <ul class="perks">
+      <li><span class="pi">🚀</span><span><b data-i18n="f20.p1t">Besondere Sichtbarkeit zum Launch</b><span class="pd" data-i18n="f20.p1d">Wir stellen euch aktiv vor: in der App, auf unseren Kanälen und in unserer Launch-Kommunikation.</span></span></li>
+      <li><span class="pi">⭐</span><span><b data-i18n="f20.p2t">Priorisierte Platzierung</b><span class="pd" data-i18n="f20.p2d">Eure Gruppe wird auf der Karte und beim Swipen bevorzugt ausgespielt. Neue Leute finden euch zuerst.</span></span></li>
+      <li><span class="pi">💚</span><span><b data-i18n="f20.p3t">Direkter Support von uns</b><span class="pd" data-i18n="f20.p3d">Feste Ansprechpartnerin, kurzer Draht und eure Wünsche fließen direkt ins Produkt.</span></span></li>
+    </ul>
+    <div class="howto" data-i18n="f20.how"><b>So läuft die Bewerbung:</b> Angaben ausfüllen, den Letter of Intent kurz mit Finger oder Maus unterschreiben, absenden. Der LOI ist rechtlich unverbindlich, er hält nur fest, dass ihr grundsätzlich Interesse habt, Clero zum Start zu nutzen.</div>
+    <p class="altnote" data-i18n="f20.alt">Kein LOI? Auch völlig okay. Du kannst deine Community auch einfach nur eintragen lassen. Dann ohne die drei Vorteile oben, aber ihr seid trotzdem von Tag eins an in der App.</p>
+    <div class="jump"><a href="#card" class="btn btn-full" data-i18n="f20.cta">Community eintragen 🚀</a></div>
+  </section>
+
   <div class="card" id="card">
 
     <div class="progress" id="progress">
@@ -165,19 +211,36 @@
       </div>
       <div class="row2">
         <div class="field"><label for="loi-mail" data-i18n="f.mail">E-Mail *</label><input id="loi-mail" type="email" required data-i18n-ph="f.mailPh" placeholder="name@mail.de" /></div>
-        <div class="field"><label for="loi-phone" data-i18n="f.phone">Telefon *</label><input id="loi-phone" type="tel" required data-i18n-ph="f.phonePh" placeholder="+49 …" /></div>
+        <div class="field" id="phoneField"><label for="loi-phone" data-i18n="f.phone">Telefon *</label><input id="loi-phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="24" required data-i18n-ph="f.phonePh" placeholder="+49 151 23456789" /><div class="hint" data-i18n="f.phoneHint">Mit Vorwahl, damit wir dich erreichen können.</div><div class="hint-err" data-i18n="err.phoneHint">Bitte eine echte Telefonnummer eingeben (nur Ziffern, mindestens 7 Stellen).</div></div>
       </div>
       <button type="button" class="btn btn-full" id="toStep2" data-i18n="s1.next">Weiter →</button>
     </div>
 
     <!-- STEP 2: Wahl + ggf. LOI -->
     <div class="step" id="step2" hidden>
-      <h2 data-i18n="s2.h">Optional: Bewirb dich jetzt für die Founding 20</h2>
-      <div class="sub" data-i18n="s2.sub">Deine Community ist bereits eingetragen. ✨ Wenn du möchtest, bewirb dich zusätzlich für einen der 20 limitierten Founding-Plätze in München:</div>
+      <h2 data-i18n="s2.h">Wie möchtest du weitermachen?</h2>
+      <div class="sub" data-i18n="s2.sub">Deine Angaben haben wir. Jetzt entscheidest du, ob du dich zusätzlich auf einen der 20 Founding-Plätze bewirbst.</div>
 
-      <div class="founding-extra">
+      <div class="choice" id="pathChoice">
+        <div class="opt" id="optFounding" data-path="founding" role="button" tabindex="0">
+          <div class="ot"><span data-i18n="s2.foundingT">Auf die Founding 20 bewerben</span><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#213B2C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 5"/></svg></span></div>
+          <div class="od" data-i18n="s2.foundingD">Mit kurzer Unterschrift unter dem Letter of Intent. Rechtlich unverbindlich, kostenlos, jederzeit widerrufbar.</div>
+          <ul class="perklist">
+            <li><span>🚀</span><span data-i18n="s2.perk1">Besondere Sichtbarkeit zum Launch</span></li>
+            <li><span>⭐</span><span data-i18n="s2.perk2">Priorisierte Platzierung</span></li>
+            <li><span>💚</span><span data-i18n="s2.perk3">Direkter Support von uns</span></li>
+          </ul>
+        </div>
+
+        <div class="opt" id="optBasic" data-path="basic" role="button" tabindex="0">
+          <div class="ot"><span data-i18n="s2.basicT">Erstmal nur eintragen</span><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#213B2C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 5"/></svg></span></div>
+          <div class="od" data-i18n="s2.basicD">Ohne LOI und ohne die drei Vorteile oben. Eure Community ist trotzdem ab Tag eins in der App. Du kannst dich später jederzeit noch auf die Founding 20 bewerben.</div>
+        </div>
+      </div>
+
+      <div class="founding-extra" id="foundingExtra" hidden>
         <ol class="steps">
-          <li data-i18n="s2.step1">Felder sind schon ausgefüllt, wir setzen sie automatisch in den LOI ein</li>
+          <li data-i18n="s2.step1">Deine Angaben setzen wir automatisch in den LOI ein</li>
           <li data-i18n="s2.step2">Unterschreib unten kurz mit Maus oder Finger</li>
           <li data-i18n="s2.step3">Absenden, fertig. Der LOI kommt direkt bei uns an</li>
         </ol>
@@ -192,19 +255,18 @@
       <label class="consent"><input type="checkbox" id="consent" /><span data-i18n="s2.consent">Ich stimme der Verarbeitung meiner Daten gemäß der <a href="https://www.clero.de/datenschutz" target="_blank" rel="noopener">Datenschutzerklärung</a> zu.</span></label>
       <div class="btn-row">
         <button type="button" class="btn btn-ghost" id="backStep1" data-i18n="s2.back">← Zurück</button>
-        <button type="button" class="btn" id="submitBtn" data-i18n="s2.sendFounding">Für Founding 20 bewerben</button>
+        <button type="button" class="btn" id="submitBtn" data-i18n="s2.sendBasic">Community eintragen</button>
       </div>
-      <p class="blank-link"><a href="#" id="skipBtn" data-i18n="s2.skip">Nur eintragen, ohne Founding 20</a></p>
-      <p class="blank-link"><a href="clero-loi.pdf" id="loiDownload" download data-i18n="s2.blank">Oder leeres LOI-PDF herunterladen</a></p>
+      <p class="blank-link"><a href="clero-loi.pdf" id="loiDownload" download data-i18n="s2.blank">Oder leeres LOI-PDF herunterladen und manuell an n.emrich@clero.de schicken</a></p>
     </div>
 
-    <!-- SUCCESS -->
     <div class="step" id="stepDone" hidden>
       <div class="success">
         <div class="big">💚</div>
         <h2 id="doneH" data-i18n="done.h">Danke, das hat geklappt!</h2>
         <p id="doneP" data-i18n="done.p">Deine Community ist bei uns eingegangen. Wir melden uns bei dir.</p>
         <a href="https://www.clero.de/host" class="btn" data-i18n="done.btn">Zur Clero-Website</a>
+        <p class="fallback" id="doneFallback" hidden></p>
       </div>
     </div>
 
@@ -230,12 +292,25 @@ const FS_ENDPOINT = '588e8d43be349a56d2acc52f584fc4d6';
 const CMB_PHONE = '4915206772337';
 const WA = '4915566000890';
 const CMB_KEY = ''; // CallMeBot-APIKEY eintragen fuer WhatsApp-Benachrichtigung
+const MAIL_TO = 'n.emrich@clero.de';
 
 const I18N = {
   de: {
     "back":"← Zur Übersicht",
-    "hero.pill":"💚 München",
+    "hero.pill":"💚 München · Founding 20",
     "hero.h1":"Trag deine <span class=\"hl\">Community</span> bei Clero ein",
+    "hero.p":"Dauert zwei Minuten. Wenn du willst, bewirb dich direkt auf einen der 20 Founding-Plätze in München.",
+
+    "f20.eyebrow":"Founding 20",
+    "f20.h":"20 Plätze für die ersten Münchner Communities",
+    "f20.lead":"Clero startet in München. Die ersten 20 Communities, die von Anfang an dabei sind, starten mit Vorsprung. Kostenlos und unverbindlich.",
+    "f20.p1t":"Besondere Sichtbarkeit zum Launch","f20.p1d":"Wir stellen euch aktiv vor: in der App, auf unseren Kanälen und in unserer Launch-Kommunikation.",
+    "f20.p2t":"Priorisierte Platzierung","f20.p2d":"Eure Gruppe wird auf der Karte und beim Swipen bevorzugt ausgespielt. Neue Leute finden euch zuerst.",
+    "f20.p3t":"Direkter Support von uns","f20.p3d":"Feste Ansprechpartnerin, kurzer Draht und eure Wünsche fließen direkt ins Produkt.",
+    "f20.how":"<b>So läuft die Bewerbung:</b> Angaben ausfüllen, den Letter of Intent kurz mit Finger oder Maus unterschreiben, absenden. Der LOI ist rechtlich unverbindlich, er hält nur fest, dass ihr grundsätzlich Interesse habt, Clero zum Start zu nutzen.",
+    "f20.alt":"Kein LOI? Auch völlig okay. Du kannst deine Community auch einfach nur eintragen lassen. Dann ohne die drei Vorteile oben, aber ihr seid trotzdem von Tag eins an in der App.",
+    "f20.cta":"Community eintragen 🚀",
+
     "prog":"Schritt %s von 2",
     "s1.h":"Deine Community","s1.next":"Weiter →",
     "f.name":"Name der Gruppe / Community *","f.namePh":"z.B. München Yoga Crew",
@@ -247,26 +322,57 @@ const I18N = {
     "f.contact":"Ansprechpartner:in *","f.contactPh":"Vor- und Nachname",
     "f.role":"Rolle","f.rolePh":"z.B. Host",
     "f.mail":"E-Mail *","f.mailPh":"name@mail.de",
-    "f.phone":"Telefon *","f.phonePh":"+49 …",
+    "f.phone":"Telefon *","f.phonePh":"+49 151 23456789",
+    "f.phoneHint":"Mit Vorwahl, damit wir dich erreichen können.",
     "f.place":"Ort","f.placePh":"München",
     "f.sig":"Deine Unterschrift *","f.sigClear":"Löschen","f.sigHint":"Mit Maus oder Finger unterschreiben.",
-    "s2.h":"Optional: Bewirb dich jetzt für die Founding 20","s2.sub":"Deine Community ist bereits eingetragen. ✨ Wenn du möchtest, bewirb dich zusätzlich für einen der 20 limitierten Founding-Plätze in München:<ul style='margin:10px 0;padding-left:0;list-style:none;'><li style='margin-bottom:5px;'>🚀 Besondere Sichtbarkeit zum Launch</li><li style='margin-bottom:5px;'>⭐ Priorisierte Platzierung</li><li style='margin-bottom:5px;'>💚 Direkter Support von uns</li></ul>Passt es diesmal nicht? Deine normale Eintragung bleibt natürlich bestehen.",
+
+    "s2.h":"Wie möchtest du weitermachen?",
+    "s2.sub":"Deine Angaben haben wir. Jetzt entscheidest du, ob du dich zusätzlich auf einen der 20 Founding-Plätze bewirbst.",
+    "s2.foundingT":"Auf die Founding 20 bewerben",
+    "s2.foundingD":"Mit kurzer Unterschrift unter dem Letter of Intent. Rechtlich unverbindlich, kostenlos, jederzeit widerrufbar.",
+    "s2.perk1":"Besondere Sichtbarkeit zum Launch","s2.perk2":"Priorisierte Platzierung","s2.perk3":"Direkter Support von uns",
+    "s2.basicT":"Erstmal nur eintragen",
+    "s2.basicD":"Ohne LOI und ohne die drei Vorteile oben. Eure Community ist trotzdem ab Tag eins in der App. Du kannst dich später jederzeit noch auf die Founding 20 bewerben.",
+    "s2.step1":"Deine Angaben setzen wir automatisch in den LOI ein","s2.step2":"Unterschreib unten kurz mit Maus oder Finger","s2.step3":"Absenden, fertig. Der LOI kommt direkt bei uns an",
     "s2.consent":"Ich stimme der Verarbeitung meiner Daten gemäß der <a href=\"https://www.clero.de/datenschutz\" target=\"_blank\" rel=\"noopener\">Datenschutzerklärung</a> zu.",
-    "s2.foundingT":"✨ Founding 20 (mit LOI)","s2.foundingD":"Bewirb dich als einer der ersten 20 Founding-Hosts in München. Für dich bringt das nur Vorteile: Clero dauerhaft kostenlos, beim Launch direkt sichtbar, bevorzugte Ausspielung und eine persönliche Ansprechpartnerin. Komplett unverbindlich, du bestätigst dein Interesse nur kurz mit einem Letter of Intent.",
-    "s2.basicT":"Erstmal nur eintragen","s2.basicD":"Wir nehmen eure Community ins Verzeichnis auf, ohne LOI und ohne Founding-20-Vorteile.",
-    "s2.step1":"Felder sind schon ausgefüllt, wir setzen sie automatisch in den LOI ein","s2.step2":"Unterschreib unten kurz mit Maus oder Finger","s2.step3":"Absenden, fertig. Der LOI kommt direkt bei uns an",
-    "s2.back":"← Zurück","s2.sendFounding":"Für die „Founding 20“ bewerben 🚀","s2.skip":"Nur vermerken, ohne Bewerbung auf das „Founding 20“-Programm","s2.sendBasic":"Community eintragen","s2.blank":"Oder leeres LOI-PDF herunterladen und manuell an n.emrich@clero.de schicken","s2.sending":"Wird gesendet …",
-    "done.h":"Danke, das hat geklappt!","done.p":"Deine Community ist bei uns eingegangen. Wir melden uns bei dir.","done.pFounding":"Vielen Dank, dein Letter of Intent ist bei uns eingegangen! Clero startet im August in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden.","done.btn":"Zur Clero-Website",
+    "s2.back":"← Zurück","s2.sendFounding":"Für die „Founding 20“ bewerben 🚀","s2.sendBasic":"Community eintragen","s2.sending":"Wird gesendet …",
+    "s2.blank":"Oder leeres LOI-PDF herunterladen und manuell an n.emrich@clero.de schicken",
+
+    "done.h":"Danke, das hat geklappt!",
+    "done.p":"Deine Community ist bei uns eingegangen. Wir melden uns bei dir.",
+    "done.hFounding":"Danke, deine Bewerbung ist da!",
+    "done.pFounding":"Dein Letter of Intent ist bei uns eingegangen. Clero startet in München. Ein paar Wochen vor dem Launch melden wir uns persönlich bei dir, um deine Community in Ruhe einzubinden.",
+    "done.fallback":"Eine Kopie deines unterschriebenen LOI wurde auf dein Gerät geladen. Falls bei dir etwas schiefgegangen ist, schick sie uns einfach an <a href=\"mailto:n.emrich@clero.de\">n.emrich@clero.de</a>.",
+    "done.btn":"Zur Clero-Website",
+
     "foot":"Fragen? Schreib uns auf","foot.back":"zur Clero-Website","nav.back":"← Clero Website",
     "wa.bubble":"<strong>Fragen zu Clero?</strong>Schreib uns direkt auf WhatsApp 💬",
     "err.req":"Bitte fülle alle Pflichtfelder (mit *) aus.",
+    "err.mail":"Bitte eine gültige E-Mail-Adresse eingeben.",
+    "err.phone":"Bitte eine echte Telefonnummer eingeben (nur Ziffern, mindestens 7 Stellen).",
+    "err.phoneHint":"Bitte eine echte Telefonnummer eingeben (nur Ziffern, mindestens 7 Stellen).",
+    "err.path":"Bitte wähl aus, wie du weitermachen möchtest.",
     "err.sig":"Bitte unterschreibe im Unterschrift-Feld.",
-    "err.consent":"Bitte stimme der Datenschutzerklärung zu."
+    "err.consent":"Bitte stimme der Datenschutzerklärung zu.",
+    "err.send":"Das Absenden hat nicht geklappt. Wir öffnen dir eine vorbereitete E-Mail."
   },
   en: {
     "back":"← Back to overview",
-    "hero.pill":"💚 Munich",
+    "hero.pill":"💚 Munich · Founding 20",
     "hero.h1":"List your <span class=\"hl\">community</span> on Clero",
+    "hero.p":"Takes two minutes. If you like, apply straight away for one of the 20 founding spots in Munich.",
+
+    "f20.eyebrow":"Founding 20",
+    "f20.h":"20 spots for the first communities in Munich",
+    "f20.lead":"Clero is launching in Munich. The first 20 communities on board start with a head start. Free and non-binding.",
+    "f20.p1t":"Special visibility at launch","f20.p1d":"We actively introduce you: in the app, on our channels and in our launch communication.",
+    "f20.p2t":"Priority placement","f20.p2d":"Your group is shown first on the map and in swipe. New people find you before anyone else.",
+    "f20.p3t":"Direct support from us","f20.p3d":"A named contact, a short line to us, and your wishes go straight into the product.",
+    "f20.how":"<b>How to apply:</b> fill in your details, sign the Letter of Intent with your finger or mouse, hit send. The LOI is legally non-binding, it simply records that you are interested in using Clero at launch.",
+    "f20.alt":"No LOI? Totally fine. You can also just list your community. Without the three benefits above, but you are still in the app from day one.",
+    "f20.cta":"List your community 🚀",
+
     "prog":"Step %s of 2",
     "s1.h":"Your community","s1.next":"Next →",
     "f.name":"Group / community name *","f.namePh":"e.g. Munich Yoga Crew",
@@ -278,21 +384,40 @@ const I18N = {
     "f.contact":"Contact person *","f.contactPh":"First and last name",
     "f.role":"Role","f.rolePh":"e.g. Host",
     "f.mail":"Email *","f.mailPh":"name@mail.com",
-    "f.phone":"Phone *","f.phonePh":"+49 …",
+    "f.phone":"Phone *","f.phonePh":"+49 151 23456789",
+    "f.phoneHint":"Including the dialling code, so we can reach you.",
     "f.place":"Place","f.placePh":"Munich",
     "f.sig":"Your signature *","f.sigClear":"Clear","f.sigHint":"Sign with your mouse or finger.",
-    "s2.h":"Optional: apply for the Founding 20 now","s2.sub":"Your community is already listed. ✨ If you like, additionally apply for one of the 20 limited founding spots in Munich:<ul style='margin:10px 0;padding-left:0;list-style:none;'><li style='margin-bottom:5px;'>🚀 Special visibility at launch</li><li style='margin-bottom:5px;'>⭐ Priority placement</li><li style='margin-bottom:5px;'>💚 Direct support from us</li></ul>Doesn't fit this time? Your normal listing of course stays.",
+
+    "s2.h":"How would you like to continue?",
+    "s2.sub":"We have your details. Now you decide whether you also apply for one of the 20 founding spots.",
+    "s2.foundingT":"Apply for the Founding 20",
+    "s2.foundingD":"With a quick signature under the Letter of Intent. Legally non-binding, free, revocable at any time.",
+    "s2.perk1":"Special visibility at launch","s2.perk2":"Priority placement","s2.perk3":"Direct support from us",
+    "s2.basicT":"Just list us for now",
+    "s2.basicD":"Without an LOI and without the three benefits above. Your community is still in the app from day one. You can still apply for the Founding 20 later.",
+    "s2.step1":"Your details are added to the LOI automatically","s2.step2":"Sign below with your mouse or finger","s2.step3":"Send it off, done. The LOI reaches us directly",
     "s2.consent":"I agree to the processing of my data in accordance with the <a href=\"https://www.clero.de/datenschutz\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.",
-    "s2.foundingT":"✨ Founding 20 (with LOI)","s2.foundingD":"Apply as one of the first 20 founding hosts in Munich. For you this only brings advantages: Clero free forever, visible right at launch, preferred placement and a personal contact. Completely non-binding, you simply confirm your interest with a Letter of Intent.",
-    "s2.basicT":"Just list us for now","s2.basicD":"We add your community to the directory, without an LOI and without Founding 20 benefits.",
-    "s2.step1":"Your details are already filled in, we add them to the LOI automatically","s2.step2":"Sign below with your mouse or finger","s2.step3":"Send it off, done. The LOI reaches us directly",
-    "s2.back":"← Back","s2.sendFounding":"Apply for the “Founding 20” 🚀","s2.skip":"Just list us, without applying for the “Founding 20” programme","s2.sendBasic":"List community","s2.blank":"Or download a blank LOI PDF and send it manually to n.emrich@clero.de","s2.sending":"Sending …",
-    "done.h":"Thank you, that worked!","done.p":"Your community has reached us. We will get back to you.","done.pFounding":"Thank you, your Letter of Intent has reached us! Clero launches in Munich in August. A few weeks before launch we will get in touch with you personally to integrate your community.","done.btn":"Back to Clero",
+    "s2.back":"← Back","s2.sendFounding":"Apply for the “Founding 20” 🚀","s2.sendBasic":"List community","s2.sending":"Sending …",
+    "s2.blank":"Or download a blank LOI PDF and send it manually to n.emrich@clero.de",
+
+    "done.h":"Thank you, that worked!",
+    "done.p":"Your community has reached us. We will get back to you.",
+    "done.hFounding":"Thank you, your application is in!",
+    "done.pFounding":"Your Letter of Intent has reached us. Clero launches in Munich. A few weeks before launch we will get in touch personally to integrate your community.",
+    "done.fallback":"A copy of your signed LOI was downloaded to your device. If anything went wrong on your side, just send it to <a href=\"mailto:n.emrich@clero.de\">n.emrich@clero.de</a>.",
+    "done.btn":"Back to Clero",
+
     "foot":"Questions? Message us on","foot.back":"back to Clero website","nav.back":"← Clero website",
     "wa.bubble":"<strong>Questions about Clero?</strong>Message us directly on WhatsApp 💬",
     "err.req":"Please fill in all required fields (marked with *).",
+    "err.mail":"Please enter a valid email address.",
+    "err.phone":"Please enter a real phone number (digits only, at least 7).",
+    "err.phoneHint":"Please enter a real phone number (digits only, at least 7).",
+    "err.path":"Please choose how you would like to continue.",
     "err.sig":"Please sign in the signature field.",
-    "err.consent":"Please agree to the privacy policy."
+    "err.consent":"Please agree to the privacy policy.",
+    "err.send":"Sending did not work. We are opening a prepared email for you."
   }
 };
 
@@ -312,61 +437,109 @@ const MONTHS_EN = ['January','February','March','April','May','June','July','Aug
 let lang = 'de';
 try { const s = localStorage.getItem('clero_lang'); if (s) lang = s; else if ((navigator.language||'').toLowerCase().startsWith('en')) lang = 'en'; } catch(e){}
 
+let path = '';        // '' | 'founding' | 'basic'
+let sending = false;
+
 const t = k => (I18N[lang] && I18N[lang][k]) || I18N.de[k] || k;
-const lv = id => (document.getElementById(id).value || '').trim();
+const $ = id => document.getElementById(id);
+const lv = id => ($(id) && $(id).value || '').trim();
 const safeName = () => (lv('loi-gname') || 'Community').replace(/[^\w\-]+/g, '_');
 function todayStr() { const d = new Date(); if (lang === 'en') return d.getDate() + ' ' + MONTHS_EN[d.getMonth()] + ' ' + d.getFullYear(); const p = n => String(n).padStart(2,'0'); return p(d.getDate()) + '.' + p(d.getMonth()+1) + '.' + d.getFullYear(); }
 
+/* ---------------- Sprache ---------------- */
 function applyLang() {
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = t(el.dataset.i18n); });
   document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
   document.querySelectorAll('.lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-  document.getElementById('loiDownload').setAttribute('href', lang === 'en' ? 'clero-loi-en.pdf' : 'clero-loi.pdf');
-  const _wb = document.getElementById('waBtn'); if (_wb) _wb.setAttribute('href', waLink());
+  $('loiDownload').setAttribute('href', lang === 'en' ? 'clero-loi-en.pdf' : 'clero-loi.pdf');
+  const _wb = $('waBtn'); if (_wb) _wb.setAttribute('href', waLink());
+  syncSubmitLabel();
 }
 function setLang(l) { lang = l; try { localStorage.setItem('clero_lang', l); } catch(e){} applyLang(); }
 document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
-document.getElementById('closeBtn').addEventListener('click', () => {
+$('closeBtn').addEventListener('click', () => {
   try { window.open('', '_self'); window.close(); } catch (e) {}
   setTimeout(() => { window.location.href = 'https://www.clero.de/host'; }, 200);
 });
 
-function postSubmitUrl() { return lang === 'en' ? 'https://www.clero.de/thank-you' : 'https://www.clero.de/danke'; }
 function waMsg() { return lang === 'en' ? 'Hi Clero team, I just discovered Clero and have a question:' : 'Hallo Clero-Team, ich habe gerade Clero entdeckt und habe eine Frage:'; }
 function waLink() { return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waMsg()); }
-document.getElementById('waX').addEventListener('click', () => { document.getElementById('waBubble').style.display = 'none'; });
+$('waX').addEventListener('click', () => { $('waBubble').style.display = 'none'; });
 
 function showToast(msg) { const el = document.createElement('div'); el.className = 'toast'; el.textContent = msg; document.body.appendChild(el); setTimeout(() => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4500); }
 
-// Schritt-Navigation
-const step1 = document.getElementById('step1'), step2 = document.getElementById('step2'), stepDone = document.getElementById('stepDone'), progress = document.getElementById('progress');
+/* ---------------- Validierung ---------------- */
+function normPhone(v) { return String(v || '').replace(/[\s\-().–—\/]/g, ''); }
+function phoneValid(v) {
+  const p = normPhone(v);
+  if (!p) return false;
+  if (!/^\+?\d+$/.test(p)) return false;                 // keine Buchstaben, + nur vorne
+  const d = p.replace(/\D/g, '');
+  if (d.length < 7 || d.length > 15) return false;       // realistische Laenge (E.164)
+  if (/^(\d)\1+$/.test(d)) return false;                 // 1111111 / 0000000
+  if (/^(0123456789|1234567890|123456789)/.test(d)) return false;
+  return true;
+}
+function mailValid(v) { return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(String(v || '').trim()); }
+function markPhone() {
+  const f = $('phoneField'), el = $('loi-phone');
+  const ok = !el.value.trim() || phoneValid(el.value);
+  f.classList.toggle('bad', !ok);
+  return ok;
+}
+$('loi-phone').addEventListener('input', markPhone);
+$('loi-phone').addEventListener('blur', markPhone);
+
+function fail(el) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); }
+
+/* ---------------- Schritt-Navigation ---------------- */
+const step1 = $('step1'), step2 = $('step2'), stepDone = $('stepDone'), progress = $('progress');
 function gotoStep(n) {
   step1.hidden = n !== 1; step2.hidden = n !== 2; stepDone.hidden = n !== 3;
   progress.style.display = n === 3 ? 'none' : 'flex';
-  document.getElementById('progBar').style.width = n === 1 ? '50%' : '100%';
-  document.getElementById('progLbl').textContent = t('prog').replace('%s', n === 1 ? '1' : '2');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  $('progBar').style.width = n === 1 ? '50%' : '100%';
+  $('progLbl').textContent = t('prog').replace('%s', n === 1 ? '1' : '2');
+  const card = $('card');
+  if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-const catValue = () => { const s = document.getElementById('loi-cat').value; return s === 'Sonstiges' ? lv('loi-cat-other') : s; };
-document.getElementById('loi-cat').addEventListener('change', e => {
-  document.getElementById('catOtherWrap').hidden = e.target.value !== 'Sonstiges';
-});
-function fail(el) { el.focus(); el.style.borderColor = '#e23b3b'; setTimeout(() => { el.style.borderColor = ''; }, 2500); }
+const catValue = () => { const s = $('loi-cat').value; return s === 'Sonstiges' ? lv('loi-cat-other') : s; };
+$('loi-cat').addEventListener('change', e => { $('catOtherWrap').hidden = e.target.value !== 'Sonstiges'; });
+
 function step1Valid() {
   for (const id of ['loi-gname','loi-cat','loi-members','loi-contact','loi-mail','loi-phone']) {
-    const el = document.getElementById(id);
+    const el = $(id);
     if (!el.value.trim()) { fail(el); showToast(t('err.req')); return false; }
   }
-  if (document.getElementById('loi-cat').value === 'Sonstiges' && !lv('loi-cat-other')) { fail(document.getElementById('loi-cat-other')); showToast(t('err.req')); return false; }
+  if ($('loi-cat').value === 'Sonstiges' && !lv('loi-cat-other')) { fail($('loi-cat-other')); showToast(t('err.req')); return false; }
+  if (!mailValid(lv('loi-mail'))) { fail($('loi-mail')); showToast(t('err.mail')); return false; }
+  if (!phoneValid(lv('loi-phone'))) { markPhone(); fail($('loi-phone')); showToast(t('err.phone')); return false; }
   return true;
 }
-document.getElementById('toStep2').addEventListener('click', () => { if (step1Valid()) gotoStep(2); });
-document.getElementById('backStep1').addEventListener('click', () => gotoStep(1));
+$('toStep2').addEventListener('click', () => { if (step1Valid()) gotoStep(2); });
+$('backStep1').addEventListener('click', () => gotoStep(1));
 
-// Unterschrift-Pad
-const sigCanvas = document.getElementById('loi-sig');
+/* ---------------- Zwei-Wege-Auswahl ---------------- */
+function syncSubmitLabel() {
+  const btn = $('submitBtn'); if (!btn || sending) return;
+  btn.textContent = path === 'founding' ? t('s2.sendFounding') : t('s2.sendBasic');
+}
+function setPath(p) {
+  path = p;
+  $('optFounding').classList.toggle('active', p === 'founding');
+  $('optBasic').classList.toggle('active', p === 'basic');
+  $('foundingExtra').hidden = p !== 'founding';
+  syncSubmitLabel();
+}
+['optFounding','optBasic'].forEach(id => {
+  const el = $(id);
+  el.addEventListener('click', () => setPath(el.dataset.path));
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPath(el.dataset.path); } });
+});
+
+/* ---------------- Unterschrift ---------------- */
+const sigCanvas = $('loi-sig');
 const sctx = sigCanvas.getContext('2d');
 sctx.strokeStyle = '#14332B'; sctx.lineWidth = 2.2; sctx.lineCap = 'round'; sctx.lineJoin = 'round';
 let sigDrawing = false, sigHas = false;
@@ -377,9 +550,9 @@ function sigEnd() { sigDrawing = false; }
 ['mousedown','touchstart'].forEach(ev => sigCanvas.addEventListener(ev, sigStart, { passive: false }));
 ['mousemove','touchmove'].forEach(ev => sigCanvas.addEventListener(ev, sigMove, { passive: false }));
 ['mouseup','mouseleave','touchend','touchcancel'].forEach(ev => sigCanvas.addEventListener(ev, sigEnd));
-document.getElementById('sigClear').addEventListener('click', () => { sctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height); sigHas = false; });
+$('sigClear').addEventListener('click', () => { sctx.clearRect(0, 0, sigCanvas.width, sigCanvas.height); sigHas = false; });
 
-// LOI-PDF befuellen
+/* ---------------- LOI-PDF befuellen ---------------- */
 async function buildFilledLoi() {
   const cfg = LOI_FIELDS[lang];
   const buf = await fetch(cfg.url).then(r => r.arrayBuffer());
@@ -402,8 +575,10 @@ async function buildFilledLoi() {
   return await doc.save();
 }
 
-function commonFields(en) {
+/* ---------------- Datenfelder ---------------- */
+function commonFields(en, founding) {
   const o = {};
+  o[en ? 'Type' : 'Art'] = founding ? (en ? 'FOUNDING 20 (LOI signed)' : 'FOUNDING 20 (LOI unterschrieben)') : (en ? 'Listing only (no LOI)' : 'Nur Eintragung (ohne LOI)');
   o[en ? 'Group' : 'Gruppe'] = lv('loi-gname');
   o[en ? 'Category' : 'Kategorie'] = catValue();
   o[en ? 'City' : 'Stadt'] = lv('loi-district');
@@ -414,6 +589,7 @@ function commonFields(en) {
   o[en ? 'Role' : 'Rolle'] = lv('loi-role');
   o['email'] = lv('loi-mail');
   o[en ? 'Phone' : 'Telefon'] = lv('loi-phone');
+  if (founding) { o[en ? 'Place' : 'Ort'] = lv('loi-place') || (en ? 'Munich' : 'München'); o[en ? 'Date' : 'Datum'] = todayStr(); }
   return o;
 }
 function waPing(kind) {
@@ -424,44 +600,78 @@ function waPing(kind) {
   fetch('https://api.callmebot.com/whatsapp.php?phone=' + CMB_PHONE + '&text=' + encodeURIComponent(msg) + '&apikey=' + CMB_KEY, { mode: 'no-cors' }).catch(() => {});
 }
 
-// Nur eintragen (ohne Founding 20)
-document.getElementById('skipBtn').addEventListener('click', async (e) => {
-  e.preventDefault();
-  const en = lang === 'en';
-  if (!document.getElementById('consent').checked) { showToast(t('err.consent')); return; }
-  const link = document.getElementById('skipBtn');
-  link.style.pointerEvents = 'none'; link.textContent = t('s2.sending');
-  const payload = { _subject: (en ? 'New community on Clero: ' : 'Neue Community auf Clero: ') + lv('loi-gname'), _cc: 'n.emrich@clero.de', _template: 'table', ...commonFields(en) };
-  try {
-    const r = await fetch('https://formsubmit.co/ajax/' + FS_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload) });
-    const j = await r.json().catch(() => ({}));
-    if (String(j.success) !== 'true') throw new Error('no success');
-    waPing('basic');
-    await sendLeadMail(en, false);
-    window.location.href = postSubmitUrl();
-  } catch (err) {
-    const subject = (en ? 'List my community on Clero: ' : 'Community bei Clero eintragen: ') + lv('loi-gname');
-    const cf = commonFields(en); const body = Object.keys(cf).map(k => k + ': ' + cf[k]).join('\n');
-    window.location.href = 'mailto:n.emrich@clero.de?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent((en ? 'Hi Nicole,\n\n' : 'Hallo Nicole,\n\n') + body);
-  } finally { link.style.pointerEvents = ''; link.textContent = t('s2.skip'); }
-});
+/* ---------------- Zustellung ----------------
+   Wichtig: Die Daten gehen IMMER zuerst per AJAX raus (kein Captcha, keine
+   Weiterleitung). Erst danach wird das LOI-PDF als Datei-Upload in einem
+   unsichtbaren iframe nachgeschoben. Selbst wenn dieser zweite Schritt
+   scheitert, ist die Bewerbung schon angekommen. */
+async function sendAjax(payload) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/' + FS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const j = await r.json().catch(() => ({}));
+      if (String(j.success) === 'true') return true;
+    } catch (e) {}
+    await new Promise(res => setTimeout(res, 900));
+  }
+  return false;
+}
 
-// Bestätigungs-Mail an Lead (HTML, mit Absätzen)
+function postLoiFile(fields, file) {
+  return new Promise(resolve => {
+    try {
+      let ifr = document.getElementById('loiSink');
+      if (!ifr) { ifr = document.createElement('iframe'); ifr.id = 'loiSink'; ifr.name = 'loiSink'; ifr.style.display = 'none'; document.body.appendChild(ifr); }
+      const form = document.createElement('form');
+      form.action = 'https://formsubmit.co/' + FS_ENDPOINT;
+      form.method = 'POST'; form.enctype = 'multipart/form-data';
+      form.target = 'loiSink'; form.style.display = 'none';
+      const add = (n, v) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v == null ? '' : v; form.appendChild(i); };
+      Object.keys(fields).forEach(k => add(k, fields[k]));
+      add('_captcha', 'false');          // <- verhindert die Captcha-Zwischenseite
+      add('_template', 'table');
+      add('_next', 'https://host.clero.de/danke.html');
+      const fi = document.createElement('input'); fi.type = 'file'; fi.name = 'attachment'; fi.style.display = 'none'; form.appendChild(fi);
+      const dt = new DataTransfer(); dt.items.add(file); fi.files = dt.files;
+      document.body.appendChild(form);
+      form.submit();
+      setTimeout(() => { try { form.remove(); } catch (e) {} resolve(true); }, 1500);
+    } catch (e) { resolve(false); }
+  });
+}
+
+function mailtoFallback(en, founding) {
+  const subject = (founding ? (en ? 'Founding 20 application: ' : 'Founding-20-Bewerbung: ') : (en ? 'List my community on Clero: ' : 'Community bei Clero eintragen: ')) + lv('loi-gname');
+  const cf = commonFields(en, founding);
+  const body = Object.keys(cf).map(k => k + ': ' + cf[k]).join('\n');
+  window.location.href = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent((en ? 'Hi Nicole,\n\n' : 'Hallo Nicole,\n\n') + body);
+}
+
+/* ---------------- Bestaetigungs-Mail an den Lead ---------------- */
 function autoresp(en, founding) {
   const intro = en
     ? '<h2 style="color:#213B2C;margin:0 0 12px;font-size:20px;">Thank you for your community submission to Clero! 💚</h2>'
     : '<h2 style="color:#213B2C;margin:0 0 12px;font-size:20px;">Vielen Dank für deinen Community-Eintrag bei Clero! 💚</h2>';
   const gotIt = founding
-    ? (en ? '<p style="margin:0 0 14px;">We have received your details and your Letter of Intent, and we are really happy that you want to be part of it. ✨</p>'
-          : '<p style="margin:0 0 14px;">Wir haben deine Angaben und deinen Letter of Intent erhalten und freuen uns sehr, dass du dabei sein möchtest. ✨</p>')
+    ? (en ? '<p style="margin:0 0 14px;">We have received your details and your Letter of Intent for the Founding 20, and we are really happy that you want to be part of it. ✨</p>'
+          : '<p style="margin:0 0 14px;">Wir haben deine Angaben und deinen Letter of Intent für die Founding 20 erhalten und freuen uns sehr, dass du dabei sein möchtest. ✨</p>')
     : (en ? '<p style="margin:0 0 14px;">We have received your details and added your community. We are really happy to have you on board. ✨</p>'
           : '<p style="margin:0 0 14px;">Wir haben deine Angaben erhalten und deine Community aufgenommen. Wir freuen uns sehr, dass du dabei bist. ✨</p>');
+  const perks = founding
+    ? (en ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What the Founding 20 gets you</h3><ul style="margin:0 0 14px;padding-left:18px;"><li>🚀 Special visibility at launch</li><li>⭐ Priority placement</li><li>💚 Direct support from us</li></ul>'
+          : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Das bringt dir die Founding 20</h3><ul style="margin:0 0 14px;padding-left:18px;"><li>🚀 Besondere Sichtbarkeit zum Launch</li><li>⭐ Priorisierte Platzierung</li><li>💚 Direkter Support von uns</li></ul>')
+    : (en ? '<p style="margin:0 0 14px;">By the way: you can still apply for one of the 20 founding spots at any time. Just reply to this email.</p>'
+          : '<p style="margin:0 0 14px;">Übrigens: Du kannst dich jederzeit noch auf einen der 20 Founding-Plätze bewerben. Antworte dafür einfach auf diese Mail.</p>');
   const about = en
     ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">A little about us</h3><p style="margin:0 0 14px;">Clero is a new platform that makes local communities in Munich visible. People discover matching groups in their city through Clero, and hosts like you get one place where your community grows, stays organised and finds new members, without all the hassle of WhatsApp, DMs and Instagram.</p>'
     : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Kurz zu uns</h3><p style="margin:0 0 14px;">Clero ist eine neue Plattform, die lokale Communities in München sichtbar macht. Menschen finden über Clero passende Gruppen in ihrer Stadt, und Hosts wie du bekommen einen festen Ort, an dem eure Community wächst, organisiert bleibt und neue Mitglieder findet, ohne den ganzen Aufwand über WhatsApp, DMs und Instagram.</p>';
   const next = en
-    ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What happens next</h3><p style="margin:0 0 14px;">Clero launches in Munich in <strong>August</strong>. A few weeks before launch we will get in touch with you personally to integrate your community and answer any open questions. So there is nothing else you need to do for now. 🙌</p>'
-    : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Wie es weitergeht</h3><p style="margin:0 0 14px;">Clero startet im <strong>August</strong> in München. Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden und offene Fragen zu klären. Du musst also erstmal nichts weiter tun. 🙌</p>';
+    ? '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">What happens next</h3><p style="margin:0 0 14px;">A few weeks before launch we will get in touch with you personally to integrate your community and answer any open questions. So there is nothing else you need to do for now. 🙌</p>'
+    : '<h3 style="color:#213B2C;margin:18px 0 6px;font-size:16px;">Wie es weitergeht</h3><p style="margin:0 0 14px;">Ein paar Wochen vor dem Launch melden wir uns nochmal persönlich bei dir, um deine Community in Ruhe einzubinden und offene Fragen zu klären. Du musst also erstmal nichts weiter tun. 🙌</p>';
   const contact = en
     ? '<p style="margin:0 0 14px;">If you have any questions, reach us directly at <a href="mailto:n.emrich@clero.de" style="color:#213B2C;">n.emrich@clero.de</a> or via WhatsApp at <strong>+49 1556 6000890</strong>.</p>'
     : '<p style="margin:0 0 14px;">Bei Fragen erreichst du uns direkt unter <a href="mailto:n.emrich@clero.de" style="color:#213B2C;">n.emrich@clero.de</a> oder per WhatsApp unter <strong>+49 1556 6000890</strong>.</p>';
@@ -469,10 +679,9 @@ function autoresp(en, founding) {
     ? '<p style="margin:18px 0 0;">Warm regards<br><strong>Nicole vom Clero Team</strong> 💚</p>'
     : '<p style="margin:18px 0 0;">Liebe Grüße<br><strong>Nicole vom Clero Team</strong> 💚</p>';
   return '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#2c3a34;max-width:560px;border-top:6px solid #82FF41;padding:20px 4px;">'
-    + intro + gotIt + about + next + contact + sign + '</div>';
+    + intro + gotIt + perks + about + next + contact + sign + '</div>';
 }
 
-// Versand der formatierten Bestätigungsmail an den Lead via EmailJS
 const EMAILJS_SERVICE = 'service_u1i5e3o';
 const EMAILJS_TEMPLATE = 'template_yq07rwe';
 const EMAILJS_PUBLIC = '6v00neIQWHklsBrpc';
@@ -489,41 +698,77 @@ async function sendLeadMail(en, founding) {
   } catch (e) {}
 }
 
-document.getElementById('submitBtn').addEventListener('click', async () => {
+/* ---------------- Absenden ---------------- */
+$('submitBtn').addEventListener('click', async () => {
+  if (sending) return;
   const en = lang === 'en';
-  if (!document.getElementById('consent').checked) { showToast(t('err.consent')); return; }
-  const btn = document.getElementById('submitBtn');
-  if (!sigHas) { showToast(t('err.sig')); document.querySelector('.sig-wrap').style.borderColor = '#e23b3b'; setTimeout(() => { document.querySelector('.sig-wrap').style.borderColor = ''; }, 2500); return; }
-  btn.textContent = t('s2.sending'); btn.disabled = true;
-  const place = lv('loi-place') || (en ? 'Munich' : 'München');
-  const form = document.createElement('form');
-  form.action = 'https://formsubmit.co/' + FS_ENDPOINT; form.method = 'POST'; form.enctype = 'multipart/form-data'; form.style.display = 'none';
-  const add = (n, v) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v || ''; form.appendChild(i); };
-  add('_subject', (en ? 'New Founding 20 LOI: ' : 'Neuer Founding-20 LOI: ') + lv('loi-gname'));
-  add('_cc', 'n.emrich@clero.de'); add('_template', 'table');
-  add('_next', postSubmitUrl());
-  const cf = commonFields(en); Object.keys(cf).forEach(k => add(k, cf[k]));
-  add(en ? 'Place' : 'Ort', place); add(en ? 'Date' : 'Datum', todayStr());
-  try {
-    if (window.PDFLib) {
+  if (!path) { showToast(t('err.path')); $('pathChoice').scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  if (!step1Valid()) { gotoStep(1); return; }
+  const founding = path === 'founding';
+  if (founding && !sigHas) {
+    showToast(t('err.sig'));
+    const w = document.querySelector('.sig-wrap');
+    w.style.borderColor = '#e23b3b'; w.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => { w.style.borderColor = ''; }, 2500);
+    return;
+  }
+  if (!$('consent').checked) { showToast(t('err.consent')); return; }
+
+  const btn = $('submitBtn');
+  sending = true; btn.disabled = true; btn.textContent = t('s2.sending');
+
+  const cf = commonFields(en, founding);
+  const subject = founding
+    ? (en ? 'New Founding 20 LOI: ' : 'Neue Founding-20-Bewerbung (LOI): ') + lv('loi-gname')
+    : (en ? 'New community on Clero: ' : 'Neue Community auf Clero: ') + lv('loi-gname');
+
+  // 1) Daten immer zuerst und ohne Captcha raus
+  const ok = await sendAjax({ _subject: subject, _cc: MAIL_TO, _template: 'table', _captcha: 'false', ...cf });
+
+  if (!ok) {
+    sending = false; btn.disabled = false; syncSubmitLabel();
+    showToast(t('err.send'));
+    mailtoFallback(en, founding);
+    return;
+  }
+
+  waPing(founding ? 'founding' : 'basic');
+
+  // 2) Bei Founding 20: unterschriebenes LOI-PDF nachschieben + Kopie fuer den Lead
+  let pdfSent = false;
+  if (founding) {
+    try {
+      if (!window.PDFLib) throw new Error('pdf-lib not loaded');
       const bytes = await buildFilledLoi();
       const fname = 'Clero-LOI-' + safeName() + '.pdf';
-      const file = new File([new Blob([bytes], { type: 'application/pdf' })], fname, { type: 'application/pdf' });
-      const fi = document.createElement('input'); fi.type = 'file'; fi.name = 'attachment'; fi.style.display = 'none'; form.appendChild(fi);
-      const dt = new DataTransfer(); dt.items.add(file); fi.files = dt.files;
-      // Kopie der ausgefuellten LOI fuer den Lead automatisch herunterladen
-      const dlUrl = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const dlUrl = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = dlUrl; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(dlUrl), 8000);
+      pdfSent = await postLoiFile({ _subject: (en ? 'LOI PDF: ' : 'LOI-PDF: ') + lv('loi-gname'), _cc: MAIL_TO, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
+    } catch (e) {}
+    // Falls das PDF nicht rausging: uns aktiv Bescheid geben, damit niemand durchrutscht
+    if (!pdfSent) {
+      sendAjax({ _subject: (en ? 'ACTION NEEDED - LOI PDF missing: ' : 'BITTE PRUEFEN - LOI-PDF fehlt: ') + lv('loi-gname'),
+                 _cc: MAIL_TO, _template: 'table', _captcha: 'false',
+                 Hinweis: en ? 'The applicant signed the LOI but the PDF could not be attached automatically. Please ask for the copy that was downloaded to their device.'
+                             : 'Bewerber:in hat den LOI unterschrieben, das PDF konnte aber nicht automatisch angehaengt werden. Bitte die Kopie anfragen, die auf dem Geraet heruntergeladen wurde.',
+                 ...cf });
     }
-  } catch (e) {}
-  waPing('founding');
-  await sendLeadMail(en, true);
-  document.body.appendChild(form); form.submit();
+  }
+
+  sendLeadMail(en, founding);
+
+  $('doneH').textContent = founding ? t('done.hFounding') : t('done.h');
+  $('doneP').textContent = founding ? t('done.pFounding') : t('done.p');
+  const fb = $('doneFallback');
+  if (founding) { fb.innerHTML = t('done.fallback'); fb.hidden = false; } else { fb.hidden = true; }
+  gotoStep(3);
+  sending = false;
 });
 
-// Leeres LOI mit Tagesdatum bei Tjard
-document.getElementById('loiDownload').addEventListener('click', async function(e) {
+/* ---------------- Leeres LOI mit Tagesdatum ---------------- */
+$('loiDownload').addEventListener('click', async function(e) {
   const url = lang === 'en' ? 'clero-loi-en.pdf' : 'clero-loi.pdf';
   if (!window.PDFLib) return;
   e.preventDefault();
@@ -540,18 +785,9 @@ document.getElementById('loiDownload').addEventListener('click', async function(
   } catch (err) { window.location.href = url; }
 });
 
-// Init + Erfolg nach LOI-Redirect
+/* ---------------- Init ---------------- */
 applyLang();
 gotoStep(1);
-(() => {
-  const p = new URLSearchParams(location.search);
-  if (p.get('done') === 'founding') {
-    waPing('founding');
-    document.getElementById('doneP').textContent = t('done.pFounding');
-    gotoStep(3);
-    history.replaceState({}, '', location.pathname);
-  }
-})();
 </script>
 </body>
 </html>
