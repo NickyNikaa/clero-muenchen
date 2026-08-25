@@ -313,6 +313,7 @@ const CMB_PHONE = '4915206772337';
 const WA = '4915566000890';
 const CMB_KEY = ''; // CallMeBot-APIKEY eintragen fuer WhatsApp-Benachrichtigung
 const MAIL_TO = 'n.emrich@clero.de';
+const MAIL_CC = 'n.emrich@clero.de,t.pueschel@clero.de'; // alle Formular-Eingaenge zusaetzlich an Tjard
 
 const I18N = {
   de: {
@@ -727,7 +728,7 @@ function mailtoFallback(en, founding) {
   const subject = (founding ? (en ? 'Founding 20 application: ' : 'Founding-20-Bewerbung: ') : (en ? 'List my community on Clero: ' : 'Community bei Clero eintragen: ')) + lv('loi-gname');
   const cf = commonFields(en, founding);
   const body = Object.keys(cf).map(k => k + ': ' + cf[k]).join('\n');
-  window.location.href = 'mailto:' + MAIL_TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent((en ? 'Hi Nicole,\n\n' : 'Hallo Nicole,\n\n') + body);
+  window.location.href = 'mailto:' + MAIL_CC + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent((en ? 'Hi Nicole,\n\n' : 'Hallo Nicole,\n\n') + body);
 }
 
 /* ---------------- Bestaetigungs-Mail an den Lead ---------------- */
@@ -802,7 +803,7 @@ $('submitBtn').addEventListener('click', async () => {
     : (en ? 'New community on Clero: ' : 'Neue Community auf Clero: ') + lv('loi-gname');
 
   // 1) Daten immer zuerst und ohne Captcha raus
-  const ok = await sendAjax({ _subject: subject, _cc: MAIL_TO, _template: 'table', _captcha: 'false', ...cf });
+  const ok = await sendAjax({ _subject: subject, _cc: MAIL_CC, _template: 'table', _captcha: 'false', ...cf });
 
   if (!ok) {
     sending = false; btn.disabled = false; syncSubmitLabel();
@@ -839,11 +840,11 @@ async function deliverLoi(en, cf) {
     const dlUrl = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = dlUrl; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(dlUrl), 8000);
-    pdfSent = await postLoiFile({ _subject: (en ? 'LOI PDF: ' : 'LOI-PDF: ') + lv('loi-gname'), _cc: MAIL_TO, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
+    pdfSent = await postLoiFile({ _subject: (en ? 'LOI PDF: ' : 'LOI-PDF: ') + lv('loi-gname'), _cc: MAIL_CC, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
   } catch (e) {}
   if (!pdfSent) {
     sendAjax({ _subject: (en ? 'ACTION NEEDED - LOI PDF missing: ' : 'BITTE PRUEFEN - LOI-PDF fehlt: ') + lv('loi-gname'),
-               _cc: MAIL_TO, _template: 'table', _captcha: 'false',
+               _cc: MAIL_CC, _template: 'table', _captcha: 'false',
                Hinweis: en ? 'The applicant signed the LOI but the PDF upload was not confirmed. Please ask for the copy that was downloaded to their device.'
                            : 'Bewerber:in hat den LOI unterschrieben, das PDF kam aber nicht bestaetigt an. Bitte die Kopie anfragen, die auf dem Geraet heruntergeladen wurde.',
                ...cf });
