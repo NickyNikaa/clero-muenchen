@@ -445,12 +445,16 @@ const MAIL_TO = 'n.emrich@clero.de';
 const MAIL_CC = 'n.emrich@clero.de,t.pueschel@clero.de'; // alle Formular-Eingaenge zusaetzlich an Tjard
 
 /* Zusaetzlicher Upload des signierten LOI-PDFs in den Drive-Ordner, ueber ein
-   Google Apps Script Web App (siehe drive-upload-apps-script.gs im Repo).
+   Google Apps Script Web App (siehe drive-upload-apps-script.gs im Repo). Das
+   Script legt Creator-LOIs (diese Seite) und Host-LOIs (eintragen.html /
+   verzeichnis.html) in getrennten Drive-Ordnern ab - DRIVE_FOLDER unten
+   waehlt den richtigen Ordner auf Script-Seite aus.
    DRIVE_UPLOAD_URL leer lassen, solange das Script noch nicht deployed ist -
    dann macht uploadToDrive() einfach nichts. Rein zusaetzlich/best effort:
    der E-Mail-Versand mit PDF-Anhang bleibt die massgebliche Zustellung. */
 const DRIVE_UPLOAD_URL = ''; // z.B. 'https://script.google.com/macros/s/XXXXX/exec'
 const DRIVE_SECRET = 'clero-loi-2026'; // muss mit SHARED_SECRET im Apps Script uebereinstimmen
+const DRIVE_FOLDER = 'creator'; // Creator-Ordner, siehe FOLDERS im Apps Script
 
 const I18N = {
   de: {
@@ -899,6 +903,7 @@ async function uploadToDrive(bytes, filename) {
   if (!DRIVE_UPLOAD_URL) return;
   const fd = new FormData();
   fd.append('secret', DRIVE_SECRET);
+  fd.append('folder', DRIVE_FOLDER);
   fd.append('filename', filename);
   fd.append('pdf_base64', bytesToBase64(bytes));
   await fetch(DRIVE_UPLOAD_URL, { method: 'POST', mode: 'no-cors', body: fd });
