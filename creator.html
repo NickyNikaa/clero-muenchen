@@ -444,6 +444,14 @@ const CMB_KEY = '';
 const MAIL_TO = 'n.emrich@clero.de';
 const MAIL_CC = 'n.emrich@clero.de,t.pueschel@clero.de'; // alle Formular-Eingaenge zusaetzlich an Tjard
 
+/* Zusaetzlicher Upload des signierten LOI-PDFs in den Drive-Ordner, ueber ein
+   Google Apps Script Web App (siehe drive-upload-apps-script.gs im Repo).
+   DRIVE_UPLOAD_URL leer lassen, solange das Script noch nicht deployed ist -
+   dann macht uploadToDrive() einfach nichts. Rein zusaetzlich/best effort:
+   der E-Mail-Versand mit PDF-Anhang bleibt die massgebliche Zustellung. */
+const DRIVE_UPLOAD_URL = ''; // z.B. 'https://script.google.com/macros/s/XXXXX/exec'
+const DRIVE_SECRET = 'clero-loi-2026'; // muss mit SHARED_SECRET im Apps Script uebereinstimmen
+
 const I18N = {
   de: {
     "hero.pill":"💚 München · Creator",
@@ -617,16 +625,16 @@ const I18N = {
   }
 };
 
-/* Stempel-Koordinaten im Creator-LOI (erzeugt von build_creator_loi.py) */
+/* Stempel-Koordinaten im Creator-LOI (erzeugt von build_creator_loi.py, Stand: neues Layout 2026-09) */
 const LOI_FIELDS = {
   de: { url: 'clero-creator-loi.pdf',
-    cName:{p:0,x:59,y:698.9}, cTheme:{p:0,x:141.3,y:423.9}, cChannels:{p:0,x:237.1,y:401.9}, cReach:{p:0,x:203.0,y:379.9},
-    sName:{p:1,x:97.0,y:453.5}, sHandle:{p:1,x:167.3,y:429.5}, sContact:{p:1,x:178.7,y:405.5}, sOrtDatum:{p:1,x:119.7,y:381.5},
-    sSign:{p:1,x:127.0,y:338.5,w:170,h:30}, tjard:{p:1,x:167.3,y:211.5} },
+    cName:{p:0,x:95.3,y:703.3}, cTheme:{p:0,x:136.9,y:318.5}, cChannels:{p:0,x:227.1,y:296.5}, cReach:{p:0,x:195.0,y:274.5},
+    sName:{p:1,x:190.2,y:620.3}, sHandle:{p:1,x:161.4,y:598.3}, sContact:{p:1,x:172.1,y:576.3}, sOrtDatum:{p:1,x:116.6,y:554.3},
+    sSign:{p:1,x:123.7,y:511.3,w:120,h:32}, tjard:{p:1,x:116.6,y:386.3} },
   en: { url: 'clero-creator-loi-en.pdf',
-    cName:{p:0,x:59,y:698.9}, cTheme:{p:0,x:127.7,y:423.9}, cChannels:{p:0,x:238.8,y:401.9}, cReach:{p:0,x:199.1,y:379.9},
-    sName:{p:1,x:97.0,y:483.9}, sHandle:{p:1,x:169.6,y:459.9}, sContact:{p:1,x:169.6,y:435.9}, sOrtDatum:{p:1,x:120.9,y:411.9},
-    sSign:{p:1,x:118.5,y:368.9,w:170,h:30}, tjard:{p:1,x:159.4,y:241.9} }
+    cName:{p:0,x:95.3,y:703.3}, cTheme:{p:0,x:124.1,y:332.1}, cChannels:{p:0,x:228.7,y:310.1}, cReach:{p:0,x:191.3,y:288.1},
+    sName:{p:1,x:156.1,y:715.9}, sHandle:{p:1,x:163.6,y:693.9}, sContact:{p:1,x:163.6,y:671.9}, sOrtDatum:{p:1,x:117.7,y:649.9},
+    sSign:{p:1,x:115.8,y:606.9,w:120,h:32}, tjard:{p:1,x:117.7,y:481.9} }
 };
 const MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -875,6 +883,27 @@ async function sendAjax(payload) {
   return false;
 }
 
+/* Best-effort-Kopie des signierten LOI-PDFs in den Drive-Ordner. Laeuft im
+   Hintergrund, ohne die Mail-Zustellung zu blockieren oder von ihr abzuhaengen -
+   schlaegt das hier fehl (z.B. weil DRIVE_UPLOAD_URL noch nicht gesetzt ist),
+   ist trotzdem alles beim E-Mail-Anhang angekommen. */
+function bytesToBase64(bytes) {
+  let binary = '';
+  const chunkSize = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
+async function uploadToDrive(bytes, filename) {
+  if (!DRIVE_UPLOAD_URL) return;
+  const fd = new FormData();
+  fd.append('secret', DRIVE_SECRET);
+  fd.append('filename', filename);
+  fd.append('pdf_base64', bytesToBase64(bytes));
+  await fetch(DRIVE_UPLOAD_URL, { method: 'POST', mode: 'no-cors', body: fd });
+}
+
 function postLoiFile(fields, file) {
   return new Promise(resolve => {
     let done = false;
@@ -991,7 +1020,13 @@ $('submitBtn').addEventListener('click', async () => {
     ? (en ? 'New Founding 20 creator LOI: ' : 'Neue Founding-20-Creator-Bewerbung (LOI): ') + lv('c-name')
     : (en ? 'New creator application: ' : 'Neue Creator-Bewerbung: ') + lv('c-name');
 
-  const ok = await sendAjax({ _subject: subject, _cc: MAIL_CC, _template: 'table', _captcha: 'false', ...cf });
+  /* Nur-Eintragen (ohne LOI): Daten sofort und ohne Captcha raus - das ist hier
+     die einzige Mail, es gibt kein PDF.
+     Founding-20 (mit LOI): KEINE separate Vorab-Mail mehr. Frueher gingen hier
+     zwei Mails raus (diese hier ohne Anhang + das PDF weiter unten). Jetzt
+     verschickt deliverLoi() weiter unten die einzige Eingangsmail, direkt mit
+     dem signierten PDF im Anhang. */
+  const ok = founding ? true : await sendAjax({ _subject: subject, _cc: MAIL_CC, _template: 'table', _captcha: 'false', ...cf });
 
   if (!ok) {
     sending = false; btn.disabled = false; syncSubmitLabel();
@@ -1011,14 +1046,18 @@ $('submitBtn').addEventListener('click', async () => {
   gotoStep(3);
   sending = false;
 
-  // Die Daten sind durch, der Erfolg steht schon auf dem Bildschirm.
-  // Das LOI-PDF laeuft jetzt im Hintergrund nach.
-  if (founding) deliverLoi(en, cf);
+  // Der Erfolg steht schon auf dem Bildschirm (die lokale PDF-Kopie klappt so gut
+  // wie immer). Der eigentliche Versand (E-Mail mit PDF + Drive-Upload) laeuft
+  // jetzt im Hintergrund nach.
+  if (founding) deliverLoi(en, cf, subject);
 });
 
-/* Unterschriebenes LOI-PDF nachschieben. Kommt es nicht bestaetigt an,
-   geht eine Warnmail raus, damit keine Bewerbung unbemerkt liegen bleibt. */
-async function deliverLoi(en, cf) {
+/* Unterschriebenes LOI-PDF nachschieben. Das ist die EINE Eingangsmail fuer eine
+   Founding-20-Creator-Bewerbung (mit PDF-Anhang) - es gibt bewusst keine
+   zusaetzliche Vorab-Mail ohne Anhang mehr. Kommt der Upload nicht bestaetigt an,
+   geht als Ersatz eine einzelne Text-Warnmail raus, damit keine Bewerbung
+   unbemerkt liegen bleibt (dann aber auch nur diese eine). */
+async function deliverLoi(en, cf, subject) {
   let pdfSent = false;
   try {
     if (!window.PDFLib) throw new Error('pdf-lib not loaded');
@@ -1028,7 +1067,8 @@ async function deliverLoi(en, cf) {
     const dlUrl = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = dlUrl; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(dlUrl), 8000);
-    pdfSent = await postLoiFile({ _subject: (en ? 'Creator LOI PDF: ' : 'Creator-LOI-PDF: ') + lv('c-name'), _cc: MAIL_CC, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
+    pdfSent = await postLoiFile({ _subject: subject, _cc: MAIL_CC, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
+    uploadToDrive(bytes, fname).catch(() => {});
   } catch (e) {}
   if (!pdfSent) {
     sendAjax({ _subject: (en ? 'ACTION NEEDED - creator LOI PDF missing: ' : 'BITTE PRUEFEN - Creator-LOI-PDF fehlt: ') + lv('c-name'),
