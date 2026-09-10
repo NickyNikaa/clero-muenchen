@@ -806,15 +806,22 @@ function showToast(msg) {
   setTimeout(() => { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 400); }, 4500);
 }
 
+// LOI-Feld-Koordinaten (Stempel-Positionen im echten PDF), erzeugt von build_host_loi.py
 const LOI_FIELDS = {
   de: { url: 'clero-loi.pdf',
-    gname: {p:0,x:46,y:666}, contactP0: {p:0,x:341,y:666}, members: {p:0,x:327,y:252},
-    hName: {p:1,x:94,y:415}, hRole: {p:1,x:89,y:391}, hMail: {p:1,x:209,y:367}, hOrt: {p:1,x:128,y:315},
-    hSign: {p:1,x:135,y:288,w:120,h:34}, tjard: {p:1,x:191,y:173} },
+    gname: {p:0,x:163.0,y:703.3}, legalform: {p:0,x:139.0,y:681.3}, address: {p:0,x:128.9,y:659.3},
+    cRepName: {p:0,x:170.5,y:637.3}, cRole: {p:0,x:136.4,y:615.3}, cEmail: {p:0,x:96.9,y:593.3},
+    cPhone: {p:0,x:144.4,y:571.3}, cLink: {p:0,x:155.0,y:549.3},
+    members: {p:0,x:140.1,y:215.3}, asOf: {p:0,x:132.1,y:193.3}, host: {p:0,x:196.1,y:131.7},
+    sName: {p:1,x:190.2,y:251.9}, sRole: {p:1,x:136.4,y:229.9}, sPlace: {p:1,x:116.6,y:207.9},
+    sSign: {p:1,x:123.7,y:164.9,w:120,h:32}, tjardDate: {p:2,x:116.6,y:699.9} },
   en: { url: 'clero-loi-en.pdf',
-    gname: {p:0,x:46,y:641}, contactP0: null, members: {p:0,x:363,y:249},
-    hName: {p:1,x:94,y:411}, hRole: {p:1,x:85,y:387}, hMail: {p:1,x:145,y:363}, hOrt: {p:1,x:128,y:311},
-    hSign: {p:1,x:121,y:286,w:120,h:34}, tjard: {p:1,x:180,y:170} }
+    gname: {p:0,x:171.0,y:703.3}, legalform: {p:0,x:141.2,y:681.3}, address: {p:0,x:136.9,y:659.3},
+    cRepName: {p:0,x:170.5,y:637.3}, cRole: {p:0,x:131.0,y:615.3}, cEmail: {p:0,x:93.7,y:593.3},
+    cPhone: {p:0,x:140.1,y:571.3}, cLink: {p:0,x:152.9,y:549.3},
+    members: {p:0,x:138.5,y:228.9}, asOf: {p:0,x:119.3,y:206.9}, host: {p:0,x:166.8,y:145.3},
+    sName: {p:1,x:156.1,y:329.9}, sRole: {p:1,x:131.0,y:307.9}, sPlace: {p:1,x:117.7,y:285.9},
+    sSign: {p:1,x:115.8,y:242.9,w:120,h:32}, tjardDate: {p:2,x:117.7,y:699.9} }
 };
 const lv = id => (document.getElementById(id).value || '').trim();
 const safeName = () => (lv('loi-gname') || 'Community').replace(/[^\w\-]+/g, '_');
@@ -852,17 +859,22 @@ async function buildFilledLoi() {
   const put = (spec, txt) => { if (spec && txt) pages[spec.p].drawText(String(txt), { x: spec.x, y: spec.y, size: 10, font, color: ink }); };
   const today = todayStr();
   const place = lv('loi-place') || (lang === 'en' ? 'Munich' : 'München');
+  const munich = lang === 'en' ? 'Munich' : 'München';
   put(cfg.gname, lv('loi-gname'));
-  put(cfg.contactP0, lv('loi-contact'));
+  put(cfg.cRepName, lv('loi-contact'));
+  put(cfg.cRole, lv('loi-role'));
+  put(cfg.cEmail, lv('loi-mail'));
+  put(cfg.cPhone, lv('loi-phone'));
   put(cfg.members, lv('loi-members'));
-  put(cfg.hName, lv('loi-contact'));
-  put(cfg.hRole, lv('loi-role'));
-  put(cfg.hMail, lv('loi-mail') + (lv('loi-phone') ? '  ·  ' + lv('loi-phone') : ''));
-  put(cfg.hOrt, place + ', ' + today);
-  put(cfg.tjard, today);
-  if (sigHas && cfg.hSign) {
+  put(cfg.asOf, today);
+  put(cfg.host, lv('loi-contact'));   // vorgesehener Host: mangels eigenem Feld = Ansprechpartner:in
+  put(cfg.sName, lv('loi-contact'));
+  put(cfg.sRole, lv('loi-role'));
+  put(cfg.sPlace, place + ', ' + today);
+  put(cfg.tjardDate, munich + ', ' + today);
+  if (sigHas && cfg.sSign) {
     const png = await doc.embedPng(sigCanvas.toDataURL('image/png'));
-    const s = cfg.hSign;
+    const s = cfg.sSign;
     pages[s.p].drawImage(png, { x: s.x, y: s.y, width: s.w, height: s.h });
   }
   return await doc.save();

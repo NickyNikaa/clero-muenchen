@@ -226,6 +226,10 @@
       <div class="field"><label for="loi-link" data-i18n="f.link">Instagram / Website</label><input id="loi-link" data-i18n-ph="f.linkPh" placeholder="@euer_account oder https://…" /></div>
       <div class="field"><label for="loi-desc" data-i18n="f.desc">Kurzbeschreibung</label><textarea id="loi-desc" data-i18n-ph="f.descPh" placeholder="Was macht eure Community aus?"></textarea></div>
       <div class="row2">
+        <div class="field"><label for="loi-legalform" data-i18n="f.legalform">Rechtsform (optional)</label><input id="loi-legalform" data-i18n-ph="f.legalformPh" placeholder="z.B. Verein, lose Gruppe" /></div>
+        <div class="field"><label for="loi-address" data-i18n="f.address">Adresse / Sitz (optional)</label><input id="loi-address" data-i18n-ph="f.addressPh" placeholder="z.B. München" /></div>
+      </div>
+      <div class="row2">
         <div class="field"><label for="loi-contact" data-i18n="f.contact">Ansprechpartner:in *</label><input id="loi-contact" required data-i18n-ph="f.contactPh" placeholder="Vor- und Nachname" /></div>
         <div class="field"><label for="loi-role" data-i18n="f.role">Rolle</label><input id="loi-role" data-i18n-ph="f.rolePh" placeholder="z.B. Host" /></div>
       </div>
@@ -315,6 +319,14 @@ const CMB_KEY = ''; // CallMeBot-APIKEY eintragen fuer WhatsApp-Benachrichtigung
 const MAIL_TO = 'n.emrich@clero.de';
 const MAIL_CC = 'n.emrich@clero.de,t.pueschel@clero.de'; // alle Formular-Eingaenge zusaetzlich an Tjard
 
+/* Zusaetzlicher Upload des signierten LOI-PDFs in den Drive-Ordner, ueber ein
+   Google Apps Script Web App (siehe drive-upload-apps-script.gs im Repo).
+   DRIVE_UPLOAD_URL leer lassen, solange das Script noch nicht deployed ist -
+   dann macht uploadToDrive() einfach nichts. Rein zusaetzlich/best effort:
+   der E-Mail-Versand mit PDF-Anhang bleibt die massgebliche Zustellung. */
+const DRIVE_UPLOAD_URL = ''; // z.B. 'https://script.google.com/macros/s/XXXXX/exec'
+const DRIVE_SECRET = 'clero-loi-2026'; // muss mit SHARED_SECRET im Apps Script uebereinstimmen
+
 const I18N = {
   de: {
     "back":"← Zur Übersicht",
@@ -340,6 +352,8 @@ const I18N = {
     "f.members":"Mitglieder (ca.) *","f.membersPh":"z.B. 80",
     "f.link":"Instagram / Website","f.linkPh":"@euer_account oder https://…",
     "f.desc":"Kurzbeschreibung","f.descPh":"Was macht eure Community aus?",
+    "f.legalform":"Rechtsform (optional)","f.legalformPh":"z.B. Verein, lose Gruppe",
+    "f.address":"Adresse / Sitz (optional)","f.addressPh":"z.B. München",
     "f.contact":"Ansprechpartner:in *","f.contactPh":"Vor- und Nachname",
     "f.role":"Rolle","f.rolePh":"z.B. Host",
     "f.mail":"E-Mail *","f.mailPh":"name@mail.de",
@@ -402,6 +416,8 @@ const I18N = {
     "f.members":"Members (approx.) *","f.membersPh":"e.g. 80",
     "f.link":"Instagram / website","f.linkPh":"@your_handle or https://…",
     "f.desc":"Short description","f.descPh":"What makes your community special?",
+    "f.legalform":"Legal form (optional)","f.legalformPh":"e.g. registered club, informal group",
+    "f.address":"Address / seat (optional)","f.addressPh":"e.g. Munich",
     "f.contact":"Contact person *","f.contactPh":"First and last name",
     "f.role":"Role","f.rolePh":"e.g. Host",
     "f.mail":"Email *","f.mailPh":"name@mail.com",
@@ -442,16 +458,22 @@ const I18N = {
   }
 };
 
-// LOI-Feld-Koordinaten (Stempel-Positionen im echten PDF)
+// LOI-Feld-Koordinaten (Stempel-Positionen im echten PDF), erzeugt von build_host_loi.py
 const LOI_FIELDS = {
   de: { url: 'clero-loi.pdf',
-    gname: {p:0,x:46,y:666}, contactP0: {p:0,x:341,y:666}, members: {p:0,x:327,y:252},
-    hName: {p:1,x:94,y:415}, hRole: {p:1,x:89,y:391}, hMail: {p:1,x:209,y:367}, hOrt: {p:1,x:128,y:315},
-    hSign: {p:1,x:136,y:293,w:130,h:25}, tjard: {p:1,x:191,y:173} },
+    gname: {p:0,x:163.0,y:703.3}, legalform: {p:0,x:139.0,y:681.3}, address: {p:0,x:128.9,y:659.3},
+    cRepName: {p:0,x:170.5,y:637.3}, cRole: {p:0,x:136.4,y:615.3}, cEmail: {p:0,x:96.9,y:593.3},
+    cPhone: {p:0,x:144.4,y:571.3}, cLink: {p:0,x:155.0,y:549.3},
+    members: {p:0,x:140.1,y:215.3}, asOf: {p:0,x:132.1,y:193.3}, host: {p:0,x:196.1,y:131.7},
+    sName: {p:1,x:190.2,y:251.9}, sRole: {p:1,x:136.4,y:229.9}, sPlace: {p:1,x:116.6,y:207.9},
+    sSign: {p:1,x:123.7,y:164.9,w:120,h:32}, tjardDate: {p:2,x:116.6,y:699.9} },
   en: { url: 'clero-loi-en.pdf',
-    gname: {p:0,x:46,y:641}, contactP0: null, members: {p:0,x:363,y:249},
-    hName: {p:1,x:94,y:411}, hRole: {p:1,x:85,y:387}, hMail: {p:1,x:145,y:363}, hOrt: {p:1,x:128,y:311},
-    hSign: {p:1,x:122,y:291,w:130,h:25}, tjard: {p:1,x:180,y:170} }
+    gname: {p:0,x:171.0,y:703.3}, legalform: {p:0,x:141.2,y:681.3}, address: {p:0,x:136.9,y:659.3},
+    cRepName: {p:0,x:170.5,y:637.3}, cRole: {p:0,x:131.0,y:615.3}, cEmail: {p:0,x:93.7,y:593.3},
+    cPhone: {p:0,x:140.1,y:571.3}, cLink: {p:0,x:152.9,y:549.3},
+    members: {p:0,x:138.5,y:228.9}, asOf: {p:0,x:119.3,y:206.9}, host: {p:0,x:166.8,y:145.3},
+    sName: {p:1,x:156.1,y:329.9}, sRole: {p:1,x:131.0,y:307.9}, sPlace: {p:1,x:117.7,y:285.9},
+    sSign: {p:1,x:115.8,y:242.9,w:120,h:32}, tjardDate: {p:2,x:117.7,y:699.9} }
 };
 const MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -627,15 +649,23 @@ async function buildFilledLoi() {
   const put = (spec, txt) => { if (spec && txt) pages[spec.p].drawText(String(txt), { x: spec.x, y: spec.y, size: 10, font, color: ink }); };
   const today = todayStr();
   const place = lv('loi-place') || (lang === 'en' ? 'Munich' : 'München');
+  const munich = lang === 'en' ? 'Munich' : 'München';
   put(cfg.gname, lv('loi-gname'));
-  put(cfg.contactP0, lv('loi-contact'));
+  put(cfg.legalform, lv('loi-legalform'));
+  put(cfg.address, lv('loi-address'));
+  put(cfg.cRepName, lv('loi-contact'));
+  put(cfg.cRole, lv('loi-role'));
+  put(cfg.cEmail, lv('loi-mail'));
+  put(cfg.cPhone, lv('loi-phone'));
+  put(cfg.cLink, lv('loi-link'));
   put(cfg.members, lv('loi-members'));
-  put(cfg.hName, lv('loi-contact'));
-  put(cfg.hRole, lv('loi-role'));
-  put(cfg.hMail, lv('loi-mail') + (lv('loi-phone') ? '  ·  ' + lv('loi-phone') : ''));
-  put(cfg.hOrt, place + ', ' + today);
-  put(cfg.tjard, today);
-  if (sigHas) await drawSignature(doc, pages, cfg.hSign);
+  put(cfg.asOf, today);
+  put(cfg.host, lv('loi-contact'));   // vorgesehener Host: mangels eigenem Feld = Ansprechpartner:in
+  put(cfg.sName, lv('loi-contact'));
+  put(cfg.sRole, lv('loi-role'));
+  put(cfg.sPlace, place + ', ' + today);
+  put(cfg.tjardDate, munich + ', ' + today);
+  if (sigHas) await drawSignature(doc, pages, cfg.sSign);
   return await doc.save();
 }
 
@@ -647,6 +677,8 @@ function commonFields(en, founding) {
   o[en ? 'Category' : 'Kategorie'] = catValue();
   o[en ? 'City' : 'Stadt'] = lv('loi-district');
   o[en ? 'Members' : 'Mitglieder'] = lv('loi-members');
+  o[en ? 'Legal form' : 'Rechtsform'] = lv('loi-legalform');
+  o[en ? 'Address' : 'Adresse'] = lv('loi-address');
   o['Instagram/Website'] = lv('loi-link');
   o[en ? 'Description' : 'Beschreibung'] = lv('loi-desc');
   o[en ? 'Contact' : 'Ansprechpartner'] = lv('loi-contact');
@@ -722,6 +754,27 @@ function postLoiFile(fields, file) {
       setTimeout(() => finish(false), 20000);
     } catch (e) { finish(false); }
   });
+}
+
+/* Best-effort-Kopie des signierten LOI-PDFs in den Drive-Ordner. Laeuft im
+   Hintergrund, ohne die Mail-Zustellung zu blockieren oder von ihr abzuhaengen -
+   schlaegt das hier fehl (z.B. weil DRIVE_UPLOAD_URL noch nicht gesetzt ist),
+   ist trotzdem alles beim E-Mail-Anhang angekommen. */
+function bytesToBase64(bytes) {
+  let binary = '';
+  const chunkSize = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
+async function uploadToDrive(bytes, filename) {
+  if (!DRIVE_UPLOAD_URL) return;
+  const fd = new FormData();
+  fd.append('secret', DRIVE_SECRET);
+  fd.append('filename', filename);
+  fd.append('pdf_base64', bytesToBase64(bytes));
+  await fetch(DRIVE_UPLOAD_URL, { method: 'POST', mode: 'no-cors', body: fd });
 }
 
 function mailtoFallback(en, founding) {
@@ -802,8 +855,13 @@ $('submitBtn').addEventListener('click', async () => {
     ? (en ? 'New Founding 20 LOI: ' : 'Neue Founding-20-Bewerbung (LOI): ') + lv('loi-gname')
     : (en ? 'New community on Clero: ' : 'Neue Community auf Clero: ') + lv('loi-gname');
 
-  // 1) Daten immer zuerst und ohne Captcha raus
-  const ok = await sendAjax({ _subject: subject, _cc: MAIL_CC, _template: 'table', _captcha: 'false', ...cf });
+  /* Nur-Eintragen (ohne LOI): Daten sofort und ohne Captcha raus - das ist hier
+     die einzige Mail, es gibt kein PDF.
+     Founding-20 (mit LOI): KEINE separate Vorab-Mail mehr. Frueher gingen hier
+     zwei Mails raus (diese hier ohne Anhang + das PDF weiter unten). Jetzt
+     verschickt deliverLoi() weiter unten die einzige Eingangsmail, direkt mit
+     dem signierten PDF im Anhang. */
+  const ok = founding ? true : await sendAjax({ _subject: subject, _cc: MAIL_CC, _template: 'table', _captcha: 'false', ...cf });
 
   if (!ok) {
     sending = false; btn.disabled = false; syncSubmitLabel();
@@ -823,14 +881,18 @@ $('submitBtn').addEventListener('click', async () => {
   gotoStep(3);
   sending = false;
 
-  // Die Daten sind durch, der Erfolg steht schon auf dem Bildschirm.
-  // Das LOI-PDF laeuft jetzt im Hintergrund nach.
-  if (founding) deliverLoi(en, cf);
+  // Der Erfolg steht schon auf dem Bildschirm (die lokale PDF-Kopie klappt so gut
+  // wie immer). Der eigentliche Versand (E-Mail mit PDF + Drive-Upload) laeuft
+  // jetzt im Hintergrund nach.
+  if (founding) deliverLoi(en, cf, subject);
 });
 
-/* Unterschriebenes LOI-PDF nachschieben. Kommt es nicht bestaetigt an,
-   geht eine Warnmail raus, damit keine Bewerbung unbemerkt liegen bleibt. */
-async function deliverLoi(en, cf) {
+/* Unterschriebenes LOI-PDF nachschieben. Das ist die EINE Eingangsmail fuer eine
+   Founding-20-Bewerbung (mit PDF-Anhang) - es gibt bewusst keine zusaetzliche
+   Vorab-Mail ohne Anhang mehr. Kommt der Upload nicht bestaetigt an, geht als
+   Ersatz eine einzelne Text-Warnmail raus, damit keine Bewerbung unbemerkt liegen
+   bleibt (dann aber auch nur diese eine). */
+async function deliverLoi(en, cf, subject) {
   let pdfSent = false;
   try {
     if (!window.PDFLib) throw new Error('pdf-lib not loaded');
@@ -840,7 +902,8 @@ async function deliverLoi(en, cf) {
     const dlUrl = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = dlUrl; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(dlUrl), 8000);
-    pdfSent = await postLoiFile({ _subject: (en ? 'LOI PDF: ' : 'LOI-PDF: ') + lv('loi-gname'), _cc: MAIL_CC, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
+    pdfSent = await postLoiFile({ _subject: subject, _cc: MAIL_CC, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
+    uploadToDrive(bytes, fname).catch(() => {});
   } catch (e) {}
   if (!pdfSent) {
     sendAjax({ _subject: (en ? 'ACTION NEEDED - LOI PDF missing: ' : 'BITTE PRUEFEN - LOI-PDF fehlt: ') + lv('loi-gname'),
@@ -854,16 +917,17 @@ async function deliverLoi(en, cf) {
 
 /* ---------------- Leeres LOI mit Tagesdatum ---------------- */
 $('loiDownload').addEventListener('click', async function(e) {
-  const url = lang === 'en' ? 'clero-loi-en.pdf' : 'clero-loi.pdf';
+  const cfg = LOI_FIELDS[lang];
+  const url = cfg.url;
   if (!window.PDFLib) return;
   e.preventDefault();
   try {
     const bytes = await fetch(url).then(r => r.arrayBuffer());
     const doc = await PDFLib.PDFDocument.load(bytes);
-    const page = doc.getPages()[1];
+    const pages = doc.getPages();
     const font = await doc.embedFont(PDFLib.StandardFonts.Helvetica);
-    const c = lang === 'en' ? { x: 180, y: 170 } : { x: 191, y: 173 };
-    page.drawText(todayStr(), { x: c.x, y: c.y, size: 10, font, color: PDFLib.rgb(0.08, 0.2, 0.17) });
+    const munich = lang === 'en' ? 'Munich' : 'München';
+    pages[cfg.tjardDate.p].drawText(munich + ', ' + todayStr(), { x: cfg.tjardDate.x, y: cfg.tjardDate.y, size: 10, font, color: PDFLib.rgb(0.08, 0.2, 0.17) });
     const out = await doc.save();
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([out], { type: 'application/pdf' })); a.download = url; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 4000);
