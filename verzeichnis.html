@@ -370,7 +370,7 @@
 
 <section class="wrap" id="mitmachen">
   <div class="host-cta">
-    <span class="founding" data-i18n="host.badge">✨ Founding 20 · Die ersten 20 Hosts in München, dauerhaft kostenlos</span>
+    <span class="founding" data-i18n="host.badge">✨ Founding 30 · Die ersten 30 Hosts in München, dauerhaft kostenlos</span>
     <h2 data-i18n="host.h2">Du leitest eine Community in München?</h2>
     <p data-i18n="host.p">Trag deine Gruppe ein und sei beim Launch direkt sichtbar. Komplett unverbindlich und aktuell kostenlos. Wir freuen uns, von dir zu hören.</p>
     <a href="eintragen.html" class="btn" data-i18n="btn.register">Community eintragen</a>
@@ -383,13 +383,13 @@
     <h3 id="modal-title" data-i18n="modal.title">Community eintragen 💚</h3>
     <p class="lead" data-i18n="modal.lead">Such dir aus, wie du loslegen möchtest.</p>
 
-    <div class="seg">
-      <button class="seg-btn active" data-tab="founding" type="button" data-i18n="modal.segFounding">✨ Founding 20 (mit LOI)</button>
+    <div class="seg" hidden>
+      <button class="seg-btn active" data-tab="founding" type="button" data-i18n="modal.segFounding">✨ Founding 30 (mit LOI)</button>
       <button class="seg-btn" data-tab="basic" type="button" data-i18n="modal.segBasic">Nur eintragen</button>
     </div>
 
     <div class="tab" id="tab-founding">
-      <div class="info-box" data-i18n="modal.foundingInfo">Als <strong>Founding-20-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 20 Hosts in München, komplett unverbindlich.</div>
+      <div class="info-box" data-i18n="modal.foundingInfo">Als <strong>Founding-30-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 30 Hosts in München, komplett unverbindlich.</div>
       <form id="loiForm" autocomplete="on">
         <div class="field"><label for="loi-gname" data-i18n="loi.gname">Name der Gruppe / Community *</label><input id="loi-gname" required data-i18n-ph="loi.gnamePh" placeholder="z.B. München Yoga Crew" /></div>
         <div class="field"><label for="loi-contact" data-i18n="loi.contact">Ansprechpartner:in *</label><input id="loi-contact" required data-i18n-ph="loi.contactPh" placeholder="Vor- und Nachname" /></div>
@@ -410,7 +410,7 @@
     </div>
 
     <div class="tab" id="tab-basic" hidden>
-      <div class="info-box" data-i18n="modal.basicInfo">Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.</div>
+      <div class="info-box" data-i18n="modal.basicInfo">Ohne LOI und ohne Founding-30-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.</div>
       <form id="hostForm">
         <div class="field"><label for="f-name" data-i18n="modal.fName">Name der Community *</label><input id="f-name" required data-i18n-ph="modal.fNamePh" placeholder="z.B. München Yoga Crew" /></div>
         <div class="field"><label for="f-cat" data-i18n="modal.fCat">Kategorie / Thema *</label><input id="f-cat" required data-i18n-ph="modal.fCatPh" placeholder="z.B. Yoga, Sport, Sprache …" /></div>
@@ -510,12 +510,12 @@ const I18N = {
     "features.f3h":"Daten in Deutschland","features.f3p":"Alle deine Daten bleiben auf unseren gemieteten Servern in Frankfurt gespeichert.",
     "search.ph":"Suche nach Community, Thema oder Stichwort…",
     "filter.district":"Stadtteil:","filter.allDistricts":"Alle Stadtteile",
-    "host.badge":"✨ Founding 20 · Die ersten 20 Hosts in München, dauerhaft kostenlos",
+    "host.badge":"✨ Founding 30 · Die ersten 30 Hosts in München, dauerhaft kostenlos",
     "host.h2":"Du leitest eine Community in München?",
     "host.p":"Trag deine Gruppe ein und sei beim Launch direkt sichtbar. Komplett unverbindlich und aktuell kostenlos. Wir freuen uns, von dir zu hören.",
     "modal.title":"Community eintragen 💚","modal.lead":"Such dir aus, wie du loslegen möchtest.",
-    "modal.segFounding":"✨ Founding 20 (mit LOI)","modal.segBasic":"Nur eintragen",
-    "modal.foundingInfo":"Als <strong>Founding-20-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 20 Hosts in München, komplett unverbindlich.",
+    "modal.segFounding":"✨ Founding 30 (mit LOI)","modal.segBasic":"Nur eintragen",
+    "modal.foundingInfo":"Als <strong>Founding-30-Host</strong> nutzt ihr Clero dauerhaft kostenlos und seid beim Launch direkt sichtbar. Limitiert auf die ersten 30 Hosts in München, komplett unverbindlich.",
     "modal.step1":"LOI herunterladen und ausfüllen","modal.step2":"Unterschreiben (digital oder eingescannt)","modal.step3":"Ausgefüllten LOI an uns zurücksenden",
     "modal.loiDownload":"📄 LOI herunterladen","modal.loiMail":"Ausgefüllten LOI per Mail senden",
     "loi.gname":"Name der Gruppe / Community *","loi.gnamePh":"z.B. München Yoga Crew",
@@ -533,7 +533,7 @@ const I18N = {
     "loi.sentToast":"Danke! Dein LOI ist bei Nicole eingegangen. 💚",
     "basic.sentToast":"Danke! Deine Community ist bei Nicole eingegangen. 💚",
     "basic.required":"Bitte fülle mindestens Name der Community und Kategorie aus.",
-    "modal.basicInfo":"Ohne LOI und ohne Founding-20-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.",
+    "modal.basicInfo":"Ohne LOI und ohne Founding-30-Vorteile. Wir nehmen eure Community trotzdem gern ins Verzeichnis auf.",
     "modal.fName":"Name der Community *","modal.fNamePh":"z.B. München Yoga Crew",
     "modal.fCat":"Kategorie / Thema *","modal.fCatPh":"z.B. Yoga, Sport, Sprache …",
     "modal.fDistrict":"Stadtteil","modal.fDistrictPh":"z.B. Maxvorstadt oder München-weit",
@@ -562,12 +562,12 @@ const I18N = {
     "features.f3h":"Data in Germany","features.f3p":"All your data stays stored on our rented servers in Frankfurt.",
     "search.ph":"Search by community, topic or keyword…",
     "filter.district":"District:","filter.allDistricts":"All districts",
-    "host.badge":"✨ Founding 20 · The first 20 hosts in Munich, free forever",
+    "host.badge":"✨ Founding 30 · The first 30 hosts in Munich, free forever",
     "host.h2":"Do you run a community in Munich?",
     "host.p":"List your group and be visible right at launch. Completely non-binding and currently free. We would love to hear from you.",
     "modal.title":"List your community 💚","modal.lead":"Choose how you would like to start.",
-    "modal.segFounding":"✨ Founding 20 (with LOI)","modal.segBasic":"Just list us",
-    "modal.foundingInfo":"As a <strong>Founding 20 host</strong> you use Clero free forever and are visible right at launch. Limited to the first 20 hosts in Munich, completely non-binding.",
+    "modal.segFounding":"✨ Founding 30 (with LOI)","modal.segBasic":"Just list us",
+    "modal.foundingInfo":"As a <strong>Founding 30 host</strong> you use Clero free forever and are visible right at launch. Limited to the first 30 hosts in Munich, completely non-binding.",
     "modal.step1":"Download and fill in the LOI","modal.step2":"Sign it (digitally or scanned)","modal.step3":"Send the completed LOI back to us",
     "modal.loiDownload":"📄 Download LOI","modal.loiMail":"Send completed LOI by email",
     "loi.gname":"Group / community name *","loi.gnamePh":"e.g. Munich Yoga Crew",
@@ -585,7 +585,7 @@ const I18N = {
     "loi.sentToast":"Thank you! Your LOI has reached Nicole. 💚",
     "basic.sentToast":"Thank you! Your community has reached Nicole. 💚",
     "basic.required":"Please fill in at least community name and category.",
-    "modal.basicInfo":"Without an LOI and without Founding 20 benefits. We are happy to add your community to the directory anyway.",
+    "modal.basicInfo":"Without an LOI and without Founding 30 benefits. We are happy to add your community to the directory anyway.",
     "modal.fName":"Community name *","modal.fNamePh":"e.g. Munich Yoga Crew",
     "modal.fCat":"Category / topic *","modal.fCatPh":"e.g. yoga, sports, language …",
     "modal.fDistrict":"District","modal.fDistrictPh":"e.g. Maxvorstadt or Munich-wide",
@@ -902,7 +902,7 @@ async function sendLoi() {
   form.action = 'https://formsubmit.co/588e8d43be349a56d2acc52f584fc4d6';
   form.method = 'POST'; form.enctype = 'multipart/form-data'; form.style.display = 'none';
   const add = (n, val) => { const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = val || ''; form.appendChild(i); };
-  add('_subject', (lang === 'en' ? 'New Founding 20 LOI: ' : 'Neuer Founding-20 LOI: ') + lv('loi-gname'));
+  add('_subject', (lang === 'en' ? 'New Founding 30 LOI: ' : 'Neuer Founding-30 LOI: ') + lv('loi-gname'));
   add('_cc', 'n.emrich@clero.de');
   add('_captcha', 'false');
   add('_template', 'table');
@@ -936,7 +936,7 @@ applyLang();
   if (params.get('loi') !== 'sent') return;
   const g = params.get('g') || (lang === 'en' ? '(no name)' : '(ohne Name)');
   if (CMB_KEY) {
-    const msg = (lang === 'en' ? '🟢 New Founding 20 LOI via Clero: ' : '🟢 Neuer Founding-20 LOI über Clero: ') + g + (lang === 'en' ? '. Details + PDF in your email. 💚' : '. Details + PDF in deiner Mail. 💚');
+    const msg = (lang === 'en' ? '🟢 New Founding 30 LOI via Clero: ' : '🟢 Neuer Founding-30 LOI über Clero: ') + g + (lang === 'en' ? '. Details + PDF in your email. 💚' : '. Details + PDF in deiner Mail. 💚');
     fetch('https://api.callmebot.com/whatsapp.php?phone=' + CMB_PHONE + '&text=' + encodeURIComponent(msg) + '&apikey=' + CMB_KEY, { mode: 'no-cors' }).catch(() => {});
   }
   showToast(t('loi.sentToast'));

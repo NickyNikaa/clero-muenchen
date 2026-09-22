@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Erzeugt clero-loi.pdf (DE) und clero-loi-en.pdf (EN) - das Host-LOI fuer die
-Founding-20-Bewerbung (eintragen.html / verzeichnis.html).
+Founding-30-Bewerbung (eintragen.html / verzeichnis.html).
 
 Basiert inhaltlich auf dem am 2026-09-10 zugelieferten Word-Template
 "Clero_LOI_Template_EN.docx" (Version 2.0, September 2026). Deutsche Fassung

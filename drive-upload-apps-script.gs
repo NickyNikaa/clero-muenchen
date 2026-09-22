@@ -2,7 +2,7 @@
  * Clero LOI -> Google Drive Upload
  * ---------------------------------
  * Nimmt das signierte LOI-PDF von eintragen.html / verzeichnis.html / creator.html
- * entgegen und legt es im passenden Drive-Ordner ab - Host-LOIs (Community/Founding-20)
+ * entgegen und legt es im passenden Drive-Ordner ab - Host-LOIs (Community/Founding-30)
  * und Creator-LOIs landen in getrennten Ordnern. Laeuft als Google Apps Script Web App,
  * damit die (rein clientseitige, serverlose) Website dort hinschreiben kann.
  *
@@ -44,7 +44,7 @@
  */
 
 var FOLDERS = {
-  host: '1YwqXYzlq9YjpnlzQZya1bw1IAjfz4Qqv',    // eintragen.html + verzeichnis.html (Community/Founding-20-LOI)
+  host: '1YwqXYzlq9YjpnlzQZya1bw1IAjfz4Qqv',    // eintragen.html + verzeichnis.html (Community/Founding-30-LOI)
   creator: '1abEZ0k2VIjFyQ6UQAxlBivoYyo0TbEeI'  // creator.html (Founding-Creator-LOI)
 };
 var SHARED_SECRET = 'clero-loi-2026'; // beliebig aendern - muss dann auch auf den Seiten geaendert werden

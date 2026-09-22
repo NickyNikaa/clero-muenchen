@@ -145,15 +145,15 @@ def build(out_name, pill, headline, sub, chips, mock_path, mock_crop):
 
 
 build('og-host.png',
-      pill='München · Founding 20',
+      pill='München · Founding 30',
       headline='Trag deine Community ein',
-      sub='20 Founding-Plätze für die ersten Münchner Communities. Kostenlos und unverbindlich.',
-      chips=['Sichtbar zum Launch', 'Priorisierte Platzierung', 'Direkter Support'],
+      sub='30 Founding-Plätze für die ersten Münchner Communities. Kostenlos und unverbindlich.',
+      chips=['Host Circle', 'Brand-Partner', 'Early Access'],
       mock_path='mock-map.webp', mock_crop=(0.0, 0.02, 1.0, 0.86))
 
 build('og-creator.png',
       pill='München · Creator',
       headline='Werde Clero Creator in München',
-      sub='Bau deine Community in deiner Nische auf. 20 Founding-Plätze, kostenlos und unverbindlich.',
-      chips=['Sichtbar zum Launch', 'Priorisierte Platzierung', 'Direkter Support'],
+      sub='30 Founding-Plätze für Münchner Creator. Kostenlos und unverbindlich.',
+      chips=['Host Circle', 'Brand-Partner', 'Early Access'],
       mock_path='mock-feed.webp', mock_crop=(0.0, 0.02, 1.0, 0.86))
