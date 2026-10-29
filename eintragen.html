@@ -738,6 +738,7 @@ async function uploadToDrive(bytes, filename) {
   await fetch(DRIVE_UPLOAD_URL, { method: 'POST', mode: 'no-cors', body: fd });
 }
 
+async function sendLoiViaScript(subject, cf, bytes, fname) { if (!DRIVE_UPLOAD_URL) return false; try { const fd = new FormData(); fd.append('secret', DRIVE_SECRET); fd.append('folder', DRIVE_FOLDER); fd.append('filename', fname); fd.append('pdf_base64', bytesToBase64(bytes)); fd.append('send_mail', '1'); fd.append('mail_subject', subject); fd.append('mail_body', Object.keys(cf).map(k => k + ': ' + cf[k]).join(String.fromCharCode(10))); fd.append('reply_to', cf.email || ''); const r = await fetch(DRIVE_UPLOAD_URL, { method: 'POST', body: fd }); const j = await r.json(); return !!(j && j.ok && j.mailed); } catch (e) { return false; } }
 function mailtoFallback(en, founding) {
   const subject = (founding ? (en ? 'Founding 30 application: ' : 'Founding-30-Bewerbung: ') : (en ? 'List my community on Clero: ' : 'Community bei Clero eintragen: ')) + lv('loi-gname');
   const cf = commonFields(en, founding);
@@ -862,8 +863,8 @@ async function deliverLoi(en, cf, subject) {
     const dlUrl = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = dlUrl; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(dlUrl), 8000);
-    pdfSent = await postLoiFile({ _subject: subject, _cc: MAIL_CC, ...cf }, new File([blob], fname, { type: 'application/pdf' }));
-    uploadToDrive(bytes, fname).catch(() => {});
+    pdfSent = await sendLoiViaScript(subject, cf, bytes, fname);
+    
   } catch (e) {}
   if (!pdfSent) {
     sendAjax({ _subject: (en ? 'ACTION NEEDED - LOI PDF missing: ' : 'BITTE PRUEFEN - LOI-PDF fehlt: ') + lv('loi-gname'),
